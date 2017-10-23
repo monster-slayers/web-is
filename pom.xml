@@ -13,8 +13,4 @@
     <modules>
         <module>web-is-persistence</module>
     </modules>
-
-    <dependencies>
-
-    </dependencies>
 </project>
