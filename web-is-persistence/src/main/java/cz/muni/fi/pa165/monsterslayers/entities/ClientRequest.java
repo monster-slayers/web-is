@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.monsterslayers.entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+//import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,18 +12,18 @@ import java.util.Map;
  */
 @Entity
 public class ClientRequest {
-    //TODO: delete me after MonsterType entity is implemented
-    interface MonsterType{}
+//    //TODO: delete me after MonsterType entity is implemented
+//    interface MonsterType{}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+//    @NotNull
     @Column(nullable = false, unique = true)
     private String title;
 
-    @NotNull
+//    @NotNull
     @ManyToOne(targetEntity = User.class)
     private User client;
 
@@ -31,8 +31,8 @@ public class ClientRequest {
 
     private String description;
 
-    @ManyToMany(targetEntity = MonsterType.class)
-    private Map<MonsterType, Integer> killList = new HashMap<>();
+//    @ManyToMany(targetEntity = MonsterType.class)
+//    private Map<MonsterType, Integer> killList = new HashMap<>();
 
     private BigDecimal reward;
 
@@ -76,21 +76,21 @@ public class ClientRequest {
         this.description = description;
     }
 
-    public void addToKillList(MonsterType monsterType, int count){
-        killList.put(monsterType, count);
-    }
-
-    public boolean isInKillList(MonsterType monsterType){
-        return killList.containsKey(monsterType);
-    }
-
-    public Integer getCountFromKillList(MonsterType monsterType){
-        return killList.get(monsterType);
-    }
-
-    public void removeFromKillList(MonsterType monsterType){
-        killList.remove(monsterType);
-    }
+//    public void addToKillList(MonsterType monsterType, int count){
+//        killList.put(monsterType, count);
+//    }
+//
+//    public boolean isInKillList(MonsterType monsterType){
+//        return killList.containsKey(monsterType);
+//    }
+//
+//    public Integer getCountFromKillList(MonsterType monsterType){
+//        return killList.get(monsterType);
+//    }
+//
+//    public void removeFromKillList(MonsterType monsterType){
+//        killList.remove(monsterType);
+//    }
 
     public BigDecimal getReward() {
         return reward;

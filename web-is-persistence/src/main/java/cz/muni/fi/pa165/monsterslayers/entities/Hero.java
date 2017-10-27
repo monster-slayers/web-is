@@ -19,14 +19,14 @@ public class Hero {
     private Long id;
 
     @OneToOne(targetEntity = User.class)
-    @Column(nullable = false, unique = true)
+//    @Column(nullable = false, unique = true)
     private User user;
 
     @Column(nullable = false, unique = true)
     private String heroName;
 
-    @ManyToMany(targetEntity = Elements.class)
-    private Set<Elements> elements = new HashSet<Elements>();
+//    @ManyToMany
+//    private Set<Elements> elements = new HashSet<Elements>();
 
     public Long getId() {
         return id;
@@ -52,11 +52,11 @@ public class Hero {
         this.heroName = heroName;
     }
 
-    public Set<Elements> getElements() {
-        return elements;
-    }
-
-    public void setElements(Set<Elements> elements) {
-        this.elements = elements;
-    }
+//    public Set<Elements> getElements() {
+//        return elements;
+//    }
+//
+//    public void setElements(Set<Elements> elements) {
+//        this.elements = elements;
+//    }
 }

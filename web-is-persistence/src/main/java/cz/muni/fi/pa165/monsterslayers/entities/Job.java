@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 /**
  * Basic entity class - Job
- * 
+ *
  * @author Tomáš Richter
  */
 @Entity
@@ -17,19 +17,19 @@ public class Job {
 
     /*
     TODO: ClientRequest (uncomment after entity is created)
-    
+
     @ManyToOne
     @Column(nullable = false)
     private ClientRequest clientRequest;
-    
+
     */
-    
+
     @ManyToOne
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private Hero assignee;
-    
+
     private JobStatus status;
-    
+
     private Integer evaluation;
 
     public Long getId() {
