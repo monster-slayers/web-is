@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.monsterslayers.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 //import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -12,18 +13,15 @@ import java.util.Map;
  */
 @Entity
 public class ClientRequest {
-//    //TODO: delete me after MonsterType entity is implemented
-//    interface MonsterType{}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @NotNull
+    @NotNull
     @Column(nullable = false, unique = true)
     private String title;
 
-//    @NotNull
+    @NotNull
     @ManyToOne(targetEntity = User.class)
     private User client;
 
