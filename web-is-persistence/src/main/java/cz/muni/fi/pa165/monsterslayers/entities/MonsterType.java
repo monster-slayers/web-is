@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.monsterslayers.entities;
 import cz.muni.fi.pa165.monsterslayers.entities.enums.Elements;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,7 +27,10 @@ public class MonsterType {
 
     private String food;
 
-    private Set<Elements> weaknesses = new HashSet<>();
+    @ElementCollection(targetClass=Elements.class)
+    @Enumerated(EnumType.STRING) // Possibly optional (I'm not sure) but defaults to ORDINAL.
+    @CollectionTable(name="monsterType_weaknesses")
+    private Collection<Elements> weaknesses = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -52,11 +56,11 @@ public class MonsterType {
         this.food = food;
     }
 
-    public Set<Elements> getWeaknesses() {
+    public Collection<Elements> getWeaknesses() {
         return weaknesses;
     }
 
-    public void setWeaknesses(Set<Elements> weaknesses) {
+    public void setWeaknesses(Collection<Elements> weaknesses) {
         this.weaknesses = weaknesses;
     }
 
