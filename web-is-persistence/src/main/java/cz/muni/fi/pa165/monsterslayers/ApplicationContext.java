@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.monsterslayers;
 
-import cz.muni.fi.pa165.monsterslayers.dao.UserDao;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,12 +16,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import javax.sql.DataSource;
+import cz.muni.fi.pa165.monsterslayers.dao.UserRepository;
 
 
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackageClasses = {UserDao.class}, basePackages = "cz.fi.muni.pa165")
+@ComponentScan(basePackageClasses = {UserRepository.class}, basePackages = "cz.fi.muni.pa165")
 public class ApplicationContext {
 
     /**
