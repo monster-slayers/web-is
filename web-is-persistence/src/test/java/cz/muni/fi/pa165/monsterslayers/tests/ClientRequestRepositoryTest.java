@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Tomáš Richter
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ApplicationContext.class)
+@ContextConfiguration(locations = "/test-context.xml")
 @Transactional
 public class ClientRequestRepositoryTest {
     @PersistenceContext
