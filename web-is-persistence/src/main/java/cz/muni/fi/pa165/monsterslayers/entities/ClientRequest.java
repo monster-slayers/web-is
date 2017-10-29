@@ -29,8 +29,8 @@ public class ClientRequest {
 
     private String description;
 
-//    @ManyToMany(targetEntity = MonsterType.class)
-//    private Map<MonsterType, Integer> killList = new HashMap<>();
+    @ManyToMany(targetEntity = MonsterType.class)
+    private Map<MonsterType, Integer> killList = new HashMap<>();
 
     private BigDecimal reward;
 
@@ -74,21 +74,21 @@ public class ClientRequest {
         this.description = description;
     }
 
-//    public void addToKillList(MonsterType monsterType, int count){
-//        killList.put(monsterType, count);
-//    }
-//
-//    public boolean isInKillList(MonsterType monsterType){
-//        return killList.containsKey(monsterType);
-//    }
-//
-//    public Integer getCountFromKillList(MonsterType monsterType){
-//        return killList.get(monsterType);
-//    }
-//
-//    public void removeFromKillList(MonsterType monsterType){
-//        killList.remove(monsterType);
-//    }
+    public void addToKillList(MonsterType monsterType, int count){
+        killList.put(monsterType, count);
+    }
+
+    public boolean isInKillList(MonsterType monsterType){
+        return killList.containsKey(monsterType);
+    }
+
+    public Integer getCountFromKillList(MonsterType monsterType){
+        return killList.get(monsterType);
+    }
+
+    public void removeFromKillList(MonsterType monsterType){
+        killList.remove(monsterType);
+    }
 
     public BigDecimal getReward() {
         return reward;

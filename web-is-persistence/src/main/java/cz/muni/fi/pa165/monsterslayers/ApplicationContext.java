@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.monsterslayers;
 
+import cz.muni.fi.pa165.monsterslayers.dao.ClientRequestRepository;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,7 +23,7 @@ import cz.muni.fi.pa165.monsterslayers.dao.UserRepository;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackageClasses = {UserRepository.class}, basePackages = "cz.fi.muni.pa165")
+@ComponentScan(basePackageClasses = {UserRepository.class, ClientRequestRepository.class}, basePackages = "cz.fi.muni.pa165")
 public class ApplicationContext {
 
     /**
