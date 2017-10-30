@@ -20,6 +20,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolationException;
 
+/**
+ * Tests for Job entity.
+ *
+ * @author Ondřej Budai
+ */
 @ContextConfiguration(locations = "/test-context.xml")
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
