@@ -6,11 +6,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -21,10 +21,10 @@ import java.util.Collections;
  * @author David Kizivat
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "/test-context.xml")
+@ContextConfiguration(locations = { "/test-context.xml" })
 @Transactional
 public class MonsterTypeRepositoryTests {
-    @Inject
+    @Autowired
     private MonsterTypeRepository repository;
 
     private MonsterType monsterType1;
@@ -72,14 +72,14 @@ public class MonsterTypeRepositoryTests {
     public void deleteMonsterTypeByIdTest() {
         MonsterType saved = repository.save(monsterType1);
         repository.delete(saved.getId());
-        Assert.assertEquals(null, repository.findOne(saved.getId()));
+        Assert.assertNull(repository.findOne(saved.getId()));
     }
 
     @Test
     public void deleteMonsterTypeTest() {
         MonsterType saved = repository.save(monsterType1);
         repository.delete(monsterType1);
-        Assert.assertEquals(null, repository.findOne(saved.getId()));
+        Assert.assertNull(repository.findOne(saved.getId()));
     }
 
     @Test
@@ -87,8 +87,8 @@ public class MonsterTypeRepositoryTests {
         MonsterType saved1 = repository.save(monsterType1);
         MonsterType saved2 = repository.save(monsterType1);
         repository.delete(Arrays.asList(monsterType1, monsterType2));
-        Assert.assertEquals(null, repository.findOne(saved1.getId()));
-        Assert.assertEquals(null, repository.findOne(saved2.getId()));
+        Assert.assertNull(repository.findOne(saved1.getId()));
+        Assert.assertNull(repository.findOne(saved2.getId()));
     }
 
     @Test
