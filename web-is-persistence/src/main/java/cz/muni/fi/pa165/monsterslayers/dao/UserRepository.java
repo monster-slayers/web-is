@@ -16,12 +16,12 @@ public interface UserRepository extends CrudRepository<User, Long> {
      * @param name specified name
      * @return list of users with specified name
      */
-    public List<User> findByName(String name);
+    List<User> findByName(String name);
     
     /**
      * Finds user with specified email (email is unique)
      * @param email specified 
      * @return user with specified name
      */
-    public User findByEmail(String email);
+    User findByEmail(String email);
 }

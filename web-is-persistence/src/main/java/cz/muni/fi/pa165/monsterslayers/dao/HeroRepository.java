@@ -14,5 +14,5 @@ public interface HeroRepository extends CrudRepository<Hero, Long> {
      * @param heroName specified hero name
      * @return Hero with specified hero name
      */
-    public Hero findByHeroName(String heroName);
+    Hero findByHeroName(String heroName);
 }

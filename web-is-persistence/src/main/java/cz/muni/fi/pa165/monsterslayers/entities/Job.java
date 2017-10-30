@@ -102,9 +102,6 @@ public class Job {
         if (!Objects.equals(this.clientRequest, other.getClientRequest())) {
             return false;
         }
-        if (!Objects.equals(this.assignee, other.getAssignee())) {
-            return false;
-        }
-        return true;
+        return (Objects.equals(this.assignee, other.getAssignee()));
     } 
 }

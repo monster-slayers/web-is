@@ -105,12 +105,7 @@ public class ClientRequest {
         if (!(obj instanceof ClientRequest))
             return false;
         ClientRequest other = (ClientRequest) obj;
-        if (title == null) {
-            if (other.title != null)
-                return false;
-        } else if (!title.equals(other.getTitle()))
-            return false;
-        return true;
+        return (Objects.equals(this.title, other.getTitle()));
     }
 
     @Override
