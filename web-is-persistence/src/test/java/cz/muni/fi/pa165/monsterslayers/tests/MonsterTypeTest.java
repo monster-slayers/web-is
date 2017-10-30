@@ -84,7 +84,7 @@ public class MonsterTypeTest {
     @Test
     public void removeWeaknessTest() {
         Assert.assertTrue(monsterType.removeWeakness(water));
-        Assert.assertEquals(Collections.singletonList(fire), monsterType.getWeaknesses());
+        Assert.assertThat(monsterType.getWeaknesses(), containsInAnyOrder(fire));
     }
 
     @Test
