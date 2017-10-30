@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.validation.ConstraintViolationException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @ContextConfiguration(locations = "/test-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -64,14 +66,21 @@ public class MonsterTypeTest {
     @Test
     public void setGetWeaknessesTest() {
         monsterType.setWeaknesses(Arrays.asList(wind, fire));
-        Assert.assertEquals(Arrays.asList(wind, fire), monsterType.getWeaknesses());
+        Set<Elements> expected = new HashSet<>();
+        expected.add(wind);
+        expected.add(fire);
+        Assert.assertEquals(expected, monsterType.getWeaknesses());
     }
 
     @Test
     public void addWeaknessTest() {
-        Assert.assertEquals(Arrays.asList(fire, water), monsterType.getWeaknesses());
+        Set<Elements> expected = new HashSet<>();
+        expected.add(water);
+        expected.add(fire);
+        Assert.assertEquals(expected, monsterType.getWeaknesses());
         monsterType.addWeakness(wind);
-        Assert.assertEquals(Arrays.asList(fire, water, wind), monsterType.getWeaknesses());
+        expected.add(wind);
+        Assert.assertEquals(expected, monsterType.getWeaknesses());
     }
 
     @Test
