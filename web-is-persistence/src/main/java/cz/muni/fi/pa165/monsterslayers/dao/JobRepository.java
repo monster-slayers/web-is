@@ -5,10 +5,17 @@ import cz.muni.fi.pa165.monsterslayers.entities.Job;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * Job repository extends Spring's CrudRepository to automatically implement data access operations.
+ * JobRepository extends Spring's CrudRepository so Spring framework automatically
+ * implements data access operations during runtime.
  *
  * @author David Kizivat
  */
 public interface JobRepository extends CrudRepository<Job, Long> {
-    Job getByAssignee(Hero assignee);
+    /**
+     * Finds a Job by given Hero assignee.
+     *
+     * @param assignee instance of type Hero
+     * @return instance of type Job that is
+     */
+    Job findByAssignee(Hero assignee);
 }

@@ -1,23 +1,23 @@
-package cz.muni.fi.pa165.monsterslayers.tests;
+package cz.muni.fi.pa165.monsterslayers.tests.dataaccess;
 
-import cz.muni.fi.pa165.monsterslayers.ApplicationContext;
 import cz.muni.fi.pa165.monsterslayers.dao.ClientRequestRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
-import java.math.BigDecimal;
-import java.util.List;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.validation.ConstraintViolationException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.validation.ConstraintViolationException;
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Test class for ClientRequestDaoImpl
@@ -25,13 +25,13 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Tomáš Richter
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "/test-context.xml")
+@ContextConfiguration(locations = { "/test-context.xml" })
 @Transactional
 public class ClientRequestRepositoryTest {
     @PersistenceContext
     private EntityManager entityManager;
     
-    @Inject
+    @Autowired
     private ClientRequestRepository clientRequestRepository;
     
     private User user;
@@ -100,14 +100,14 @@ public class ClientRequestRepositoryTest {
     }
     
     @Test
-    public void saveAllAtributesTest() {
+    public void saveAllAttributesTest() {
         clientRequestNotPersisted.setDescription(description);
         clientRequestNotPersisted.setLocation(location);
         clientRequestNotPersisted.setReward(reward);
         clientRequestNotPersisted.addToKillList(monsterType, monsterCount);
         clientRequestRepository.save(clientRequestNotPersisted);
         
-        ClientRequest found = clientRequestRepository.findOne(clientRequestNotPersisted.getId());       
+        ClientRequest found = clientRequestRepository.findOne(clientRequestNotPersisted.getId());
         Assert.assertEquals(title, found.getTitle());
         Assert.assertEquals(user, found.getClient());
         Assert.assertEquals(description, found.getDescription());

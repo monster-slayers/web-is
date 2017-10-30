@@ -5,7 +5,6 @@ import cz.muni.fi.pa165.monsterslayers.entities.enums.Elements;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class MonsterType {

@@ -11,7 +11,7 @@ import javax.persistence.*;
  * @author David Kizivat
  */
 @Entity
-@Table(name = "usertable")
+@Table(name = "Users")
 public class User {
 
     @Id
@@ -27,15 +27,15 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-//    @Lob
-//    private byte[] image;
-//    private String imageMimeType;
+    @Lob
+    private byte[] image;
+    private String imageMimeType;
 
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 
-//    private UserStatus status;
-
-
-//    private RightsLevel rightsLevel;
+    @Enumerated(EnumType.STRING)
+    private RightsLevel rightsLevel;
 
     public Long getId() {
         return id;
@@ -69,37 +69,37 @@ public class User {
         this.password = password;
     }
 
-//    public byte[] getImage() {
-//        return image;
-//    }
-//
-//    public void setImage(byte[] image) {
-//        this.image = image;
-//    }
-//
-//    public String getImageMimeType() {
-//        return imageMimeType;
-//    }
-//
-//    public void setImageMimeType(String imageMimeType) {
-//        this.imageMimeType = imageMimeType;
-//    }
+    public byte[] getImage() {
+        return image;
+    }
 
-//    public UserStatus getStatus() {
-//        return status;
-//    }
-//
-//    public void setStatus(UserStatus status) {
-//        this.status = status;
-//    }
-//
-//    public RightsLevel getRightsLevel() {
-//        return rightsLevel;
-//    }
-//
-//    public void setRightsLevel(RightsLevel rightsLevel) {
-//        this.rightsLevel = rightsLevel;
-//    }
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getImageMimeType() {
+        return imageMimeType;
+    }
+
+    public void setImageMimeType(String imageMimeType) {
+        this.imageMimeType = imageMimeType;
+    }
+
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserStatus status) {
+        this.status = status;
+    }
+
+    public RightsLevel getRightsLevel() {
+        return rightsLevel;
+    }
+
+    public void setRightsLevel(RightsLevel rightsLevel) {
+        this.rightsLevel = rightsLevel;
+    }
 
     @Override
     public boolean equals(Object o) {
