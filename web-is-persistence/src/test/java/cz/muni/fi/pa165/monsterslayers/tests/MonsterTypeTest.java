@@ -16,8 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.validation.ConstraintViolationException;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 
 @ContextConfiguration(locations = "/test-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -66,21 +67,14 @@ public class MonsterTypeTest {
     @Test
     public void setGetWeaknessesTest() {
         monsterType.setWeaknesses(Arrays.asList(wind, fire));
-        Set<Elements> expected = new HashSet<>();
-        expected.add(wind);
-        expected.add(fire);
-        Assert.assertEquals(expected, monsterType.getWeaknesses());
+        Assert.assertThat(monsterType.getWeaknesses(), containsInAnyOrder(wind, fire));
     }
 
     @Test
     public void addWeaknessTest() {
-        Set<Elements> expected = new HashSet<>();
-        expected.add(water);
-        expected.add(fire);
-        Assert.assertEquals(expected, monsterType.getWeaknesses());
+        Assert.assertThat(monsterType.getWeaknesses(), containsInAnyOrder(fire, water));
         monsterType.addWeakness(wind);
-        expected.add(wind);
-        Assert.assertEquals(expected, monsterType.getWeaknesses());
+        Assert.assertThat(monsterType.getWeaknesses(), containsInAnyOrder(fire, water, wind));
     }
 
     @Test
