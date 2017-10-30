@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.monsterslayers.entities.enums.RightsLevel;
 import cz.muni.fi.pa165.monsterslayers.entities.enums.UserStatus;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
@@ -12,19 +13,22 @@ import java.util.Objects;
  * @author David Kizivat
  */
 @Entity
-@Table(name = "UsersTable")
+@Table(name = "Users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @Column(nullable = false)
     private String name;
 
+    @NotNull
     @Column(nullable = false, unique = true)
     private String email;
 
+    @NotNull
     @Column(nullable = false)
     private String password;
 
@@ -114,15 +118,7 @@ public class User {
             return false;
         }
         User other = (User) o;
-        if (other.email == null) {
-            if (this.email != null) {
-                return false;
-            }
-        } else if (!this.email.equals(other.email)) {
-            return false;
-        }
-
-        return true;
+        return (Objects.equals(this.email, other.getEmail()));
     }
 
     @Override

@@ -7,8 +7,6 @@ import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
 import java.math.BigDecimal;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolationException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -28,10 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/test-context.xml" })
 @Transactional
-public class ClientRequestTests {  
-    @PersistenceContext
-    EntityManager em;
-    
+public class ClientRequestTests {
     @Autowired
     private ClientRequestRepository clientRequestRepository;
     

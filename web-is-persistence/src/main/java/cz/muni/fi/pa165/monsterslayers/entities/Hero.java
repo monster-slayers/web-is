@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.monsterslayers.entities;
 import cz.muni.fi.pa165.monsterslayers.entities.enums.Elements;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -20,9 +21,11 @@ public class Hero {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER, optional = false)
     private User user;
 
+    @NotNull
     @Column(nullable = false, unique = true)
     private String heroName;
 

@@ -5,9 +5,15 @@ import cz.muni.fi.pa165.monsterslayers.entities.enums.Elements;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 
+/**
+ * Class representing monster type entity
+ *
+ * @author Maksym Tsuhui
+ */
 @Entity
 public class MonsterType {
     @Id
@@ -18,7 +24,6 @@ public class MonsterType {
     public MonsterType() {
     }
 
-    //konstruktor, pri vytvoreni objektu nastavi hodnoty atributu
     public MonsterType(String name) {
         this.name = name;
     }
@@ -30,7 +35,7 @@ public class MonsterType {
     private String food;
 
     @ElementCollection(targetClass=Elements.class)
-    @Enumerated(EnumType.STRING) // Possibly optional (I'm not sure) but defaults to ORDINAL.
+    @Enumerated(EnumType.STRING)
     @CollectionTable(name="monsterType_weaknesses")
     private Collection<Elements> weaknesses = new HashSet<>();
 
@@ -59,7 +64,7 @@ public class MonsterType {
     }
 
     public Collection<Elements> getWeaknesses() {
-        return weaknesses;
+        return Collections.unmodifiableCollection(weaknesses);
     }
 
     public void setWeaknesses(Collection<Elements> weaknesses) {
@@ -76,6 +81,10 @@ public class MonsterType {
 
     public boolean hasWeakness(Elements weakness) {
         return this.weaknesses.contains(weakness);
+    }
+
+    public int getCountOfWeaknesses() {
+        return weaknesses.size();
     }
 
     @Override
