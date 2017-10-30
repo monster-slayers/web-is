@@ -3,8 +3,7 @@ package cz.muni.fi.pa165.monsterslayers.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Basic entity class - ClientRequest
@@ -118,7 +117,7 @@ public class ClientRequest {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + title.hashCode();
+        result = prime * result + Objects.hashCode(title);
         return result;
     }
 }
