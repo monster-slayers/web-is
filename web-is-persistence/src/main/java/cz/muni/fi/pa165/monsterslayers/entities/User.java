@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.monsterslayers.entities.enums.RightsLevel;
 import cz.muni.fi.pa165.monsterslayers.entities.enums.UserStatus;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Basic entity class - User
@@ -11,7 +12,7 @@ import javax.persistence.*;
  * @author David Kizivat
  */
 @Entity
-@Table(name = "Users")
+@Table(name = "UsersTable")
 public class User {
 
     @Id
@@ -113,15 +114,11 @@ public class User {
             return false;
         }
         User other = (User) o;
-        if (other.id == null) {
-            if (this.id != null) {
-                return false;
-            }
-        } else if (other.email == null) {
+        if (other.email == null) {
             if (this.email != null) {
                 return false;
             }
-        } else if (!this.id.equals(other.id) || !this.email.equals(other.email)) {
+        } else if (!this.email.equals(other.email)) {
             return false;
         }
 
@@ -131,8 +128,7 @@ public class User {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 71 * hash + id.intValue();
-        hash = 71 * hash + ((email == null) ? 0 : email.hashCode());
+        hash = 71 * hash + Objects.hashCode(email);
         return hash;
     }
 }
