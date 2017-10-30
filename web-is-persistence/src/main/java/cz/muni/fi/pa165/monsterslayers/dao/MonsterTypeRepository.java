@@ -9,5 +9,11 @@ import org.springframework.data.repository.CrudRepository;
  * @author Ondřej Budai
  */
 public interface MonsterTypeRepository extends CrudRepository<MonsterType, Long> {
+    /**
+     * Find MonsterType by name.
+     *
+     * @param name name of MonsterType to find
+     * @return instance of MonsterType with the provided name
+     */
     MonsterType findByName(String name);
 }

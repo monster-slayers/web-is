@@ -7,6 +7,7 @@ import java.util.*;
 
 /**
  * Basic entity class - ClientRequest
+ *
  * @author Ondřej Budai
  */
 @Entity

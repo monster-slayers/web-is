@@ -17,9 +17,13 @@ import javax.validation.ConstraintViolationException;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 
+/**
+ * Test class for MonsterType.
+ *
+ * @author David Kizivat
+ */
 @ContextConfiguration(locations = "/test-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
