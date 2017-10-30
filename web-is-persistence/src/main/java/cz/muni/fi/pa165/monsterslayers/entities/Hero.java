@@ -2,9 +2,9 @@ package cz.muni.fi.pa165.monsterslayers.entities;
 
 import cz.muni.fi.pa165.monsterslayers.entities.enums.Elements;
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * Basic entity class - Hero
@@ -18,15 +18,16 @@ public class Hero {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(targetEntity = User.class)
-//    @Column(nullable = false, unique = true)
+    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER, optional = false)
     private User user;
 
     @Column(nullable = false, unique = true)
     private String heroName;
 
-//    @ManyToMany
-//    private Set<Elements> elements = new HashSet<Elements>();
+    @ElementCollection(targetClass=Elements.class)
+    @Enumerated(EnumType.STRING) // Possibly optional (I'm not sure) but defaults to ORDINAL.
+    @CollectionTable(name="Hero_Elements")
+    private Collection<Elements> elements = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -52,11 +53,19 @@ public class Hero {
         this.heroName = heroName;
     }
 
-//    public Set<Elements> getElements() {
-//        return elements;
-//    }
-//
-//    public void setElements(Set<Elements> elements) {
-//        this.elements = elements;
-//    }
+    public Collection<Elements> getElements() {
+        return elements;
+    }
+
+    public void setElements(Collection<Elements> elements) {
+        this.elements = elements;
+    }
+
+    public void addElement(Elements element) {
+        elements.add(element);
+    }
+
+    public void removeElement(Elements element) {
+        elements.remove(element);
+    }
 }
