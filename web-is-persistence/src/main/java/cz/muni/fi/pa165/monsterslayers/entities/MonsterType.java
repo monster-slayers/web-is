@@ -3,8 +3,10 @@ package cz.muni.fi.pa165.monsterslayers.entities;
 import cz.muni.fi.pa165.monsterslayers.entities.enums.Elements;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 
 @Entity
 public class MonsterType {
@@ -21,6 +23,7 @@ public class MonsterType {
         this.name = name;
     }
 
+    @NotNull
     @Column(nullable = false, unique = true)
     private String name;
 
@@ -67,8 +70,8 @@ public class MonsterType {
         this.weaknesses.add(weakness);
     }
 
-    public void removeWeakness(Elements weakness) {
-        this.weaknesses.remove(weakness);
+    public boolean removeWeakness(Elements weakness) {
+        return weaknesses.remove(weakness);
     }
 
     public boolean hasWeakness(Elements weakness) {
@@ -87,6 +90,6 @@ public class MonsterType {
 
     @Override
     public int hashCode() {
-        return getName().hashCode();
+        return Objects.hashCode(getName());
     }
 }
