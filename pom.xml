@@ -18,7 +18,7 @@
     </parent>
     <modules>
         <module>web-is-persistence</module>
-        <module>web-is-api</module>
         <module>web-is-service</module>
+        <module>web-is-api</module>
     </modules>
 </project>

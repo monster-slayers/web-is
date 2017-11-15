@@ -18,32 +18,33 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public User findById(Long id) {
+    public User findUserById(Long id) {
         return userRepository.findOne(id);
     }
 
     @Override
-    public Iterable<User> findAll() {
+    public Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    public void createOrUpdateIfExists(User user) {
+    public void registerUser(User user, String password) {
         userRepository.save(user);
     }
 
     @Override
-    public void remove(User user) {
-        userRepository.delete(user);
-    }
-
-    @Override
-    public List<User> findByName(String name) {
+    public List<User> findUserByName(String name) {
         return userRepository.findByName(name);
     }
 
     @Override
-    public User findByEmail(String email) {
+    public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public boolean authenticateUser(User user, String password) {
+        //enough for now, some encryption will be added
+        return user.getPassword().equals(password);
     }
 }

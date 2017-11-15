@@ -1,27 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.monsterslayers.service;
 
 import cz.muni.fi.pa165.monsterslayers.entities.User;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
- *
+ * Interface for a service access to User entity
+ * 
  * @author Tomáš Richter
  */
+@Service
 public interface UserService {
-    //Basic crud operations
-    User findById(Long id);
-    Iterable<User> findAll();
-    void createOrUpdateIfExists(User user);
-    void remove(User user);
-    
-    //Custom crud operations
-    List<User> findByName(String name);
-    User findByEmail(String email);
-    
-    //Business methods
+    User findUserById(Long id);
+    Iterable<User> getAllUsers();
+    void registerUser (User user, String password);
+    boolean authenticateUser (User user, String password);
+    List<User> findUserByName(String name);
+    User findUserByEmail(String email);
 }
