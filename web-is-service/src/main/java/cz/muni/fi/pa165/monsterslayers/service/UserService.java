@@ -13,8 +13,13 @@ import org.springframework.stereotype.Service;
 public interface UserService {
     User findUserById(Long id);
     Iterable<User> getAllUsers();
+    List<User> findUsersByName(String name);
+    User findUserByEmail(String email);
+    
     void registerUser (User user, String password);
     boolean authenticateUser (User user, String password);
-    List<User> findUserByName(String name);
-    User findUserByEmail(String email);
+    
+    boolean hasUserManagerRights(User user);
+    boolean isUserActive(User user);
+    void editUserImage(User user, byte[] image, String imageMimeType);
 }

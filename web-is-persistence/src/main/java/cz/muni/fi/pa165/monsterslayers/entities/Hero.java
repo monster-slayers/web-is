@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.monsterslayers.entities;
 
-import cz.muni.fi.pa165.monsterslayers.entities.enums.Elements;
+import cz.muni.fi.pa165.monsterslayers.entities.enums.PowerElement;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -29,10 +29,10 @@ public class Hero {
     @Column(nullable = false, unique = true)
     private String heroName;
 
-    @ElementCollection(targetClass=Elements.class)
+    @ElementCollection(targetClass=PowerElement.class)
     @Enumerated(EnumType.STRING) // Possibly optional (I'm not sure) but defaults to ORDINAL.
     @CollectionTable(name="Hero_Elements")
-    private Collection<Elements> elements = new HashSet<>();
+    private Collection<PowerElement> elements = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -58,23 +58,23 @@ public class Hero {
         this.heroName = heroName;
     }
 
-    public Collection<Elements> getElements() {
+    public Collection<PowerElement> getElements() {
         return Collections.unmodifiableCollection(elements);
     }
 
-    public void setElements(Collection<Elements> elements) {
+    public void setElements(Collection<PowerElement> elements) {
         this.elements = elements;
     }
 
-    public void addElement(Elements element) {
+    public void addElement(PowerElement element) {
         elements.add(element);
     }
 
-    public void removeElement(Elements element) {
+    public void removeElement(PowerElement element) {
         elements.remove(element);
     }
 
-    public boolean hasElement(Elements element) {
+    public boolean hasElement(PowerElement element) {
         return elements.contains(element);
     }
 
@@ -89,22 +89,13 @@ public class Hero {
         if (!(o instanceof Hero)) {
             return false;
         }
-        Hero other = (Hero) o;
-        if (other.user == null) {
-            if (this.user != null) {
-                return false;
-            }
-        } else if (other.heroName == null) {
-            if (this.heroName != null) {
-                return false;
-            }
-        }else if (!this.user.equals(other.user) || !this.heroName.equals(other.heroName)) {
+        final Hero other = (Hero) o;
+        if (!Objects.equals(this.heroName, other.getHeroName())) {
             return false;
         }
-
-        return true;
+        return Objects.equals(this.user, other.getUser());
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 7;

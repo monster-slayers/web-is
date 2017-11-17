@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.monsterslayers.service;
 
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
+import cz.muni.fi.pa165.monsterslayers.entities.enums.PowerElement;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,4 +17,5 @@ public interface HeroService {
     void removeHero(Hero hero);
     Hero findHeroByName(String heroName);
     void createHeroOfUser (User user, Hero hero);
+    boolean hasHeroPowerElement (Hero hero, PowerElement element);     
 }

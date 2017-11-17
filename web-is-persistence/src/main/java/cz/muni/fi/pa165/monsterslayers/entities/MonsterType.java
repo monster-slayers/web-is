@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.monsterslayers.entities;
 
-import cz.muni.fi.pa165.monsterslayers.entities.enums.Elements;
+import cz.muni.fi.pa165.monsterslayers.entities.enums.PowerElement;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -34,10 +34,10 @@ public class MonsterType {
 
     private String food;
 
-    @ElementCollection(targetClass=Elements.class)
+    @ElementCollection(targetClass=PowerElement.class)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name="monsterType_weaknesses")
-    private Collection<Elements> weaknesses = new HashSet<>();
+    private Collection<PowerElement> weaknesses = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -63,23 +63,23 @@ public class MonsterType {
         this.food = food;
     }
 
-    public Collection<Elements> getWeaknesses() {
+    public Collection<PowerElement> getWeaknesses() {
         return Collections.unmodifiableCollection(weaknesses);
     }
 
-    public void setWeaknesses(Collection<Elements> weaknesses) {
+    public void setWeaknesses(Collection<PowerElement> weaknesses) {
         this.weaknesses = weaknesses;
     }
 
-    public void addWeakness(Elements weakness) {
+    public void addWeakness(PowerElement weakness) {
         this.weaknesses.add(weakness);
     }
 
-    public boolean removeWeakness(Elements weakness) {
+    public boolean removeWeakness(PowerElement weakness) {
         return weaknesses.remove(weakness);
     }
 
-    public boolean hasWeakness(Elements weakness) {
+    public boolean hasWeakness(PowerElement weakness) {
         return this.weaknesses.contains(weakness);
     }
 

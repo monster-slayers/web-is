@@ -28,6 +28,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    //hash of the password
     @NotNull
     @Column(nullable = false)
     private String password;

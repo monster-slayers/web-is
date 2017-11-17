@@ -5,7 +5,7 @@ package cz.muni.fi.pa165.monsterslayers.entities.enums;
  *
  * @author David Kizivat
  */
-public enum Elements {
+public enum PowerElement {
     NORMAL,
     FIRE,
     WATER,

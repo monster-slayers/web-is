@@ -8,7 +8,7 @@ import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
-import cz.muni.fi.pa165.monsterslayers.entities.enums.Elements;
+import cz.muni.fi.pa165.monsterslayers.entities.enums.PowerElement;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,12 +45,12 @@ public class HeroTests {
     private Hero hero;
 
     private String heroName = "Hero name";
-    private Elements elementEarth = Elements.EARTH;
-    private Elements elementPoison = Elements.POISON;
+    private PowerElement elementEarth = PowerElement.EARTH;
+    private PowerElement elementPoison = PowerElement.POISON;
 
     @Before
     public void setup() {
-        HashSet<Elements> elements = new HashSet<>();
+        HashSet<PowerElement> elements = new HashSet<>();
         elements.add(elementEarth);
         elements.add(elementPoison);
 
@@ -79,13 +79,13 @@ public class HeroTests {
     @Test
     public void elementsTest() {
         Assert.assertTrue(hero.hasElement(elementEarth));
-        Assert.assertFalse(hero.hasElement(Elements.GHOST));
+        Assert.assertFalse(hero.hasElement(PowerElement.GHOST));
 
         hero.removeElement(elementEarth);
         Assert.assertFalse(hero.hasElement(elementEarth));
 
-        hero.addElement(Elements.GHOST);
-        Assert.assertTrue(hero.hasElement(Elements.GHOST));
+        hero.addElement(PowerElement.GHOST);
+        Assert.assertTrue(hero.hasElement(PowerElement.GHOST));
     }
 
     @Test(expected = DataAccessException.class)

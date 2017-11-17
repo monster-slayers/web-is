@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.monsterslayers.service;
 import cz.muni.fi.pa165.monsterslayers.dao.HeroRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
+import cz.muni.fi.pa165.monsterslayers.entities.enums.PowerElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +42,10 @@ public class HeroServiceImpl implements HeroService {
     public void createHeroOfUser(User user, Hero hero) {
         hero.setUser(user);
         heroRepository.save(hero);
+    }
+    
+    @Override
+    public boolean hasHeroPowerElement(Hero hero, PowerElement powerElement) {
+        return findHeroById(hero.getId()).hasElement(powerElement);
     }
 }
