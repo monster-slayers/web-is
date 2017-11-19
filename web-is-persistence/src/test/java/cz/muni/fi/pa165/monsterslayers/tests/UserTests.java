@@ -4,7 +4,7 @@ import cz.muni.fi.pa165.monsterslayers.dao.HeroRepository;
 import cz.muni.fi.pa165.monsterslayers.dao.UserRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
-import cz.muni.fi.pa165.monsterslayers.entities.enums.Elements;
+import cz.muni.fi.pa165.monsterslayers.entities.enums.PowerElement;
 import cz.muni.fi.pa165.monsterslayers.entities.enums.RightsLevel;
 import cz.muni.fi.pa165.monsterslayers.entities.enums.UserStatus;
 import org.junit.Assert;

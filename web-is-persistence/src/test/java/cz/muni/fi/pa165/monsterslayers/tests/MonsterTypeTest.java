@@ -3,7 +3,7 @@ package cz.muni.fi.pa165.monsterslayers.tests;
 import cz.muni.fi.pa165.monsterslayers.dao.MonsterTypeRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
-import cz.muni.fi.pa165.monsterslayers.entities.enums.Elements;
+import cz.muni.fi.pa165.monsterslayers.entities.enums.PowerElement;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +17,9 @@ import javax.validation.ConstraintViolationException;
 import java.util.Arrays;
 import java.util.Collections;
 
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 
 /**
@@ -32,9 +35,9 @@ public class MonsterTypeTest {
     private MonsterTypeRepository repository;
 
     private MonsterType monsterType;
-    private Elements fire = Elements.FIRE;
-    private Elements water = Elements.WATER;
-    private Elements wind = Elements.WIND;
+    private PowerElement fire = PowerElement.FIRE;
+    private PowerElement water = PowerElement.WATER;
+    private PowerElement wind = PowerElement.WIND;
 
     private static final String monsterName = "Monster";
 

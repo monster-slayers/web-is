@@ -1,48 +1,28 @@
-package cz.muni.fi.pa165.monsterslayers.entities;
+package cz.muni.fi.pa165.monsterslayers.dto;
 
 import cz.muni.fi.pa165.monsterslayers.entities.enums.RightsLevel;
 import cz.muni.fi.pa165.monsterslayers.entities.enums.UserStatus;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
- * Basic entity class - User
- *
- * @author David Kizivat
+ * Basic data transfer object for user
+ * 
+ * @author Tomáš Richter
  */
-@Entity
-@Table(name = "Users")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserDTO {
     private Long id;
-
-    @NotNull
-    @Column(nullable = false)
     private String name;
-
-    @NotNull
-    @Column(nullable = false, unique = true)
     private String email;
-
+    
     //hash of the password
-    @NotNull
-    @Column(nullable = false)
     private String password;
-
-    @Lob
+    
     private byte[] image;
     private String imageMimeType;
 
-    @Enumerated(EnumType.STRING)
     private UserStatus status;
-
-    @Enumerated(EnumType.STRING)
     private RightsLevel rightsLevel;
-
+    
     public Long getId() {
         return id;
     }
@@ -106,7 +86,7 @@ public class User {
     public void setRightsLevel(RightsLevel rightsLevel) {
         this.rightsLevel = rightsLevel;
     }
-
+    
     @Override
     public boolean equals(Object o) {
         if (o == null) {
@@ -115,10 +95,10 @@ public class User {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof User)) {
+        if (!(o instanceof UserDTO)) {
             return false;
         }
-        User other = (User) o;
+        UserDTO other = (UserDTO) o;
         return (Objects.equals(this.email, other.getEmail()));
     }
 

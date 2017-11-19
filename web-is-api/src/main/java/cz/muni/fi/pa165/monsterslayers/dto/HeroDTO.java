@@ -1,39 +1,22 @@
-package cz.muni.fi.pa165.monsterslayers.entities;
+package cz.muni.fi.pa165.monsterslayers.dto;
 
 import cz.muni.fi.pa165.monsterslayers.entities.enums.PowerElement;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 
 /**
- * Basic entity class - Hero
- *
- * @author David Kizivat
+ * Basic data transfer object for hero
+ * 
+ * @author Tomáš Richter
  */
-
-@Entity
-public class Hero {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class HeroDTO {
     private Long id;
-
-    @NotNull
-    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER, optional = false)
-    private User user;
-
-    @NotNull
-    @Column(nullable = false, unique = true)
+    private UserDTO user;
     private String heroName;
-
-    @ElementCollection(targetClass=PowerElement.class)
-    @Enumerated(EnumType.STRING) // Possibly optional (I'm not sure) but defaults to ORDINAL.
-    @CollectionTable(name="Hero_Elements")
     private Collection<PowerElement> elements = new HashSet<>();
-
+    
     public Long getId() {
         return id;
     }
@@ -42,11 +25,11 @@ public class Hero {
         this.id = id;
     }
 
-    public User getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 
@@ -66,18 +49,6 @@ public class Hero {
         this.elements = elements;
     }
 
-    public void addElement(PowerElement element) {
-        elements.add(element);
-    }
-
-    public void removeElement(PowerElement element) {
-        elements.remove(element);
-    }
-
-    public boolean hasElement(PowerElement element) {
-        return elements.contains(element);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null) {
@@ -86,10 +57,10 @@ public class Hero {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Hero)) {
+        if (!(o instanceof HeroDTO)) {
             return false;
         }
-        final Hero other = (Hero) o;
+        final HeroDTO other = (HeroDTO) o;
         if (!Objects.equals(this.heroName, other.getHeroName())) {
             return false;
         }
@@ -102,5 +73,5 @@ public class Hero {
         hash = 71 * hash + Objects.hashCode(user);
         hash = 71 * hash + Objects.hashCode(heroName);
         return hash;
-    }
+    }   
 }
