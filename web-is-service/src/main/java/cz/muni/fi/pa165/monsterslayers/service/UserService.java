@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.monsterslayers.service;
 
 import cz.muni.fi.pa165.monsterslayers.entities.User;
+import java.util.Collection;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService {
     User findUserById(Long id);
-    Iterable<User> getAllUsers();
+    Collection<User> getAllUsers();
     List<User> findUsersByName(String name);
     User findUserByEmail(String email);
     

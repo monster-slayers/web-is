@@ -6,6 +6,7 @@ import cz.muni.fi.pa165.monsterslayers.entities.enums.RightsLevel;
 import cz.muni.fi.pa165.monsterslayers.entities.enums.UserStatus;
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.Collection;
 import java.util.List;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -29,8 +30,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Iterable<User> getAllUsers() {
-        return userRepository.findAll();
+    public Collection<User> getAllUsers() {
+        return (Collection<User>) userRepository.findAll();
     }
 
     @Override

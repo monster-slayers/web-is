@@ -1,8 +1,10 @@
 package cz.muni.fi.pa165.monsterslayers.service;
 
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
+import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
 import cz.muni.fi.pa165.monsterslayers.entities.enums.PowerElement;
+import java.util.Collection;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,9 +15,9 @@ import org.springframework.stereotype.Service;
 @Service
 public interface HeroService {
     Hero findHeroById(Long id);
-    Iterable<Hero> getAllHeroes();
+    Collection<Hero> getAllHeroes();
     void removeHero(Hero hero);
+    void saveHero(Hero hero);
     Hero findHeroByName(String heroName);
-    void createHeroOfUser (User user, Hero hero);
-    boolean hasHeroPowerElement (Hero hero, PowerElement element);     
+    PowerElementsMatch countHeroSuitabilityAgainstMonsterType (Hero hero, MonsterType monsterType);
 }
