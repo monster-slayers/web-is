@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 
 /**
  * Interface for a service access to Hero entity
- * 
+ *
  * @author Tomáš Richter
  */
 @Service
 public interface HeroService {
     Hero findHeroById(Long id);
-    Collection<Hero> getAllHeroes();
+    Iterable<Hero> getAllHeroes();
     void removeHero(Hero hero);
     void saveHero(Hero hero);
     Hero findHeroByName(String heroName);

@@ -15,12 +15,12 @@ import org.springframework.stereotype.Service;
 
 /**
  * Implementation of user service interface
- * 
+ *
  * @author Tomáš Richter
  */
 @Service
 public class UserServiceImpl implements UserService {
-    
+
     @Autowired
     private UserRepository userRepository;
 
@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Collection<User> getAllUsers() {
-        return (Collection<User>) userRepository.findAll();
+    public Iterable<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     @Override
@@ -49,17 +49,17 @@ public class UserServiceImpl implements UserService {
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
-    
+
     @Override
     public boolean hasUserManagerRights(User user) {
         return findUserById(user.getId()).getRightsLevel() == RightsLevel.MANAGER;
     }
-    
+
     @Override
     public boolean isUserActive(User user) {
         return findUserById(user.getId()).getStatus() == UserStatus.ACTIVE;
     }
-    
+
     @Override
     public void editUserImage(User user, byte[] image, String imageMimeType) {
         user.setImageMimeType(imageMimeType);
@@ -71,9 +71,9 @@ public class UserServiceImpl implements UserService {
     public boolean authenticateUser(User user, String password) {
         return checkPasswordAgainstHash(password, findUserById(user.getId()).getPassword());
     }
-    
+
     //Helper private methods for authentication following
-    
+
     private static boolean checkPasswordAgainstHash(String password, String correctHash) {
         if(password==null) return false;
         if(correctHash==null) throw new IllegalArgumentException("password hash is null");
@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
         byte[] testHash = pbkdf2(password.toCharArray(), salt, iterations, hash.length);
         return slowEquals(hash, testHash);
     }
-    
+
     private static String createHash(String password) {
         final int SALT_BYTE_SIZE = 24;
         final int HASH_BYTE_SIZE = 24;
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
         // format iterations:salt:hash
         return PBKDF2_ITERATIONS + ":" + toHex(salt) + ":" + toHex(hash);
     }
-    
+
     private static byte[] pbkdf2(char[] password, byte[] salt, int iterations, int bytes) {
         try {
             PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, bytes * 8);
@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException(e);
         }
     }
-    
+
     private static byte[] fromHex(String hex) {
         byte[] binary = new byte[hex.length() / 2];
         for (int i = 0; i < binary.length; i++) {
@@ -122,7 +122,7 @@ public class UserServiceImpl implements UserService {
         int paddingLength = (array.length * 2) - hex.length();
         return paddingLength > 0 ? String.format("%0" + paddingLength + "d", 0) + hex : hex;
     }
-    
+
     private static boolean slowEquals(byte[] a, byte[] b) {
         int diff = a.length ^ b.length;
         for (int i = 0; i < a.length && i < b.length; i++)

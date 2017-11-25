@@ -22,8 +22,8 @@ public class ClientRequestServiceImpl implements ClientRequestService {
     }
 
     @Override
-    public Collection<ClientRequest> getAllClientRequests() {
-        return (Collection<ClientRequest>) clientRequestRepository.findAll();
+    public Iterable<ClientRequest> getAllClientRequests() {
+        return clientRequestRepository.findAll();
     }
 
     @Override
