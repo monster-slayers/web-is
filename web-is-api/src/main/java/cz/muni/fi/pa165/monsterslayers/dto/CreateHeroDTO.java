@@ -2,14 +2,13 @@ package cz.muni.fi.pa165.monsterslayers.dto;
 
 import cz.muni.fi.pa165.monsterslayers.entities.enums.PowerElement;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 /**
  * Data transfer object for creating hero to specified user.
- * 
+ *
  * @author Tomáš Richter
  */
 public class CreateHeroDTO {
@@ -18,7 +17,7 @@ public class CreateHeroDTO {
     @NotNull
     @Size(min = 4, max = 32)
     private String heroName;
-    
+
     @NotEmpty(message = "Hero should control at least one power element. Otherwise, it's not a true hero :).")
     private Collection<PowerElement> elements = new HashSet<>();
 
@@ -44,7 +43,7 @@ public class CreateHeroDTO {
     }
 
     public Collection<PowerElement> getElements() {
-        return Collections.unmodifiableCollection(elements);
+        return elements;
     }
 
     public void addElement(PowerElement element) {

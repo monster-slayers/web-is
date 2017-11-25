@@ -2,13 +2,12 @@ package cz.muni.fi.pa165.monsterslayers.dto;
 
 import cz.muni.fi.pa165.monsterslayers.entities.enums.PowerElement;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 
 /**
  * Basic data transfer object for hero
- * 
+ *
  * @author Tomáš Richter
  */
 public class HeroDTO {
@@ -16,7 +15,7 @@ public class HeroDTO {
     private UserDTO user;
     private String heroName;
     private Collection<PowerElement> elements = new HashSet<>();
-    
+
     public Long getId() {
         return id;
     }
@@ -42,7 +41,7 @@ public class HeroDTO {
     }
 
     public Collection<PowerElement> getElements() {
-        return Collections.unmodifiableCollection(elements);
+        return elements;
     }
 
     public void setElements(Collection<PowerElement> elements) {
@@ -66,12 +65,12 @@ public class HeroDTO {
         }
         return Objects.equals(this.user, other.getUser());
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 71 * hash + Objects.hashCode(user);
         hash = 71 * hash + Objects.hashCode(heroName);
         return hash;
-    }   
+    }
 }

@@ -7,7 +7,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,7 +70,7 @@ public class CreateClientRequestDTO {
     }
 
     public Map<MonsterType, Integer> getKillList() {
-        return Collections.unmodifiableMap(killList);
+        return killList;
     }
 
     public void setKillList(Map<MonsterType, Integer> killList) {
