@@ -21,7 +21,7 @@ public class MappingServiceImpl implements MappingService {
     private Mapper dozer;
 
     @Override
-    public  <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass) {
+    public  <T> List<T> mapTo(Iterable<?> objects, Class<T> mapToClass) {
         List<T> mappedCollection = new ArrayList<>();
         for (Object object : objects) {
             mappedCollection.add(dozer.map(object, mapToClass));

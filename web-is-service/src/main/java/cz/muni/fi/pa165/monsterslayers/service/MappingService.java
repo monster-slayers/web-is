@@ -11,6 +11,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface MappingService {
-    <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass);
+    <T> List<T> mapTo(Iterable<?> objects, Class<T> mapToClass);
     <T> T mapTo(Object u, Class<T> mapToClass);
 }

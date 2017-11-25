@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -46,13 +47,19 @@ public class SampleTest {
 
     @Test
     public void sampleTest(){
+        Long expectedId = 42L;
+        MonsterType mockMonsterType = new MonsterType();
+        mockMonsterType.setId(expectedId);
+
+        when(monsterTypeRepository.save(any(MonsterType.class))).thenReturn(mockMonsterType);
         monsterTypeService.create(new MonsterType());
 
         List<MonsterType> mockList = new ArrayList<>();
-        mockList.add(new MonsterType());
+        mockList.add(mockMonsterType);
         when(monsterTypeRepository.findAll()).thenReturn(mockList);
 
         Assert.assertEquals(1, Iterables.size(monsterTypeService.findAll()));
+        Assert.assertEquals(expectedId, monsterTypeService.findAll().iterator().next().getId());
     }
 
 
