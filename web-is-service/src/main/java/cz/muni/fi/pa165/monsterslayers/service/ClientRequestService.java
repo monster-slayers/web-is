@@ -14,7 +14,7 @@ import java.util.List;
 
 public interface ClientRequestService {
     ClientRequest findClientRequestById(Long id);
-    Collection<ClientRequest> getAllClientRequests();
+    Iterable<ClientRequest> getAllClientRequests();
     ClientRequest findClientRequestByTitle(String title);
 
     void removeClientRequest(ClientRequest clientRequest);
