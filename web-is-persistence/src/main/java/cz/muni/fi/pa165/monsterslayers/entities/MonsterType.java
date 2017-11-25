@@ -34,7 +34,7 @@ public class MonsterType {
 
     private String food;
 
-    @ElementCollection(targetClass=PowerElement.class)
+    @ElementCollection(targetClass=PowerElement.class,fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name="monsterType_weaknesses")
     private Collection<PowerElement> weaknesses = new HashSet<>();
