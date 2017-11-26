@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.monsterslayers.service.facadeImpl;
 
 import cz.muni.fi.pa165.monsterslayers.dto.ClientRequestDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.CreateClientRequestDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.ModifyClientRequestDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import cz.muni.fi.pa165.monsterslayers.facade.ClientRequestFacade;
@@ -56,11 +57,6 @@ public class ClientRequestFacadeImpl implements ClientRequestFacade {
     }
 
     @Override
-    public void editClientRequest(ClientRequestDTO clientRequestDTO) {
-        clientRequestService.saveClientRequest(mappingService.mapTo(clientRequestDTO,ClientRequest.class));
-    }
-
-    @Override
     public void createClientRequest(CreateClientRequestDTO createClientRequestDTO) {
         ClientRequest clientRequest = new ClientRequest();
         clientRequest.setDescription(createClientRequestDTO.getDescription());
@@ -70,5 +66,23 @@ public class ClientRequestFacadeImpl implements ClientRequestFacade {
         clientRequest.setClient(userService.findUserById(createClientRequestDTO.getClientId()));
         clientRequest.setKillList(mappingService.mapTo(createClientRequestDTO.getKillList(), MonsterType.class));
         clientRequestService.saveClientRequest(clientRequest);
+    }
+
+    @Override
+    public void editClientRequest(ModifyClientRequestDTO modifyClientRequestDTO) {
+        ClientRequest clientRequest = clientRequestService.findClientRequestById(
+                modifyClientRequestDTO.getClientRequestId());
+        if (modifyClientRequestDTO.getTitle() != null) {
+            clientRequest.setTitle(modifyClientRequestDTO.getTitle());
+        }
+        if (modifyClientRequestDTO.getDescription() != null) {
+            clientRequest.setDescription(modifyClientRequestDTO.getDescription());
+        }
+        if (modifyClientRequestDTO.getLocation() != null) {
+            clientRequest.setLocation(modifyClientRequestDTO.getLocation());
+        }
+        if (modifyClientRequestDTO.getReward() != null) {
+            clientRequest.setReward(modifyClientRequestDTO.getReward());
+        }
     }
 }

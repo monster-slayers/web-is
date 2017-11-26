@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.monsterslayers.service.facadeImpl;
 
 import cz.muni.fi.pa165.monsterslayers.dto.CreateHeroDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.HeroDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.ModifyHeroDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.facade.HeroFacade;
 import cz.muni.fi.pa165.monsterslayers.service.HeroService;
@@ -61,16 +62,19 @@ public class HeroFacadeImpl implements HeroFacade {
     }
 
     @Override
-    public void editHero(HeroDTO heroDTO) {
-        heroService.saveHero(mappingService.mapTo(heroDTO, Hero.class));
-    }
-
-    @Override
     public void createHero(CreateHeroDTO createHeroDTO) {
         Hero hero = new Hero();
         hero.setHeroName(createHeroDTO.getHeroName());
         hero.setUser(userService.findUserById(createHeroDTO.getUserId()));
         hero.setElements(createHeroDTO.getElements());
         heroService.saveHero(hero);
+    }
+
+    @Override
+    public void editHero(ModifyHeroDTO modifyHeroDTO) {
+        Hero hero = heroService.findHeroById(modifyHeroDTO.getHeroId());
+        if (modifyHeroDTO.getNewHeroName() != null) {
+            hero.setHeroName(modifyHeroDTO.getNewHeroName());
+        }
     }
 }

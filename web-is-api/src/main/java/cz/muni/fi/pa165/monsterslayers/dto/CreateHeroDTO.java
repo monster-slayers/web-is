@@ -17,8 +17,7 @@ public class CreateHeroDTO {
     @Size(min = 4, max = 32)
     private String heroName;
 
-    //TODO: we cannot have Hibernate dependency here
-//    @NotEmpty(message = "Hero should control at least one power element. Otherwise, it's not a true hero :).")
+    @Size(min = 1)
     private Collection<PowerElement> elements = new HashSet<>();
 
     public CreateHeroDTO(Long userId, String heroName) {
@@ -46,6 +45,10 @@ public class CreateHeroDTO {
         return elements;
     }
 
+    public void setElements(Collection<PowerElement> elements) {
+        this.elements = elements;
+    }
+    
     public void addElement(PowerElement element) {
         this.elements.add(element);
     }

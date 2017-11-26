@@ -68,6 +68,14 @@ public class ClientRequestDTO {
         killList.remove(monsterType);
     }
 
+    public Map<MonsterTypeDTO, Integer> getKillList() {
+        return killList;
+    }
+
+    public void setKillList(Map<MonsterTypeDTO, Integer> killList) {
+        this.killList = killList;
+    }
+
     public BigDecimal getReward() {
         return reward;
     }

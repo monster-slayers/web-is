@@ -8,40 +8,33 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * DTO for client request create
+ * DTO for modification of some properties of client request
  *
  * @author Maksym Tsuhui
  */
-public class CreateClientRequestDTO {
-    private Long clientId;
-
-    @NotNull
+public class ModifyClientRequestDTO {
+    private Long clientRequestId;
+    
     @Size(min = 4, max = 64)
     private String title;
 
-    @NotNull
     @Size(min = 4, max = 64)
     private String location;
 
-    @NotNull
     @Size(min = 4, max = 256)
     private String description;
 
-    @Size(min = 1)
-    private Map<MonsterTypeDTO, Integer> killList = new HashMap<>();
-
-    @NotNull
     @Min(100)
     private BigDecimal reward;
 
-    public Long getClientId() {
-        return clientId;
+    public Long getClientRequestId() {
+        return clientRequestId;
     }
 
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
+    public void setClientRequestId(Long clientRequestId) {
+        this.clientRequestId = clientRequestId;
     }
-
+    
     public String getTitle() {
         return title;
     }
@@ -64,14 +57,6 @@ public class CreateClientRequestDTO {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Map<MonsterTypeDTO, Integer> getKillList() {
-        return killList;
-    }
-
-    public void setKillList(Map<MonsterTypeDTO, Integer> killList) {
-        this.killList = killList;
     }
 
     public BigDecimal getReward() {

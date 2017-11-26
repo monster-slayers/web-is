@@ -5,8 +5,6 @@ import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Collection;
-
 /**
  * Implementation of client request service
  *
