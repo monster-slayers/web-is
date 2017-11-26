@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.monsterslayers.service.facadeImpl;
 import cz.muni.fi.pa165.monsterslayers.dto.ClientRequestDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.CreateClientRequestDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
+import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import cz.muni.fi.pa165.monsterslayers.facade.ClientRequestFacade;
 import cz.muni.fi.pa165.monsterslayers.service.ClientRequestService;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
@@ -67,7 +68,7 @@ public class ClientRequestFacadeImpl implements ClientRequestFacade {
         clientRequest.setReward(createClientRequestDTO.getReward());
         clientRequest.setTitle(createClientRequestDTO.getTitle());
         clientRequest.setClient(userService.findUserById(createClientRequestDTO.getClientId()));
-        clientRequest.setKillList(createClientRequestDTO.getKillList());
+        clientRequest.setKillList(mappingService.mapTo(createClientRequestDTO.getKillList(), MonsterType.class));
         clientRequestService.saveClientRequest(clientRequest);
     }
 }

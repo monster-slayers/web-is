@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.monsterslayers.entities.enums;
+package cz.muni.fi.pa165.monsterslayers.enums;
 
 /**
  * Enumerates levels of rights that a User can have. These are used to validate access to certain parts of the system.

@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.monsterslayers.entities;
 
-import cz.muni.fi.pa165.monsterslayers.entities.enums.JobStatus;
+import cz.muni.fi.pa165.monsterslayers.enums.JobStatus;
+
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -37,8 +38,8 @@ public class Job {
     public Job(ClientRequest clientRequest, Hero assignee) {
         this.clientRequest = clientRequest;
         this.assignee = assignee;
-    } 
-    
+    }
+
     public Long getId() {
         return id;
     }
@@ -103,5 +104,5 @@ public class Job {
             return false;
         }
         return (Objects.equals(this.assignee, other.getAssignee()));
-    } 
+    }
 }

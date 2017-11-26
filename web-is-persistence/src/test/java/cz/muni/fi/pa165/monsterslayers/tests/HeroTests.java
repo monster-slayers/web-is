@@ -1,34 +1,26 @@
 package cz.muni.fi.pa165.monsterslayers.tests;
 
-import cz.muni.fi.pa165.monsterslayers.dao.ClientRequestRepository;
 import cz.muni.fi.pa165.monsterslayers.dao.HeroRepository;
-import cz.muni.fi.pa165.monsterslayers.dao.MonsterTypeRepository;
 import cz.muni.fi.pa165.monsterslayers.dao.UserRepository;
-import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
-import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
-import cz.muni.fi.pa165.monsterslayers.entities.enums.PowerElement;
+import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolationException;
-import java.math.BigDecimal;
 import java.util.HashSet;
 
 /**
  * Test class for Hero entity
- * 
+ *
  * @author Maksym Tsuhui
  */
 @RunWith(SpringJUnit4ClassRunner.class)

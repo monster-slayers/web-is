@@ -3,7 +3,7 @@ package cz.muni.fi.pa165.monsterslayers.tests;
 import cz.muni.fi.pa165.monsterslayers.dao.MonsterTypeRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
-import cz.muni.fi.pa165.monsterslayers.entities.enums.PowerElement;
+import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,13 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolationException;
 import java.util.Arrays;
-import java.util.Collections;
 
 import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-
 /**
  * Test class for MonsterType.
  *

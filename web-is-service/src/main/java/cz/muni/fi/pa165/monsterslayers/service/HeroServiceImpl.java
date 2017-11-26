@@ -1,11 +1,9 @@
 package cz.muni.fi.pa165.monsterslayers.service;
 
 import cz.muni.fi.pa165.monsterslayers.dao.HeroRepository;
-import cz.muni.fi.pa165.monsterslayers.dao.UserRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
-import cz.muni.fi.pa165.monsterslayers.entities.enums.PowerElement;
-import java.util.Collection;
+import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

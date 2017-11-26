@@ -1,8 +1,5 @@
 package cz.muni.fi.pa165.monsterslayers.dto;
 
-import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
-import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
-
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +16,7 @@ public class ClientRequestDTO {
     private UserDTO client;
     private String location;
     private String description;
-    private Map<MonsterType, Integer> killList = new HashMap<>();
+    private Map<MonsterTypeDTO, Integer> killList = new HashMap<>();
     private BigDecimal reward;
 
     public Long getId() {
@@ -63,11 +60,11 @@ public class ClientRequestDTO {
         this.description = description;
     }
 
-    public void addToKillList(MonsterType monsterType, int count){
+    public void addToKillList(MonsterTypeDTO monsterType, int count){
         killList.put(monsterType, count);
     }
 
-    public void removeFromKillList(MonsterType monsterType){
+    public void removeFromKillList(MonsterTypeDTO monsterType){
         killList.remove(monsterType);
     }
 
@@ -85,9 +82,9 @@ public class ClientRequestDTO {
             return true;
         if (obj == null)
             return false;
-        if (!(obj instanceof ClientRequest))
+        if (!(obj instanceof ClientRequestDTO))
             return false;
-        ClientRequest other = (ClientRequest) obj;
+        ClientRequestDTO other = (ClientRequestDTO) obj;
         return (Objects.equals(this.title, other.getTitle()));
     }
 

@@ -1,8 +1,5 @@
 package cz.muni.fi.pa165.monsterslayers.dto;
 
-import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,8 +27,9 @@ public class CreateClientRequestDTO {
     @Size(min = 4, max = 256)
     private String description;
 
-    @NotEmpty
-    private Map<MonsterType, Integer> killList = new HashMap<>();
+    //TODO: there cannot be dependency on Hibernate!
+    //@NotEmpty
+    private Map<MonsterTypeDTO, Integer> killList = new HashMap<>();
 
     @NotNull
     @Min(100)
@@ -69,11 +67,11 @@ public class CreateClientRequestDTO {
         this.description = description;
     }
 
-    public Map<MonsterType, Integer> getKillList() {
+    public Map<MonsterTypeDTO, Integer> getKillList() {
         return killList;
     }
 
-    public void setKillList(Map<MonsterType, Integer> killList) {
+    public void setKillList(Map<MonsterTypeDTO, Integer> killList) {
         this.killList = killList;
     }
 
