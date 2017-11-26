@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.monsterslayers.service;
 
+import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
-import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +16,5 @@ public interface HeroService {
     void removeHero(Hero hero);
     void saveHero(Hero hero);
     Hero findHeroByName(String heroName);
-    PowerElementsMatch countHeroSuitabilityAgainstMonsterType (Hero hero, MonsterType monsterType);
+    Hero findBestHeroForClientRequest (ClientRequest clientRequest);
 }

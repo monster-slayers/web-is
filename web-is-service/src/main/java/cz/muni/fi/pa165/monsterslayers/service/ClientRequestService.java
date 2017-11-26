@@ -3,9 +3,6 @@ package cz.muni.fi.pa165.monsterslayers.service;
 import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 
-import java.util.Collection;
-import java.util.List;
-
 /**
  * Client request service interface
  *
