@@ -2,11 +2,10 @@ package cz.muni.fi.pa165.monsterslayers.service;
 
 import cz.muni.fi.pa165.monsterslayers.dao.UserRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
-import cz.muni.fi.pa165.monsterslayers.entities.enums.RightsLevel;
-import cz.muni.fi.pa165.monsterslayers.entities.enums.UserStatus;
+import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
+import cz.muni.fi.pa165.monsterslayers.enums.UserStatus;
 import java.math.BigInteger;
 import java.security.SecureRandom;
-import java.util.Collection;
 import java.util.List;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;

@@ -8,7 +8,7 @@ import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.Job;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
-import cz.muni.fi.pa165.monsterslayers.entities.enums.JobStatus;
+import cz.muni.fi.pa165.monsterslayers.enums.JobStatus;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

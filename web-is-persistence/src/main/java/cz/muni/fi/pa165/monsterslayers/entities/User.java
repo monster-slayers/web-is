@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.monsterslayers.entities;
 
-import cz.muni.fi.pa165.monsterslayers.entities.enums.RightsLevel;
-import cz.muni.fi.pa165.monsterslayers.entities.enums.UserStatus;
+import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
+import cz.muni.fi.pa165.monsterslayers.enums.UserStatus;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

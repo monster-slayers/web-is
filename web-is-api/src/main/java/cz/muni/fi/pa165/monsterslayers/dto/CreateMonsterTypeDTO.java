@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.monsterslayers.dto;
 
-import cz.muni.fi.pa165.monsterslayers.entities.enums.PowerElement;
+import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 
 /**
  * DTO for creating a new MonsterType.

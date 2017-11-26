@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.monsterslayers.entities.enums;
+package cz.muni.fi.pa165.monsterslayers.enums;
 
 /**
  * Enumerates elements that can be used to defeat a monster.

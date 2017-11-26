@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.monsterslayers.entities;
 
-import cz.muni.fi.pa165.monsterslayers.entities.enums.PowerElement;
+import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

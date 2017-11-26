@@ -1,29 +1,24 @@
 package cz.muni.fi.pa165.monsterslayers.tests;
 
-import cz.muni.fi.pa165.monsterslayers.dao.HeroRepository;
 import cz.muni.fi.pa165.monsterslayers.dao.UserRepository;
-import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
-import cz.muni.fi.pa165.monsterslayers.entities.enums.PowerElement;
-import cz.muni.fi.pa165.monsterslayers.entities.enums.RightsLevel;
-import cz.muni.fi.pa165.monsterslayers.entities.enums.UserStatus;
+import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
+import cz.muni.fi.pa165.monsterslayers.enums.UserStatus;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolationException;
-import java.util.HashSet;
 
 /**
  * Test class for User entity
- * 
+ *
  * @author Maksym Tsuhui
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -115,7 +110,7 @@ public class UserTests {
         user1.setEmail("other@email.cz");
         Assert.assertNotEquals(user, user1);
     }
-    
+
     @Test
     public void hashCodeTest() {
         User user1 = new User();

@@ -1,28 +1,28 @@
 package cz.muni.fi.pa165.monsterslayers.dto;
 
-import cz.muni.fi.pa165.monsterslayers.entities.enums.RightsLevel;
-import cz.muni.fi.pa165.monsterslayers.entities.enums.UserStatus;
+import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
+import cz.muni.fi.pa165.monsterslayers.enums.UserStatus;
 import java.util.Objects;
 
 /**
  * Basic data transfer object for user
- * 
+ *
  * @author Tomáš Richter
  */
 public class UserDTO {
     private Long id;
     private String name;
     private String email;
-    
+
     //hash of the password
     private String password;
-    
+
     private byte[] image;
     private String imageMimeType;
 
     private UserStatus status;
     private RightsLevel rightsLevel;
-    
+
     public Long getId() {
         return id;
     }
@@ -86,7 +86,7 @@ public class UserDTO {
     public void setRightsLevel(RightsLevel rightsLevel) {
         this.rightsLevel = rightsLevel;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (o == null) {

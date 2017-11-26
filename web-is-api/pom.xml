@@ -15,10 +15,5 @@
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>cz.muni.fi.pa165.monster-slayers</groupId>
-            <artifactId>web-is-persistence</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
     </dependencies>
 </project>
