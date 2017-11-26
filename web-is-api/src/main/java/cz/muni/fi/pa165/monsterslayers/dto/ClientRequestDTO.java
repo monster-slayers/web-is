@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.monsterslayers.dto;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -16,9 +17,10 @@ public class ClientRequestDTO {
     private UserDTO client;
     private String location;
     private String description;
-    private Map<MonsterTypeDTO, Integer> killList = new HashMap<>();
-    private BigDecimal reward;
 
+    private Map<MonsterTypeDTO, Integer> killList = new HashMap<>();
+
+    private BigDecimal reward;
     public Long getId() {
         return id;
     }
@@ -58,6 +60,10 @@ public class ClientRequestDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Map<MonsterTypeDTO, Integer> getKillList() {
+        return Collections.unmodifiableMap(killList);
     }
 
     public void addToKillList(MonsterTypeDTO monsterType, int count){
