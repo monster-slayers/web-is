@@ -16,9 +16,10 @@ public class ClientRequestDTO {
     private UserDTO client;
     private String location;
     private String description;
-    private Map<MonsterTypeDTO, Integer> killList = new HashMap<>();
-    private BigDecimal reward;
 
+    private Map<MonsterTypeDTO, Integer> killList = new HashMap<>();
+
+    private BigDecimal reward;
     public Long getId() {
         return id;
     }
