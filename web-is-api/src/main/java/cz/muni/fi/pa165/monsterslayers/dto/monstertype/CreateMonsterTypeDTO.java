@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.monsterslayers.dto;
+package cz.muni.fi.pa165.monsterslayers.dto.monstertype;
 
 import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 

@@ -8,6 +8,8 @@ import cz.muni.fi.pa165.monsterslayers.service.ClientRequestService;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -83,8 +85,8 @@ public class ClientRequestFacadeTest {
     
     @Test
     public void getAllCallsServiceProperlyTest() {
-        Collection<ClientRequest> list = Arrays.asList(clientRequest);
-        Collection<ClientRequestDTO> listDTO = Arrays.asList(clientRequestDTO);
+        Collection<ClientRequest> list = Collections.singletonList(clientRequest);
+        Collection<ClientRequestDTO> listDTO = Collections.singletonList(clientRequestDTO);
 
         when(clientRequestService.getAllClientRequests()).thenReturn(list);
         when(mappingService.mapTo(list, ClientRequestDTO.class)).thenReturn(listDTO);

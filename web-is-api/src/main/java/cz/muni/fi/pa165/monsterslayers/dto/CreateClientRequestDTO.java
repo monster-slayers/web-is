@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.monsterslayers.dto;
 
+import cz.muni.fi.pa165.monsterslayers.dto.monstertype.MonsterTypeDTO;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.monsterslayers.service.facadeImpl;
 
-import cz.muni.fi.pa165.monsterslayers.dto.CreateMonsterTypeDTO;
-import cz.muni.fi.pa165.monsterslayers.dto.ModifyMonsterTypeDTO;
-import cz.muni.fi.pa165.monsterslayers.dto.MonsterTypeDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.monstertype.CreateMonsterTypeDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.monstertype.ModifyMonsterTypeDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.monstertype.MonsterTypeDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import cz.muni.fi.pa165.monsterslayers.facade.MonsterTypeFacade;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
@@ -41,6 +41,7 @@ public class MonsterTypeFacadeImpl implements MonsterTypeFacade {
     public void deleteMonsterType(Long id) {
         monsterTypeService.remove(monsterTypeService.findById(id));
     }
+
     @Override
     public void editMonsterType(ModifyMonsterTypeDTO modifyMonsterTypeDTO) {
         MonsterType monsterType = monsterTypeService.findById(modifyMonsterTypeDTO.getId());
