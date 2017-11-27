@@ -16,6 +16,7 @@ public interface UserService {
     Iterable<User> getAllUsers();
     List<User> findUsersByName(String name);
     User findUserByEmail(String email);
+    void saveUser(User user);
 
     void registerUser (User user, String password);
     boolean authenticateUser (User user, String password);

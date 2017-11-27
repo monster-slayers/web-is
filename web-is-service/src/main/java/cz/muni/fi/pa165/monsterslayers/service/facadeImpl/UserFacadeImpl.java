@@ -4,6 +4,8 @@ import cz.muni.fi.pa165.monsterslayers.dto.ChangeUserImageDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.UserDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.UserLoginDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
+import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
+import cz.muni.fi.pa165.monsterslayers.enums.UserStatus;
 import cz.muni.fi.pa165.monsterslayers.facade.UserFacade;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
 import cz.muni.fi.pa165.monsterslayers.service.UserService;
@@ -86,5 +88,19 @@ public class UserFacadeImpl implements UserFacade {
     public void changeUserImage(ChangeUserImageDTO changeUserImageDTO) {
         User user = userService.findUserById(changeUserImageDTO.getUserId());
         userService.editUserImage(user, changeUserImageDTO.getImage(), changeUserImageDTO.getImageMimeType());
+    }
+
+    @Override
+    public void changeUserStatus(Long userId, UserStatus userStatus) {
+        User user = userService.findUserById(userId);
+        user.setStatus(userStatus);
+        userService.saveUser(user);
+    }
+
+    @Override
+    public void changeRightsLevel(Long userId, RightsLevel rightsLevel) {
+        User user = userService.findUserById(userId);
+        user.setRightsLevel(rightsLevel);
+        userService.saveUser(user);
     }
 }
