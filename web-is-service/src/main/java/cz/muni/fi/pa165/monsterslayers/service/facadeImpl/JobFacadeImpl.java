@@ -11,7 +11,7 @@ import cz.muni.fi.pa165.monsterslayers.facade.JobFacade;
 import cz.muni.fi.pa165.monsterslayers.service.HeroService;
 import cz.muni.fi.pa165.monsterslayers.service.JobService;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
-import cz.muni.fi.pa165.monsterslayers.service.PowerElementsMatch;
+import cz.muni.fi.pa165.monsterslayers.service.utils.PowerElementsMatch;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.monsterslayers.service;
 
+import cz.muni.fi.pa165.monsterslayers.service.utils.PowerElementsMatch;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.monsterslayers.service;
+package cz.muni.fi.pa165.monsterslayers.service.utils;
 
 import java.util.Collection;
 
