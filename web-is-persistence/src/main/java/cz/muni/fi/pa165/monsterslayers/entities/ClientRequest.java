@@ -28,6 +28,17 @@ public class ClientRequest {
 
     private String description;
 
+    private BigDecimal reward;
+
+    public ClientRequest() {
+
+    }
+
+    public ClientRequest(String title, User client) {
+        this.title = title;
+        this.client = client;
+    }
+
     public Map<MonsterType, Integer> getKillList() {
         return Collections.unmodifiableMap(killList);
     }
@@ -35,11 +46,9 @@ public class ClientRequest {
     public void setKillList(Map<MonsterType, Integer> killList) {
         this.killList = killList;
     }
-
     @ManyToMany(targetEntity = MonsterType.class)
     private Map<MonsterType, Integer> killList = new HashMap<>();
 
-    private BigDecimal reward;
 
     public Long getId() {
         return id;
