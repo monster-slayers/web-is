@@ -31,16 +31,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class JobFacadeImpl implements JobFacade {
 
-    private final JobService jobService;
-    private final HeroService heroService;
-    private final MappingService mappingService;
-
     @Autowired
-    public JobFacadeImpl(JobService jobService, HeroService heroService, MappingService mappingService) {
-        this.jobService = jobService;
-        this.heroService = heroService;
-        this.mappingService = mappingService;
-    }
+    private JobService jobService;
+    @Autowired
+    private HeroService heroService;
+    @Autowired
+    private MappingService mappingService;
 
     @Override
     public JobDTO getJobById(Long id) {
@@ -52,8 +48,8 @@ public class JobFacadeImpl implements JobFacade {
     }
 
     @Override
-    public Collection<JobDTO> getJobsByAssignee(HeroDTO assignee) {
-        Hero hero = mappingService.mapTo(assignee, Hero.class);
+    public Collection<JobDTO> getJobsByAssignee(Long assigneeId) {
+        Hero hero = heroService.findHeroById(assigneeId);
         return mappingService.mapTo(jobService.getJobsByAssignee(hero), JobDTO.class);
     }
 
@@ -92,22 +88,24 @@ public class JobFacadeImpl implements JobFacade {
     }
 
     @Override
-    public HeroDTO getBestHeroForJob(JobDTO dto) {
-        Map<MonsterTypeDTO, Integer> killList = dto.getClientRequest().getKillList();
+    public HeroDTO getBestHeroForJob(Long jobId) {
+        Job job = jobService.getJobById(jobId);
+
+        Map<MonsterType, Integer> killList = job.getClientRequest().getKillList();
 
         PowerElementsMatch bestMatch = new PowerElementsMatch(0, Integer.MAX_VALUE);
         Hero bestHero = new Hero();
-        
+
         for (Hero hero : heroService.getAllHeroes()) {
             List<PowerElementsMatch> matches = new ArrayList<>();
-            for (Map.Entry<MonsterTypeDTO, Integer> entry : killList.entrySet()) {
-                MonsterType monsterType = mappingService.mapTo(entry.getKey(), MonsterType.class);
+            for (Map.Entry<MonsterType, Integer> entry : killList.entrySet()) {
+                MonsterType monsterType = entry.getKey();
                 matches.add(
                         heroService.countHeroSuitabilityAgainstMonsterType(hero, monsterType)
                                 .multiplyByMonsterCount(entry.getValue())
                 );
             }
-            
+
             PowerElementsMatch match = PowerElementsMatch.sumMatches(matches);
             if (match.isMoreSuitable(bestMatch)) {
                 bestMatch = match;

@@ -27,9 +27,9 @@ public class Job {
     private Hero assignee;
 
     @Enumerated(EnumType.ORDINAL)
-    private JobStatus status;
+    private JobStatus status = JobStatus.ASSIGNED;
 
-    private Integer evaluation;
+    private Integer evaluation = 0;
 
     public Job() {
         //hibernate requires it
