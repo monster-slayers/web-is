@@ -30,7 +30,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Tests for Job Facade
+ * Job facade tests.
  *
  * @author Ondrej Budai
  */
