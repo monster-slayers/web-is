@@ -21,10 +21,10 @@ public interface JobFacade {
 
     /**
      * Gets JobDTOs by assignee.
-     * @param assignee HeroDTO of the Hero whose JobsDTOs to get
+     * @param assigneeId ID of the Hero whose JobsDTOs to get
      * @return Collection of JobDTOs assigned to the hero given by their DTO
      */
-    Collection<JobDTO> getJobsByAssignee(HeroDTO assignee);
+    Collection<JobDTO> getJobsByAssignee(Long assigneeId);
 
     /**
      * Gets DTO of all jobs.
@@ -65,8 +65,8 @@ public interface JobFacade {
     /**
      * Gets Hero who's suited the best for the job based on monsters requested to be killed.
      *
-     * @param dto {@link JobDTO} with respective data
+     * @param jobId Job id
      * @return The best suited hero
      */
-    HeroDTO getBestHeroForJob(JobDTO dto);
+    HeroDTO getBestHeroForJob(Long jobId);
 }
