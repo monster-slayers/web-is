@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.monsterslayers.facade;
 
-import cz.muni.fi.pa165.monsterslayers.dto.CreateMonsterTypeDTO;
-import cz.muni.fi.pa165.monsterslayers.dto.ModifyMonsterTypeDTO;
-import cz.muni.fi.pa165.monsterslayers.dto.MonsterTypeDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.monstertype.CreateMonsterTypeDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.monstertype.ModifyMonsterTypeDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.monstertype.MonsterTypeDTO;
 
 /**
  * Facade layer interface for MonsterType.

@@ -1,20 +1,14 @@
-package cz.muni.fi.pa165.monsterslayers.dto;
-
-import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
-
-import java.util.HashSet;
-import java.util.Set;
+package cz.muni.fi.pa165.monsterslayers.dto.monstertype;
 
 /**
- * DTO for MonsterType.
+ * DTO for modifying an existing MonsterType.
  *
  * @author Ondrej Budai
  */
-public class MonsterTypeDTO {
+public class ModifyMonsterTypeDTO {
     private Long id;
     private String name;
     private String food;
-    private Set<PowerElement> weaknesses = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -38,13 +32,5 @@ public class MonsterTypeDTO {
 
     public void setFood(String food) {
         this.food = food;
-    }
-
-    public Set<PowerElement> getWeaknesses() {
-        return weaknesses;
-    }
-
-    public void setWeaknesses(Set<PowerElement> weaknesses) {
-        this.weaknesses = weaknesses;
     }
 }
