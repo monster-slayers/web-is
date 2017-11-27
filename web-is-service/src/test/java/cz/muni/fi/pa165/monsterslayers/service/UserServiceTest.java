@@ -138,7 +138,7 @@ public class UserServiceTest {
     public void testFindUsersByNameNoUsers(){
         when(userRepository.findByName("Jaryn")).thenReturn(emptyUsers);
 
-        List<User> actualUsers = userService.findUsersByName("Pepa");
+        List<User> actualUsers = userService.findUsersByName("Jaryn");
 
         Assert.assertEquals(actualUsers.size(), 0);
     }
