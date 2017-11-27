@@ -21,6 +21,11 @@ import java.util.HashSet;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * Job service tests
+ *
+ * @author Tomas Richter
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/service-context.xml"})
 public class JobServiceTest {

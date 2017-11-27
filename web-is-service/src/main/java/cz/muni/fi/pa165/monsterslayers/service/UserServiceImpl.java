@@ -50,6 +50,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
     public boolean hasUserManagerRights(User user) {
         return findUserById(user.getId()).getRightsLevel() == RightsLevel.MANAGER;
     }
