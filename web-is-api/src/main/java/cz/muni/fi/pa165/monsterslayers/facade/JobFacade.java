@@ -21,6 +21,7 @@ public interface JobFacade {
 
     /**
      * Gets JobDTOs by assignee.
+     * 
      * @param assigneeId ID of the Hero whose JobsDTOs to get
      * @return Collection of JobDTOs assigned to the hero given by their DTO
      */

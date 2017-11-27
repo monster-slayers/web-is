@@ -11,10 +11,47 @@ import java.util.Collection;
  * @author Tomáš Richter
  */
 public interface HeroFacade {
+    /**
+     * Gets hero with specific id as DTO
+     * 
+     * @param heroId specific id
+     * @return single DTO
+     */
     HeroDTO getHeroById(Long heroId);
+    
+    /**
+     * Gets hero with specific name as DTO
+     * 
+     * @param heroName specific hero name
+     * @return single DTO
+     */
     HeroDTO getHeroByName(String heroName);
+    
+    /**
+     * Gets all heroes as collection of DTOs
+     * 
+     * @return collection of DTOs
+     */
     Collection<HeroDTO> getAllHeroes();
+    
+    /**
+     * Removes hero according to DTO
+     * 
+     * @param heroDTO DTO of hero that will be removed
+     */
     void removeHero(HeroDTO heroDTO);
+    
+    /**
+     * Edits hero according to special DTOs
+     * 
+     * @param modifyHeroDTO DTO for modification of hero
+     */
     void editHero(ModifyHeroDTO modifyHeroDTO);
+    
+    /**
+     * Creates new hero according to special DTO
+     * 
+     * @param heroDTO DTO for creating new hero
+     */
     void createHero(CreateHeroDTO heroDTO);
 }
