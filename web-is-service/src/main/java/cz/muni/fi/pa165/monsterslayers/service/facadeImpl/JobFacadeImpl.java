@@ -12,16 +12,23 @@ import cz.muni.fi.pa165.monsterslayers.service.HeroService;
 import cz.muni.fi.pa165.monsterslayers.service.JobService;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
 import cz.muni.fi.pa165.monsterslayers.service.PowerElementsMatch;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Implementation of the facade layer for Jobs.
  *
  * @author David Kizivat
  */
+
+@Service
+@Transactional
 public class JobFacadeImpl implements JobFacade {
 
     private final JobService jobService;
@@ -90,15 +97,21 @@ public class JobFacadeImpl implements JobFacade {
 
         PowerElementsMatch bestMatch = new PowerElementsMatch(0, Integer.MAX_VALUE);
         Hero bestHero = new Hero();
-
-        for (Map.Entry<MonsterTypeDTO, Integer> entry : killList.entrySet()) {
-            MonsterType monsterType = mappingService.mapTo(entry.getKey(), MonsterType.class);
-            for (Hero hero : heroService.getAllHeroes()) {
-                PowerElementsMatch match = heroService.countHeroSuitabilityAgainstMonsterType(hero, monsterType);
-                if (match.isMoreSuitable(bestMatch)) {
-                    bestMatch = match;
-                    bestHero = hero;
-                }
+        
+        for (Hero hero : heroService.getAllHeroes()) {
+            List<PowerElementsMatch> matches = new ArrayList<>();
+            for (Map.Entry<MonsterTypeDTO, Integer> entry : killList.entrySet()) {
+                MonsterType monsterType = mappingService.mapTo(entry.getKey(), MonsterType.class);
+                matches.add(
+                        heroService.countHeroSuitabilityAgainstMonsterType(hero, monsterType)
+                                .multiplyByMonsterCount(entry.getValue())
+                );
+            }
+            
+            PowerElementsMatch match = PowerElementsMatch.sumMatches(matches);
+            if (match.isMoreSuitable(bestMatch)) {
+                bestMatch = match;
+                bestHero = hero;
             }
         }
 

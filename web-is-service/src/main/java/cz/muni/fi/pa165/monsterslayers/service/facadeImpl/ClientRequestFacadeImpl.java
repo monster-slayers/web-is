@@ -2,27 +2,27 @@ package cz.muni.fi.pa165.monsterslayers.service.facadeImpl;
 
 import cz.muni.fi.pa165.monsterslayers.dto.ClientRequestDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.CreateClientRequestDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.ModifyClientRequestDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
-import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import cz.muni.fi.pa165.monsterslayers.facade.ClientRequestFacade;
 import cz.muni.fi.pa165.monsterslayers.service.ClientRequestService;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
-import cz.muni.fi.pa165.monsterslayers.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collection;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Implementation of client request facade interface
  *
  * @author Maksym Tsuhui
  */
+@Service
+@Transactional
 public class ClientRequestFacadeImpl implements ClientRequestFacade {
     @Autowired
     private ClientRequestService clientRequestService;
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private MappingService mappingService;
@@ -56,19 +56,27 @@ public class ClientRequestFacadeImpl implements ClientRequestFacade {
     }
 
     @Override
-    public void editClientRequest(ClientRequestDTO clientRequestDTO) {
-        clientRequestService.saveClientRequest(mappingService.mapTo(clientRequestDTO,ClientRequest.class));
+    public void createClientRequest(CreateClientRequestDTO createClientRequestDTO) {
+        ClientRequest clientRequest = mappingService.mapTo(createClientRequestDTO, ClientRequest.class);
+        clientRequestService.saveClientRequest(clientRequest);
     }
 
     @Override
-    public void createClientRequest(CreateClientRequestDTO createClientRequestDTO) {
-        ClientRequest clientRequest = new ClientRequest();
-        clientRequest.setDescription(createClientRequestDTO.getDescription());
-        clientRequest.setLocation(createClientRequestDTO.getLocation());
-        clientRequest.setReward(createClientRequestDTO.getReward());
-        clientRequest.setTitle(createClientRequestDTO.getTitle());
-        clientRequest.setClient(userService.findUserById(createClientRequestDTO.getClientId()));
-        clientRequest.setKillList(mappingService.mapTo(createClientRequestDTO.getKillList(), MonsterType.class));
+    public void editClientRequest(ModifyClientRequestDTO modifyClientRequestDTO) {
+        ClientRequest clientRequest = clientRequestService.findClientRequestById(
+                modifyClientRequestDTO.getClientRequestId());
+        if (modifyClientRequestDTO.getTitle() != null) {
+            clientRequest.setTitle(modifyClientRequestDTO.getTitle());
+        }
+        if (modifyClientRequestDTO.getDescription() != null) {
+            clientRequest.setDescription(modifyClientRequestDTO.getDescription());
+        }
+        if (modifyClientRequestDTO.getLocation() != null) {
+            clientRequest.setLocation(modifyClientRequestDTO.getLocation());
+        }
+        if (modifyClientRequestDTO.getReward() != null) {
+            clientRequest.setReward(modifyClientRequestDTO.getReward());
+        }
         clientRequestService.saveClientRequest(clientRequest);
     }
 }

@@ -50,6 +50,7 @@ public class MonsterTypeFacadeImpl implements MonsterTypeFacade {
         if(modifyMonsterTypeDTO.getFood() != null){
             monsterType.setFood(modifyMonsterTypeDTO.getFood());
         }
+        monsterTypeService.update(monsterType);
     }
 
     @Override

@@ -62,7 +62,7 @@ public class SampleTest {
         Assert.assertEquals(expectedId, monsterTypeService.findAll().iterator().next().getId());
     }
 
-
+    
 
 
 }

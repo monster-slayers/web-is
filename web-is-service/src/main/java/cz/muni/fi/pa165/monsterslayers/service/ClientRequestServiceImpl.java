@@ -4,14 +4,14 @@ import cz.muni.fi.pa165.monsterslayers.dao.ClientRequestRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Collection;
+import org.springframework.stereotype.Service;
 
 /**
  * Implementation of client request service
  *
  * @author Maksym Tsuhui
  */
+@Service
 public class ClientRequestServiceImpl implements ClientRequestService {
     @Autowired
     private ClientRequestRepository clientRequestRepository;
@@ -39,15 +39,5 @@ public class ClientRequestServiceImpl implements ClientRequestService {
     @Override
     public void saveClientRequest(ClientRequest clientRequest) {
         clientRequestRepository.save(clientRequest);
-    }
-
-    @Override
-    public void addMonstersToClientRequest(ClientRequest clientRequest, MonsterType monsterType, int count) {
-        clientRequest.addToKillList(monsterType, count);
-    }
-
-    @Override
-    public void removeMonstersFromClientRequest(ClientRequest clientRequest, MonsterType monsterType) {
-        clientRequest.removeFromKillList(monsterType);
     }
 }

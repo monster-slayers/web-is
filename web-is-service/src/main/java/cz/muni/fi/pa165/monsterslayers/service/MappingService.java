@@ -1,5 +1,5 @@
 package cz.muni.fi.pa165.monsterslayers.service;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface MappingService {
-    <T> List<T> mapTo(Iterable<?> objects, Class<T> mapToClass);
+    <T> Collection<T> mapTo(Iterable<?> objects, Class<T> mapToClass);
     <K, V> Map<K, V> mapTo(Map<?, V> objects, Class<K> mapToClass);
     <T> T mapTo(Object u, Class<T> mapToClass);
 }

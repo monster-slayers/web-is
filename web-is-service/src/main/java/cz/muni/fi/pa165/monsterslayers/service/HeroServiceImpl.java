@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.monsterslayers.dao.HeroRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
+import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +25,8 @@ public class HeroServiceImpl implements HeroService {
     }
 
     @Override
-    public Iterable<Hero> getAllHeroes() {
-        return heroRepository.findAll();
+    public Collection<Hero> getAllHeroes() {
+        return (Collection<Hero>) heroRepository.findAll();
     }
 
     @Override
@@ -51,12 +52,7 @@ public class HeroServiceImpl implements HeroService {
                 usefulElements++;
             }
         }
-
-        //elements which can be used by hero, but monster type is not weak against them
         int uselessElements = hero.getElements().size() - usefulElements;
-
-        //count of useless elements is not bigger than total count of monster weaknesses
-        //therefore, useful elements plays primary role everytime
         return new PowerElementsMatch(usefulElements, uselessElements);
     }
 }
