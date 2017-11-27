@@ -25,8 +25,8 @@ public class HeroServiceImpl implements HeroService {
     }
 
     @Override
-    public Collection<Hero> getAllHeroes() {
-        return (Collection<Hero>) heroRepository.findAll();
+    public Iterable<Hero> getAllHeroes() {
+        return heroRepository.findAll();
     }
 
     @Override
