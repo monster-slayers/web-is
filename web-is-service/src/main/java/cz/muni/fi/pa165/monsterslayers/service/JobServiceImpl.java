@@ -8,6 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Collection;
 import org.springframework.stereotype.Service;
 
+/**
+ * Job service implementation.
+ *
+ * @author David Kizivat
+ */
 @Service
 public class JobServiceImpl implements JobService {
 

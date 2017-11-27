@@ -29,6 +29,11 @@ import java.util.List;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * Job facade tests.
+ *
+ * @author Ondrej Budai
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/service-context.xml"})
 public class JobFacadeTest {

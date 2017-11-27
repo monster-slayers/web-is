@@ -6,6 +6,11 @@ import cz.muni.fi.pa165.monsterslayers.enums.JobStatus;
 
 import java.util.Objects;
 
+/**
+ * Job data transfer object.
+ *
+ * @author David Kizivat
+ */
 public class JobDTO {
     private Long id;
 
