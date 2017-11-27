@@ -29,6 +29,11 @@ public class MonsterTypeServiceImpl implements MonsterTypeService {
     public Long create(MonsterType monsterType) {
         return monsterTypeRepository.save(monsterType).getId();
     }
+    
+    @Override
+    public void update(MonsterType monsterType) {
+        monsterTypeRepository.save(monsterType);
+    }
 
     @Override
     public void remove(MonsterType monsterType) {

@@ -18,12 +18,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Implementation of the facade layer for Jobs.
  *
  * @author David Kizivat
  */
+
+@Service
+@Transactional
 public class JobFacadeImpl implements JobFacade {
 
     private final JobService jobService;

@@ -63,10 +63,8 @@ public class HeroFacadeImpl implements HeroFacade {
 
     @Override
     public void createHero(CreateHeroDTO createHeroDTO) {
-        Hero hero = new Hero();
-        hero.setHeroName(createHeroDTO.getHeroName());
+        Hero hero = mappingService.mapTo(createHeroDTO, Hero.class);
         hero.setUser(userService.findUserById(createHeroDTO.getUserId()));
-        hero.setElements(createHeroDTO.getElements());
         heroService.saveHero(hero);
     }
 
@@ -76,5 +74,6 @@ public class HeroFacadeImpl implements HeroFacade {
         if (modifyHeroDTO.getNewHeroName() != null) {
             hero.setHeroName(modifyHeroDTO.getNewHeroName());
         }
+        heroService.saveHero(hero);
     }
 }
