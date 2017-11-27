@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 /**
  * Job service tests
  *
- * @author Tomas Richter
+ * @author Tomáš Richter
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/service-context.xml"})
