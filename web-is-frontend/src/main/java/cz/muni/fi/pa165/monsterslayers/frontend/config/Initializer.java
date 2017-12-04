@@ -12,7 +12,7 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/api/v1/*"};
+        return new String[]{"/"};
     }
 
     @Override
