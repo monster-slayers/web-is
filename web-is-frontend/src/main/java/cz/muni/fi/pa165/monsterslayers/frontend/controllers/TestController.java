@@ -1,28 +1,32 @@
 package cz.muni.fi.pa165.monsterslayers.frontend.controllers;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController(value = "/api/test")
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/test")
 public class TestController {
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public final String create() {
         return "CREATE";
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public final String find() {
-        return "FIND";
+    @GetMapping
+    public final Map<String, String> find() {
+        Map<String, String> map = new HashMap<>();
+        map.put("key", "value");
+        return map;
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @PutMapping
     public final String update() {
         return "GET";
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
+    @DeleteMapping
     public final String delete() {
         return "DELETE";
     }
