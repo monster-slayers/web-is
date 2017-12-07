@@ -7,10 +7,12 @@ import cz.muni.fi.pa165.monsterslayers.enums.UserStatus;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
 import cz.muni.fi.pa165.monsterslayers.service.UserService;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -24,13 +26,13 @@ import static org.mockito.Mockito.when;
 
 /**
  * Test class for user facade tests
- * 
+ *
  * @author Maksym Tsuhui
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/service-context.xml"})
 public class UserFacadeTest {
-    
+
     @Mock
     private UserService userService;
 
@@ -52,6 +54,17 @@ public class UserFacadeTest {
 
     @Mock
     private User user;
+    private boolean initialized = false;
+
+    @Before
+    public void setup(){
+        if (initialized) {
+            return;
+        }
+        MockitoAnnotations.initMocks(this);
+
+        initialized = true;
+    }
 
     @Test
     public void testGetUserById() {

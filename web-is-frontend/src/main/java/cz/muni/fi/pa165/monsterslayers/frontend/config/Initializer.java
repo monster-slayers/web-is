@@ -1,7 +1,6 @@
 package cz.muni.fi.pa165.monsterslayers.frontend.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-import javax.servlet.ServletException;
 
 public class Initializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -12,12 +11,11 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/"};
+        return new String[]{"/rest/*"};
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return null;
     }
-
 }

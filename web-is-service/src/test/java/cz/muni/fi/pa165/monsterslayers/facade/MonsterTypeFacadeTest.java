@@ -7,10 +7,12 @@ import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
 import cz.muni.fi.pa165.monsterslayers.service.MonsterTypeService;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -50,6 +52,17 @@ public class MonsterTypeFacadeTest {
 
     @Mock
     private MonsterType monsterType;
+    private boolean initialized = false;
+
+    @Before
+    public void setup(){
+        if (initialized) {
+            return;
+        }
+        MockitoAnnotations.initMocks(this);
+
+        initialized = true;
+    }
 
     @Test
     public void createMonsterTypeServiceCallTest() {

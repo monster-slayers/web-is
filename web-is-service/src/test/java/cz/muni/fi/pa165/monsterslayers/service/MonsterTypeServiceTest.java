@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -38,9 +39,16 @@ public class MonsterTypeServiceTest {
     private MonsterType monsterType1;
     private MonsterType monsterType2;
     private Collection<MonsterType> monsterTypes;
+    private boolean initialized = false;
 
     @Before
     public void setup() {
+        if (initialized) {
+            return;
+        }
+        MockitoAnnotations.initMocks(this);
+
+        initialized = true;
         monsterType1 = new MonsterType("Zombie");
         monsterType1.setId(1L);
         monsterType1.setFood("food for zombie");

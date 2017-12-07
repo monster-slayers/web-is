@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -43,9 +44,16 @@ public class ClientRequestServiceTest {
     private ClientRequest cr1;
     private ClientRequest cr2;
     private Collection<ClientRequest> crs = new ArrayList<>();
+    private boolean initialized = false;
 
     @Before
     public void setUp() {
+        if (initialized) {
+            return;
+        }
+        MockitoAnnotations.initMocks(this);
+
+        initialized = true;
         cr1 = new ClientRequest("cr1", client);
         cr1.setId(1L);
         cr2 = new ClientRequest("cr2", client);
