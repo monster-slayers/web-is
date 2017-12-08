@@ -1,6 +1,6 @@
 'use strict';
 
-const monsterSlayerApp = angular.module('monsterSlayerApp', ['ngRoutea']);
+const monsterSlayerApp = angular.module('monsterSlayerApp', ['ngRoute']);
 
 
 monsterSlayerApp.config(function($routeProvider){
