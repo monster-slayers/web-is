@@ -47,8 +47,10 @@ public interface UserService {
      * Saves user entity
      * 
      * @param user user entity that will be saved
+     *
+     * @return ID of newly created user
      */
-    void saveUser(User user);
+    Long saveUser(User user);
 
     /**
      * Registers new user with password

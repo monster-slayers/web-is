@@ -36,9 +36,7 @@ public class HeroServiceImpl implements HeroService {
     }
 
     @Override
-    public void saveHero(Hero hero) {
-        heroRepository.save(hero);
-    }
+    public Long saveHero(Hero hero) { return heroRepository.save(hero).getId(); }
 
     @Override
     public Hero findHeroByName(String heroName) {

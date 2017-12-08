@@ -52,6 +52,8 @@ public interface HeroFacade {
      * Creates new hero according to special DTO
      * 
      * @param heroDTO DTO for creating new hero
+     *
+     * @return ID of newly created hero
      */
-    void createHero(CreateHeroDTO heroDTO);
+    Long createHero(CreateHeroDTO heroDTO);
 }

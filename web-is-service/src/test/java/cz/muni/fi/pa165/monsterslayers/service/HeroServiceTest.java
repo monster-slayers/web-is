@@ -137,6 +137,8 @@ public class HeroServiceTest {
 
     @Test
     public void testSaveHero(){
+        when(heroRepository.save(hero1)).thenReturn(hero1);
+
         heroService.saveHero(hero1);
 
         verify(heroRepository).save(hero1);

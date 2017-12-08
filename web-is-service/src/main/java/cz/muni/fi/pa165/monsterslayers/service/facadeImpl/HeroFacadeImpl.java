@@ -62,10 +62,10 @@ public class HeroFacadeImpl implements HeroFacade {
     }
 
     @Override
-    public void createHero(CreateHeroDTO createHeroDTO) {
+    public Long createHero(CreateHeroDTO createHeroDTO) {
         Hero hero = mappingService.mapTo(createHeroDTO, Hero.class);
         hero.setUser(userService.findUserById(createHeroDTO.getUserId()));
-        heroService.saveHero(hero);
+        return heroService.saveHero(hero);
     }
 
     @Override

@@ -121,6 +121,7 @@ public class ClientRequestServiceTest {
 
     @Test
     public void saveClientRequestTest() {
+        when(repository.save(cr1)).thenReturn(cr1);
         service.saveClientRequest(cr1);
         verify(repository).save(cr1);
     }

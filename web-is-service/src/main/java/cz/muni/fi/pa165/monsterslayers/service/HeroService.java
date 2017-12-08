@@ -38,9 +38,11 @@ public interface HeroService {
      * Saves (creates or updates) hero
      * 
      * @param hero hero entity that will be saved
+     *
+     * @return ID of newly created hero
      */
-    void saveHero(Hero hero);
-    
+    Long saveHero(Hero hero);
+
     /**
      * Finds hero with given name
      * 
