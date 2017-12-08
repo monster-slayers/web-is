@@ -46,7 +46,11 @@ public class ClientRequest {
     public void setKillList(Map<MonsterType, Integer> killList) {
         this.killList = killList;
     }
-    @ManyToMany(targetEntity = MonsterType.class)
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable
+    @MapKeyJoinColumn
+    @Column
     private Map<MonsterType, Integer> killList = new HashMap<>();
 
 
