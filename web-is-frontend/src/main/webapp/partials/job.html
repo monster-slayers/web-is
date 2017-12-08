@@ -1,0 +1,8 @@
+<h2>Jobs</h2>
+
+<table class="table table-stripped">
+        <tr><th>ID</th><th>Hero</th><th>Status</th><th>Evaluation</th></tr>
+    <tr ng-repeat="job in jobs">
+        <td>{{job.id}}</td><td>{{job.assignee.heroName}}</td><td>{{job.status}}</td><td>{{job.evaluation}}</td>
+    </tr>
+</table>

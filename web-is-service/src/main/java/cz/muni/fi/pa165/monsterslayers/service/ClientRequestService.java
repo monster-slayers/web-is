@@ -43,6 +43,8 @@ public interface ClientRequestService {
      * Saves (creates or updates) client request
      * 
      * @param clientRequest client request that will be saved
+     *
+     * @return ID of newly created client request
      */
-    void saveClientRequest(ClientRequest clientRequest);
+    Long saveClientRequest(ClientRequest clientRequest);
 }

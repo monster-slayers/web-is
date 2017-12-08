@@ -53,6 +53,8 @@ public interface ClientRequestFacade {
      * Creates new client request according to special DTO
      * 
      * @param createClientRequestDTO DTO for creating client request
+     *
+     * @return ID of newly created client request
      */
-    void createClientRequest(CreateClientRequestDTO createClientRequestDTO);
+    Long createClientRequest(CreateClientRequestDTO createClientRequestDTO);
 }

@@ -56,9 +56,9 @@ public class ClientRequestFacadeImpl implements ClientRequestFacade {
     }
 
     @Override
-    public void createClientRequest(CreateClientRequestDTO createClientRequestDTO) {
+    public Long createClientRequest(CreateClientRequestDTO createClientRequestDTO) {
         ClientRequest clientRequest = mappingService.mapTo(createClientRequestDTO, ClientRequest.class);
-        clientRequestService.saveClientRequest(clientRequest);
+        return clientRequestService.saveClientRequest(clientRequest);
     }
 
     @Override

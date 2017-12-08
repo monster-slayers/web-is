@@ -37,7 +37,7 @@ public class ClientRequestServiceImpl implements ClientRequestService {
     }
 
     @Override
-    public void saveClientRequest(ClientRequest clientRequest) {
-        clientRequestRepository.save(clientRequest);
+    public Long saveClientRequest(ClientRequest clientRequest) {
+        return clientRequestRepository.save(clientRequest).getId();
     }
 }
