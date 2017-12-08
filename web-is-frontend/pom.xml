@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>cz.muni.fi.pa165.monster-slayers</groupId>
-            <artifactId>web-is-service</artifactId>
+            <artifactId>web-is-sample-data</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
