@@ -29,7 +29,7 @@ public class Job {
     @Enumerated(EnumType.ORDINAL)
     private JobStatus status = JobStatus.ASSIGNED;
 
-    private Integer evaluation = 0;
+    private Integer evaluation;
 
     public Job() {
         //hibernate requires it

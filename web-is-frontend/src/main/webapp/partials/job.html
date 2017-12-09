@@ -1,8 +1,89 @@
 <h2>Jobs</h2>
 
-<table class="table table-stripped">
-        <tr><th>ID</th><th>Hero</th><th>Status</th><th>Evaluation</th></tr>
-    <tr ng-repeat="job in jobs">
-        <td>{{job.id}}</td><td>{{job.assignee.heroName}}</td><td>{{job.status}}</td><td>{{job.evaluation}}</td>
+<table class="table table-stripped" id="table-data-view">
+        <tr><th></th><th>ID</th><th>Client Request</th><th>Hero</th><th>Status</th><th>Evaluation</th><th></th></tr>
+    <tr ng-repeat-start="job in jobs">
+        <td>
+            <a href
+               class="glyphicon dropdown-link"
+               ng-class="{'glyphicon-chevron-down':job.editable,'glyphicon-chevron-right':!job.editable}"
+               ng-click="job.editable = !job.editable"></a>
+        </td>
+        <td>{{job.id}}</td>
+        <td>{{job.clientRequest.title}}</td>
+        <td>{{job.assignee.heroName}}</td>
+        <td>{{job.status}}</td>
+        <td>
+            <div class="progress" ng-if="job.status === 'Done'">
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{job.evaluation}}" aria-valuemin="0" aria-valuemax="100" style="width: {{job.evaluation}}%;">
+                </div>
+            </div>
+            <span ng-if="job.status !== 'Done'">
+                N/A
+            </span>
+        </td>
+        <td>
+            <div class="dropdown" style="display: inline;" ng-if="job.status === 'On Mission' || job.status === 'Assigned'">
+                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Change status to...
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href ng-click="updateStatus(job, 'ON_MISSION')">On Mission</a></li>
+                    <li><a href ng-click="updateStatus(job, 'UNSUCESSFUL')">Unsuccessful</a></li>
+                    <li><a href ng-click="updateStatus(job, 'REJECTED')">Rejected</a></li>
+                    <li><a href ng-click="updateStatus(job, 'DONE')">Done</a></li>
+                </ul>
+            </div>
+            <button class="btn btn-primary btn-sm" ng-click="evaluateJob(job)" ng-if="job.status === 'Done' && _.isNull(job.evaluation)">Evaluate</button>
+        </td>
     </tr>
+    <tr ng-repeat-end
+        ng-class="{'show-animate':job.editable,'hidden-animate':!job.editable}"
+        class="animate-if">
+        <td></td>
+        <td colspan="5">
+            <div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Details about {{job.clientRequest.title}}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr><th>Location</th><td>{{job.clientRequest.location}}</td></tr>
+                            <tr><th>Description</th><td>{{job.clientRequest.description}}</td></tr>
+                            <tr><th>Reward</th><td>{{job.clientRequest.reward}}</td></tr>
+                        </table>
+                        <h4>Kill List</h4>
+                        <table class="table">
+                            <tr ng-repeat="kill in job.clientRequest.killList">
+                                <td>{{kill.key.name}}</td><td>{{kill.value}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <div class="modal" id="doneModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Job {{jobToBeEvaluated.clientRequest.title}} evaluation</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group" ng-class="{'has-error': !evaluationForm.$valid && evaluationForm.$dirty}" ng-form name="evaluationForm">
+                        <label>Evaluation from 0 to 100</label>
+                        <input type="number" min="0" max="100" class="form-control" ng-model="evaluation" name="evaluation" required>
+                        <span class="help-block" ng-if="!evaluationForm.$valid && evaluationForm.$dirty">You must insert value between 0 and 100.</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" ng-click="evaluate()" ng-disabled="!evaluationForm.$valid">Evaluate</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </table>

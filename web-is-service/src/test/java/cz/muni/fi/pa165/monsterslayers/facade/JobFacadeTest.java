@@ -157,7 +157,7 @@ public class JobFacadeTest {
         Assert.assertEquals(job.getClientRequest().getId(), clientRequestId);
         Assert.assertEquals(job.getAssignee().getId(), heroId);
         Assert.assertEquals(job.getStatus(), JobStatus.ASSIGNED);
-        Assert.assertEquals(job.getEvaluation(), new Integer(0));
+        Assert.assertNull(job.getEvaluation());
         Assert.assertEquals(expectedId, actualJobId);
     }
 

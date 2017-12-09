@@ -6,13 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Monster Slayers</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/bootstrap.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/bootstrap-theme.min.css"  crossorigin="anonymous">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
     <script src="${pageContext.request.contextPath}/libs/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/libs/angular.min.js"></script>
     <script src="${pageContext.request.contextPath}/libs/angular-resource.min.js"></script>
     <script src="${pageContext.request.contextPath}/libs/angular-route.min.js"></script>
     <script src="${pageContext.request.contextPath}/libs/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/libs/lodash.min.js"></script>
     <script src="${pageContext.request.contextPath}/angular_app.js"></script>
 </head>
 <body ng-controller="MainCtrl">

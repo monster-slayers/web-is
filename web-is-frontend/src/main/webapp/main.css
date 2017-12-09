@@ -1,0 +1,25 @@
+#table-data-view td {
+    vertical-align: middle;
+}
+
+#table-data-view .animate-if div {
+    transition: max-height 100ms linear;
+}
+
+#table-data-view tr.animate-if > td {
+    border: 0;
+    padding: 0;
+}
+
+#table-data-view .hidden-animate div {
+    max-height:0;
+    overflow: hidden;
+}
+
+#table-data-view .show-animate div {
+    max-height: 500px;
+}
+
+#table-data-view .dropdown-link {
+    text-decoration: none;
+}
