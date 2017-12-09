@@ -2,7 +2,6 @@
 
 const monsterSlayerApp = angular.module('monsterSlayerApp', ['ngRoute']);
 
-
 monsterSlayerApp.config(function($routeProvider){
     $routeProvider.when("/monster-type", {templateUrl: 'partials/monster-type.html', controller: 'MonsterTypeCtrl'});
     $routeProvider.when("/client-request", {templateUrl: 'partials/client-request.html', controller: 'ClientRequestCtrl'});
@@ -33,9 +32,61 @@ monsterSlayerApp.controller('ClientRequestCtrl', function () {
 });
 
 monsterSlayerApp.controller('JobCtrl', function ($scope, $http) {
-    $http.get('/pa165/rest/job').then(function(response){
-        $scope.jobs = response.data;
-    });
+    const prettifyJobStatus = function(jobStatus){
+        return _.startCase(_.lowerCase(_.replace(jobStatus, '_', ' ')));
+    };
+
+    const update = function(){
+        $http.get('/pa165/rest/job').then(function(response){
+            $scope.jobs = response.data;
+            _.each($scope.jobs, function(job){
+                job.editable = false;
+                job.status = prettifyJobStatus(job.status);
+                }
+            );
+        }, function(){
+            //TODO
+            console.log('error');
+        });
+    };
+
+    update();
+
+    $scope.updateStatus = function(job, newStatus){
+        $http.put('/pa165/rest/job/update-status/' + job.id + "/" + newStatus)
+             .then(function(response){
+             },function(){
+                 //TODO
+                 console.log("error");
+             });
+        job.status = prettifyJobStatus(newStatus);
+    };
+
+    $scope.updateEvaluation = function(job, newEvaluation){
+        $http.put('/pa165/rest/job/update-evaluation/' + job.id + "/" + newEvaluation)
+            .then(function(response){
+            },function(){
+                //TODO
+                console.log("error");
+            });
+        job.evaluation = newEvaluation;
+    };
+
+    $scope.evaluateJob = function(job){
+        $scope.jobToBeEvaluated = job;
+        $('#doneModal').modal();
+    };
+
+    $scope.evaluate = function(){
+        if(!$scope.evaluationForm.evaluation.$valid){
+            console.log('invalid');
+            return;
+        }
+        $scope.updateEvaluation($scope.jobToBeEvaluated, $scope.evaluation);
+
+        $("#doneModal").modal('hide');
+    };
+
 });
 
 monsterSlayerApp.controller('UserCtrl', function () {
@@ -44,5 +95,5 @@ monsterSlayerApp.controller('UserCtrl', function () {
 monsterSlayerApp.controller('HeroCtrl', function () {
 });
 
-
-monsterSlayerApp.run();
+// add lodash to root scope
+monsterSlayerApp.run(function($rootScope){$rootScope._ = _;});
