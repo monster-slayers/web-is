@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.monsterslayers.dao.HeroRepository;
 import cz.muni.fi.pa165.monsterslayers.dao.UserRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
+import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 import org.junit.Assert;
 import org.junit.Before;
@@ -39,6 +40,7 @@ public class HeroTests {
     private String heroName = "Hero name";
     private PowerElement elementEarth = PowerElement.EARTH;
     private PowerElement elementPoison = PowerElement.POISON;
+    private HeroStatus heroStatus = HeroStatus.ACTIVE;
 
     @Before
     public void setup() {
@@ -56,6 +58,7 @@ public class HeroTests {
         hero.setUser(user);
         hero.setHeroName(heroName);
         hero.setElements(elements);
+        hero.setStatus(heroStatus);
         heroRepository.save(hero);
     }
 
@@ -64,6 +67,7 @@ public class HeroTests {
         Hero found = heroRepository.findOne(hero.getId());
         Assert.assertEquals(user, found.getUser());
         Assert.assertEquals(heroName, found.getHeroName());
+        Assert.assertEquals(heroStatus, found.getStatus());
         Assert.assertTrue(found.getElements().size() == 2);
     }
 

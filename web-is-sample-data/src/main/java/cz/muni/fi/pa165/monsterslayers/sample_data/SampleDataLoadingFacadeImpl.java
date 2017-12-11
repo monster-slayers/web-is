@@ -3,7 +3,7 @@ package cz.muni.fi.pa165.monsterslayers.sample_data;
 import cz.muni.fi.pa165.monsterslayers.entities.*;
 import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
-import cz.muni.fi.pa165.monsterslayers.enums.UserStatus;
+import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 import cz.muni.fi.pa165.monsterslayers.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,13 +47,13 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         guitarCrusherEles.add(PowerElement.WATER);
         guitarCrusherEles.add(PowerElement.WIND);
 
-        Hero guitarCrusher = hero(andrew, "Guitar Crusher", guitarCrusherEles);
+        Hero guitarCrusher = hero(andrew, "Guitar Crusher", guitarCrusherEles, HeroStatus.ACTIVE);
 
         List<PowerElement> trevorEles = new ArrayList<>();
         trevorEles.add(PowerElement.EARTH);
         trevorEles.add(PowerElement.GHOST);
         trevorEles.add(PowerElement.POISON);
-        Hero trevorHero = hero(trevor, "Trevor the Unstoppable", trevorEles);
+        Hero trevorHero = hero(trevor, "Trevor the Unstoppable", trevorEles, HeroStatus.ACTIVE  );
 
         Map<MonsterType, Integer> justZombiesKL = new HashMap<>();
         justZombiesKL.put(zombie, 4);
@@ -105,11 +105,12 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         job(trevorHero, easyPeasy);
     }
 
-    private Hero hero(User user, String heroName, Collection<PowerElement> elements) {
+    private Hero hero(User user, String heroName, Collection<PowerElement> elements, HeroStatus heroStatus) {
         Hero hero = new Hero();
         hero.setUser(user);
         hero.setHeroName(heroName);
         hero.setElements(elements);
+        hero.setStatus(heroStatus);
         return heroService.findHeroById(heroService.saveHero(hero));
     }
 
@@ -129,7 +130,6 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user.setEmail(email);
         user.setPassword(password);
         user.setRightsLevel(rightLevel);
-        user.setStatus(UserStatus.ACTIVE);
 
         return userService.findUserById(userService.saveUser(user));
     }

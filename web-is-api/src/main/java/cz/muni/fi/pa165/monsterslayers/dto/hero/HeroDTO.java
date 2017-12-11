@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.monsterslayers.dto.hero;
 
 import cz.muni.fi.pa165.monsterslayers.dto.user.UserDTO;
+import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 import java.util.Collection;
 import java.util.HashSet;
@@ -16,6 +17,7 @@ public class HeroDTO {
     private UserDTO user;
     private String heroName;
     private Collection<PowerElement> elements = new HashSet<>();
+    private HeroStatus status;
 
     public Long getId() {
         return id;
@@ -48,6 +50,10 @@ public class HeroDTO {
     public void setElements(Collection<PowerElement> elements) {
         this.elements = elements;
     }
+
+    public HeroStatus getStatus() { return status; }
+
+    public void setStatus(HeroStatus status) { this.status = status; }
 
     @Override
     public boolean equals(Object o) {

@@ -1,7 +1,6 @@
 package cz.muni.fi.pa165.monsterslayers.entities;
 
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
-import cz.muni.fi.pa165.monsterslayers.enums.UserStatus;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -36,9 +35,6 @@ public class User {
     @Lob
     private byte[] image;
     private String imageMimeType;
-
-    @Enumerated(EnumType.STRING)
-    private UserStatus status;
 
     @Enumerated(EnumType.STRING)
     private RightsLevel rightsLevel;
@@ -89,14 +85,6 @@ public class User {
 
     public void setImageMimeType(String imageMimeType) {
         this.imageMimeType = imageMimeType;
-    }
-
-    public UserStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(UserStatus status) {
-        this.status = status;
     }
 
     public RightsLevel getRightsLevel() {

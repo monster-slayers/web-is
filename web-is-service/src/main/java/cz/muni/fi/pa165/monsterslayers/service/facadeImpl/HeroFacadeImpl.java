@@ -4,10 +4,13 @@ import cz.muni.fi.pa165.monsterslayers.dto.hero.CreateHeroDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.hero.ModifyHeroDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
-import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
-import cz.muni.fi.pa165.monsterslayers.enums.UserStatus;
+import cz.muni.fi.pa165.monsterslayers.entities.Job;
+import cz.muni.fi.pa165.monsterslayers.entities.User;
+import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
+import cz.muni.fi.pa165.monsterslayers.enums.JobStatus;
 import cz.muni.fi.pa165.monsterslayers.facade.HeroFacade;
 import cz.muni.fi.pa165.monsterslayers.service.HeroService;
+import cz.muni.fi.pa165.monsterslayers.service.JobService;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
 import cz.muni.fi.pa165.monsterslayers.service.UserService;
 import java.util.Collection;
@@ -18,22 +21,25 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Implementation of hero facade interface.
  * Uses hero service and DTO.
- * 
+ *
  * @author Tomáš Richter
  */
 
 @Service
 @Transactional
 public class HeroFacadeImpl implements HeroFacade {
-    
+
     @Autowired
     private HeroService heroService;
-    
+
     @Autowired
     private UserService userService;
 
     @Autowired
     private MappingService mappingService;
+
+    @Autowired
+    private JobService jobService;
 
     @Override
     public HeroDTO getHeroById(Long heroId) {
@@ -77,5 +83,20 @@ public class HeroFacadeImpl implements HeroFacade {
             hero.setHeroName(modifyHeroDTO.getNewHeroName());
         }
         heroService.saveHero(hero);
+    }
+
+    @Override
+    public void changeStatus(Long userId, HeroStatus userStatus) {
+        Hero hero = heroService.findHeroById(userId);
+        hero.setStatus(userStatus);
+        heroService.saveHero(hero);
+
+        if(userStatus == HeroStatus.DECEASED) {
+            Collection<Job> jobs = jobService.getJobsByAssignee(hero);
+            for(Job job: jobs){
+                job.setStatus(JobStatus.UNSUCCESSFUL);
+                jobService.updateJob(job);
+            }
+        }
     }
 }

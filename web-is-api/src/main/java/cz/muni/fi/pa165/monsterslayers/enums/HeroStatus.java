@@ -5,7 +5,7 @@ package cz.muni.fi.pa165.monsterslayers.enums;
  *
  * @author David Kizivat
  */
-public enum UserStatus {
+public enum HeroStatus {
     ACTIVE,
     INACTIVE,
     DECEASED
