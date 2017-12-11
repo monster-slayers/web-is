@@ -1,1 +1,79 @@
-Users
+<h2>Users</h2>
+
+<table class="table table-stripped" id="table-data-view">
+    <tr><th></th><th>ID</th><th>Name</th><th>Status</th><th></th><th>Rights</th><th></th></tr>
+    <tr ng-repeat-start="user in users">
+        <td>
+            <a href
+               class="glyphicon dropdown-link"
+               ng-class="{'glyphicon-chevron-down':user.editable,'glyphicon-chevron-right':!user.editable}"
+               ng-click="user.editable = !user.editable"></a>
+        </td>
+        <td>{{user.id}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.status}}</td>
+        <td>
+            <div class="dropdown" style="display: inline;" ng-if="user.status !== 'Deceased' && user.rightsLevel === 'Hero'">
+                <button class="btn btn-primary" ng-click="changeStatus(user, 'DECEASED')">
+                    Hero died
+                </button>
+            </div>
+        </td>
+        <td>{{user.rightsLevel}}</td>
+        <td>
+            <div class="dropdown" style="display: inline;" ng-if="user.rightsLevel === 'Client'">
+                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuRights" data-toggle="dropdown" aria-haspopup="true">
+                    Promote to...
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuRights">
+                    <li><a href ng-click="createHeroStart(user)">Hero</a></li>
+                    <li><a href ng-click="promoteRights(user, 'MANAGER')">Manager</a></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+    <tr ng-repeat-end
+        ng-class="{'show-animate':user.editable,'hidden-animate':!user.editable}"
+        class="animate-if">
+        <td></td>
+        <td colspan="5">
+            <div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Profile of {{user.name}}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4>Contact</h4>
+                        <table class="table">
+                            <tr><th>Email</th><td>{{job.clientRequest.location}}</td></tr>
+                        </table>
+                        <h4>Image and how to change it</h4>
+                    </div>
+                </div>
+            </div>
+        </td>
+        <td></td>
+    </tr>
+</table>
+<div class="modal" id="doneModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Create hero to user {{currentUser.name}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group" ng-class="{'has-error': !createHeroForm.$valid && createHeroForm.$dirty}" ng-form name="createHeroForm">
+                        <label>Hero name</label>
+                        <input type="text" class="form-control" ng-model="heroName" name="heroName" required>
+                        <span class="help-block" ng-if="!createHeroForm.$valid && createHeroForm.$dirty">You must insert some name.</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" ng-click="createHeroSubmit()" ng-disabled="!createHeroForm.$valid">Create</button>
+                </div>
+            </div>
+        </div>
+</div>

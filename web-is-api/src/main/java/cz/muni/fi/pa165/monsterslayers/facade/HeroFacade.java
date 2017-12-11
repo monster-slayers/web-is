@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.monsterslayers.facade;
 
-import cz.muni.fi.pa165.monsterslayers.dto.CreateHeroDTO;
-import cz.muni.fi.pa165.monsterslayers.dto.HeroDTO;
-import cz.muni.fi.pa165.monsterslayers.dto.ModifyHeroDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.hero.CreateHeroDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.hero.ModifyHeroDTO;
 import java.util.Collection;
 
 /**

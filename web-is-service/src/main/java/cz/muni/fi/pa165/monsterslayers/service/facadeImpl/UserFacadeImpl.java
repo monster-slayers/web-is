@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.monsterslayers.service.facadeImpl;
 
-import cz.muni.fi.pa165.monsterslayers.dto.ChangeUserImageDTO;
-import cz.muni.fi.pa165.monsterslayers.dto.UserDTO;
-import cz.muni.fi.pa165.monsterslayers.dto.UserLoginDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.user.ChangeUserImageDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.user.UserDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.user.UserLoginDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
 import cz.muni.fi.pa165.monsterslayers.enums.UserStatus;

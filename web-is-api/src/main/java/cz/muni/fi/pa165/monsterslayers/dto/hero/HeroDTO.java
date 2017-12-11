@@ -1,5 +1,6 @@
-package cz.muni.fi.pa165.monsterslayers.dto;
+package cz.muni.fi.pa165.monsterslayers.dto.hero;
 
+import cz.muni.fi.pa165.monsterslayers.dto.user.UserDTO;
 import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 import java.util.Collection;
 import java.util.HashSet;

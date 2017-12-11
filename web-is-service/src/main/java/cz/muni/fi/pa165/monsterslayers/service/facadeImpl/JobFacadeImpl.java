@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.monsterslayers.service.facadeImpl;
 
-import cz.muni.fi.pa165.monsterslayers.dto.HeroDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.monstertype.MonsterTypeDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.jobs.*;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;

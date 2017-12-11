@@ -8,7 +8,7 @@ package cz.muni.fi.pa165.monsterslayers.enums;
 public enum JobStatus {
     ASSIGNED,
     ON_MISSION,
-    UNSUCCESFUL,
+    UNSUCCESSFUL,
     REJECTED,
     DONE
 }

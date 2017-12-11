@@ -24,13 +24,13 @@
         </td>
         <td>
             <div class="dropdown" style="display: inline;" ng-if="job.status === 'On Mission' || job.status === 'Assigned'">
-                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
                     Change status to...
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <li><a href ng-click="updateStatus(job, 'ON_MISSION')">On Mission</a></li>
-                    <li><a href ng-click="updateStatus(job, 'UNSUCESSFUL')">Unsuccessful</a></li>
+                    <li><a href ng-click="updateStatus(job, 'UNSUCCESSFUL')">Unsuccessful</a></li>
                     <li><a href ng-click="updateStatus(job, 'REJECTED')">Rejected</a></li>
                     <li><a href ng-click="updateStatus(job, 'DONE')">Done</a></li>
                 </ul>
@@ -64,6 +64,7 @@
                 </div>
             </div>
         </td>
+        <td></td>
     </tr>
     <div class="modal" id="doneModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">

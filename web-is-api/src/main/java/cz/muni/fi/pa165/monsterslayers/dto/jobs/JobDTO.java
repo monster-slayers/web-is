@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.monsterslayers.dto.jobs;
 
-import cz.muni.fi.pa165.monsterslayers.dto.ClientRequestDTO;
-import cz.muni.fi.pa165.monsterslayers.dto.HeroDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.clientrequest.ClientRequestDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
 import cz.muni.fi.pa165.monsterslayers.enums.JobStatus;
 
 import java.util.Objects;

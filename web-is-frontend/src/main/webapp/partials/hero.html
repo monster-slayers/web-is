@@ -1,1 +1,21 @@
-Heroes
+<h2>Heroes</h2>
+
+<table class="table table-stripped" id="table-data-view">
+    <tr><th>ID</th><th>Name</th><th>Elements</th><th>User</th><th></th><th></th></tr>
+    <tr ng-repeat="hero in heroes">
+        <td>{{hero.id}}</td>
+        <td>{{hero.heroName}}</td>
+        <td>
+            <div ng-repeat="element in hero.elements" class="element {{element}}">
+                {{element}}
+            </div>
+        </td>
+        <td>{{hero.user.name}}</td>
+        <td>
+            <button class="btn btn-primary btn-sm" ng-click="">Modify</button>
+        </td>
+        <td>
+            <button class="btn btn-primary btn-sm" ng-click="deleteHero(hero)">Delete</button>
+        </td>
+    </tr>
+</table>
