@@ -1,1 +1,83 @@
-Monster Types
+<h2>Monster types</h2>
+
+<table class="table table-stripped" id="table-data-view">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Food</th>
+        <th>Weaknesses</th>
+        <th></th>
+    </tr>
+    <tr ng-repeat="monsterType in monsterTypes">
+        <td>{{monsterType.id}}</td>
+        <td>{{monsterType.name}}</td>
+        <td>{{monsterType.food}}</td>
+        <td>
+            <div ng-repeat="element in monsterType.weaknesses" class="element {{element}}">
+                {{element}}
+            </div>
+        </td>
+        <td>
+            <button class="btn btn-primary btn-sm" ng-click="modifyMonsterStart(monsterType)">Modify</button>
+        </td>
+    </tr>
+</table>
+<br/>
+<button class="btn btn-primary btn-sm" ng-click="createMonsterStart()">Create</button>
+<br/>
+
+
+<div class="modal" id="doneModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Create new monster type</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" ng-class="{'has-error': !createMonsterForm.$valid && createMonsterForm.$dirty}" ng-form name="createMonsterForm">
+                    <label>Name</label>
+                    <input type="text" class="form-control" ng-model="name" name="name" required>
+                    <span class="help-block" ng-if="!createMonsterForm.name.$valid && createMonsterForm.name.$dirty">You must insert some name.</span>
+                    <label>Food</label>
+                    <input type="text" class="form-control" ng-model="food" name="food" required>
+                    <span class="help-block" ng-if="!createMonsterForm.food.$valid && createMonsterForm.food.$dirty">You must insert some food.</span>
+                    <label>Weakness</label>
+                    <select class="form-control" ng-model="selectElements" name="selectElements" required>
+                        <option ng-repeat="element in $parent.listOfElements">{{element}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" ng-click="createMonsterSubmit()" ng-disabled="!createMonsterForm.$valid">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="doneModalModify" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabelModify">Modify monster type {{currentMonster.name}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" ng-class="{'has-error': !modifyMonsterForm.$valid && modifyMonsterForm.$dirty}" ng-form name="modifyMonsterForm">
+                    <label>Name</label>
+                    <input type="text" class="form-control" ng-model="name" name="name" required>
+                    <span class="help-block" ng-if="!modifyMonsterForm.name.$valid && modifyMonsterForm.name.$dirty">You must insert some name.</span>
+                    <label>Food</label>
+                    <input type="text" class="form-control" ng-model="food" name="food" required>
+                    <span class="help-block" ng-if="!modifyMonsterForm.food.$valid && modifyMonsterForm.food.$dirty">You must insert some food.</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" ng-click="modifyMonsterSubmit()" ng-disabled="!modifyMonsterForm.$valid">Modify</button>
+            </div>
+        </div>
+    </div>
+</div>
