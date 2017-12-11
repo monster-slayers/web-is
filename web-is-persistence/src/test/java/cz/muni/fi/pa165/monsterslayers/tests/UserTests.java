@@ -3,7 +3,7 @@ package cz.muni.fi.pa165.monsterslayers.tests;
 import cz.muni.fi.pa165.monsterslayers.dao.UserRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
-import cz.muni.fi.pa165.monsterslayers.enums.UserStatus;
+import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +33,7 @@ public class UserTests {
     private String name = "user name";
     private String email = "user@name.com";
     private String password = "userPassword";
-    private UserStatus userStatus = UserStatus.ACTIVE;
+    private HeroStatus userStatus = HeroStatus.ACTIVE;
     private RightsLevel rightsLevel = RightsLevel.CLIENT;
     private String imageMimeType = "image type";
     private byte[] image = new byte[1];
@@ -44,7 +44,6 @@ public class UserTests {
         user.setName(name);
         user.setEmail(email);
         user.setPassword(password);
-        user.setStatus(userStatus);
         user.setRightsLevel(rightsLevel);
         user.setImage(image);
         user.setImageMimeType(imageMimeType);
@@ -57,7 +56,6 @@ public class UserTests {
         Assert.assertEquals(name, found.getName());
         Assert.assertEquals(email, found.getEmail());
         Assert.assertEquals(password, found.getPassword());
-        Assert.assertEquals(userStatus, found.getStatus());
         Assert.assertEquals(rightsLevel, found.getRightsLevel());
         Assert.assertEquals(image, found.getImage());
         Assert.assertEquals(imageMimeType, found.getImageMimeType());

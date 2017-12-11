@@ -5,7 +5,6 @@ import cz.muni.fi.pa165.monsterslayers.dto.user.UserDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.user.UserLoginDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
-import cz.muni.fi.pa165.monsterslayers.enums.UserStatus;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
 import cz.muni.fi.pa165.monsterslayers.service.UserService;
 import org.junit.Assert;
@@ -157,28 +156,12 @@ public class UserFacadeTest {
     }
 
     @Test
-    public void testIsUserActiveFalse() {
-        when(userService.isUserActive(user)).thenReturn(true);
-        when(mappingService.mapTo(userDTO, User.class)).thenReturn(user);
-
-        Assert.assertTrue(userFacade.isUserActive(userDTO));
-        verify(userService).isUserActive(user);
-    }
-
-    @Test
     public void testChangeRightsLevel() {
         when(userService.findUserById(1L)).thenReturn(user);
         userFacade.changeRightsLevel(1L, RightsLevel.HERO);
         verify(userService).saveUser(user);
     }
 
-    @Test
-    public void testChangeUserStatus() {
-        when(userService.findUserById(1L)).thenReturn(user);
-        userFacade.changeUserStatus(1L, UserStatus.INACTIVE);
-        verify(userService).saveUser(user);
-    }
-    
     @Test
     public void testChangeImage() {
         String mimeType = "image/jpg";

@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.monsterslayers.entities;
 
+import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 
 import javax.persistence.*;
@@ -29,6 +30,9 @@ public class Hero {
     @Column(nullable = false, unique = true)
     private String heroName;
 
+    @Enumerated(EnumType.STRING)
+    private HeroStatus status;
+
     @ElementCollection(targetClass=PowerElement.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING) // Possibly optional (I'm not sure) but defaults to ORDINAL.
     @CollectionTable(name="Hero_Elements")
@@ -56,6 +60,14 @@ public class Hero {
 
     public void setHeroName(String heroName) {
         this.heroName = heroName;
+    }
+
+    public HeroStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(HeroStatus status) {
+        this.status = status;
     }
 
     public Collection<PowerElement> getElements() {

@@ -91,7 +91,6 @@ monsterSlayerApp.controller('UserCtrl', function ($scope, $http) {
             $scope.users = response.data;
             _.each($scope.users, function(user){
                 user.editable = false;
-                user.status = prettifyEnum(user.status);
                 user.rightsLevel = prettifyEnum(user.rightsLevel);
                 }
             );
@@ -100,9 +99,9 @@ monsterSlayerApp.controller('UserCtrl', function ($scope, $http) {
             console.log('error');
         });
     };
-    
+
     update();
-    
+
     $scope.createHero = function(user, name){
         $scope.promoteRights(user, 'HERO');
         $http.post('/pa165/rest/hero/create/' + user.id + "/" + name)
@@ -112,17 +111,17 @@ monsterSlayerApp.controller('UserCtrl', function ($scope, $http) {
                  console.log("error");
              });
     };
-    
+
     $scope.createHeroStart = function(user){
         $scope.currentUser = user;
         $('#doneModal').modal();
     };
-    
+
     $scope.createHeroSubmit = function(){
         $scope.createHero ($scope.currentUser, $scope.heroName);
         $("#doneModal").modal('hide');
     };
-    
+
     $scope.promoteRights = function(user, newRightsLevel){
         $http.put('/pa165/rest/user/promote-rights/' + user.id + "/" + newRightsLevel)
              .then(function(response){
@@ -132,28 +131,21 @@ monsterSlayerApp.controller('UserCtrl', function ($scope, $http) {
              });
         user.rightsLevel = prettifyEnum(newRightsLevel);
     };
-    
-    $scope.changeStatus = function(user, newStatus){
-        $http.put('/pa165/rest/user/change-status/' + user.id + "/" + newStatus)
-             .then(function(response){
-             },function(){
-                 //TODO
-                 console.log("error");
-             });
-        user.status = prettifyEnum(newStatus);
-    };
 });
 
 monsterSlayerApp.controller('HeroCtrl', function ($scope, $http) {
     var update = function(){
         $http.get('/pa165/rest/hero').then(function(response){
             $scope.heroes = response.data;
+            _.each($scope.heroes, function(hero){
+                hero.status = prettifyEnum(hero.status);
+            });
         }, function(){
             //TODO
             console.log('error');
         });
     };
-    
+
     update();
 
     $scope.deleteHero = function(hero){
@@ -164,6 +156,23 @@ monsterSlayerApp.controller('HeroCtrl', function ($scope, $http) {
                  //TODO
                  console.log("error");
              });
+    };
+
+    $scope.changeStatus = function(hero, newStatus){
+        $http.put('/pa165/rest/hero/change-status/' + hero.id + "/" + newStatus)
+            .then(function(){
+                hero.status = prettifyEnum(newStatus);
+            },function(){
+                //TODO
+                console.log("error");
+            });
+        $("#killModal").modal('hide');
+    };
+
+    $scope.killHero = function(hero){
+        $scope.heroToBeKilled = hero;
+        console.log('adf');
+        $("#killModal").modal();
     };
 });
 

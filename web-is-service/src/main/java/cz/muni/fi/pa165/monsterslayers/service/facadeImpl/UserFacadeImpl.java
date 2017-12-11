@@ -5,7 +5,7 @@ import cz.muni.fi.pa165.monsterslayers.dto.user.UserDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.user.UserLoginDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
-import cz.muni.fi.pa165.monsterslayers.enums.UserStatus;
+import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 import cz.muni.fi.pa165.monsterslayers.facade.UserFacade;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
 import cz.muni.fi.pa165.monsterslayers.service.UserService;
@@ -17,21 +17,21 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Implementation of user facade interface.
  * Uses user service and DTO (DTOs for authetication and change image as well).
- * 
+ *
  * @author Tomáš Richter
  */
 
 @Service
 @Transactional
 public class UserFacadeImpl implements UserFacade {
-    
+
     @Autowired
     private UserService userService;
 
     @Autowired
     private MappingService mappingService;
-    
-        
+
+
     @Override
     public UserDTO getUserById(Long userId) {
         User found = userService.findUserById(userId);
@@ -40,7 +40,7 @@ public class UserFacadeImpl implements UserFacade {
         }
         return mappingService.mapTo(found, UserDTO.class);
     }
-    
+
     @Override
     public UserDTO getUserByEmail(String userEmail) {
         User found = userService.findUserByEmail(userEmail);
@@ -49,24 +49,24 @@ public class UserFacadeImpl implements UserFacade {
         }
         return mappingService.mapTo(found, UserDTO.class);
     }
-      
+
     @Override
     public Collection<UserDTO> getAllUsers() {
         return mappingService.mapTo(userService.getAllUsers(), UserDTO.class);
     }
-    
+
     @Override
     public Collection<UserDTO> getUsersByName(String userName) {
         return mappingService.mapTo(userService.findUsersByName(userName), UserDTO.class);
     }
-    
+
     @Override
     public void registerUser(UserDTO userDTO, String unencryptedPassword) {
         User user = mappingService.mapTo(userDTO, User.class);
         userService.registerUser(user, unencryptedPassword);
         userDTO.setId(user.getId());
     }
-    
+
     @Override
     public boolean authenticateUser(UserLoginDTO userLoginDTO) {
         return userService.authenticateUser(userService.findUserByEmail(userLoginDTO.getEmail()), userLoginDTO.getPassword());
@@ -79,22 +79,9 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public boolean isUserActive(UserDTO userDTO) {
-        User user = mappingService.mapTo(userDTO, User.class);
-        return userService.isUserActive(user);
-    }
-
-    @Override
     public void changeUserImage(ChangeUserImageDTO changeUserImageDTO) {
         User user = userService.findUserById(changeUserImageDTO.getUserId());
         userService.editUserImage(user, changeUserImageDTO.getImage(), changeUserImageDTO.getImageMimeType());
-    }
-
-    @Override
-    public void changeUserStatus(Long userId, UserStatus userStatus) {
-        User user = userService.findUserById(userId);
-        user.setStatus(userStatus);
-        userService.saveUser(user);
     }
 
     @Override

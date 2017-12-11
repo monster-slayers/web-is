@@ -1,7 +1,7 @@
 <h2>Users</h2>
 
 <table class="table table-stripped" id="table-data-view">
-    <tr><th></th><th>ID</th><th>Name</th><th>Status</th><th></th><th>Rights</th><th></th></tr>
+    <tr><th></th><th>ID</th><th>Name</th><th>Rights</th><th></th></tr>
     <tr ng-repeat-start="user in users">
         <td>
             <a href
@@ -10,15 +10,6 @@
                ng-click="user.editable = !user.editable"></a>
         </td>
         <td>{{user.id}}</td>
-        <td>{{user.name}}</td>
-        <td>{{user.status}}</td>
-        <td>
-            <div class="dropdown" style="display: inline;" ng-if="user.status !== 'Deceased' && user.rightsLevel === 'Hero'">
-                <button class="btn btn-primary" ng-click="changeStatus(user, 'DECEASED')">
-                    Hero died
-                </button>
-            </div>
-        </td>
         <td>{{user.rightsLevel}}</td>
         <td>
             <div class="dropdown" style="display: inline;" ng-if="user.rightsLevel === 'Client'">

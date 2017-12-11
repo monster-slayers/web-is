@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.hero.ModifyHeroDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.hero.CreateHeroDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
+import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 import cz.muni.fi.pa165.monsterslayers.service.HeroService;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
 import org.junit.Assert;
@@ -132,6 +133,13 @@ public class HeroFacadeTest {
 
         heroFacade.editHero(modifyHeroDTO);
 
+        verify(heroService).saveHero(hero);
+    }
+
+    @Test
+    public void testChangeUserStatus() {
+        when(heroService.findHeroById(1L)).thenReturn(hero);
+        heroFacade.changeStatus(1L, HeroStatus.INACTIVE);
         verify(heroService).saveHero(hero);
     }
 

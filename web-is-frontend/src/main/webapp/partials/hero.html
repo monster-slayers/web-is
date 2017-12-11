@@ -1,10 +1,11 @@
 <h2>Heroes</h2>
 
 <table class="table table-stripped" id="table-data-view">
-    <tr><th>ID</th><th>Name</th><th>Elements</th><th>User</th><th></th><th></th></tr>
+    <tr><th>ID</th><th>Name</th><th>Status</th><th>Elements</th><th>User</th><th></th></tr>
     <tr ng-repeat="hero in heroes">
         <td>{{hero.id}}</td>
         <td>{{hero.heroName}}</td>
+        <td>{{hero.status}}</td>
         <td>
             <div ng-repeat="element in hero.elements" class="element {{element}}">
                 {{element}}
@@ -12,10 +13,36 @@
         </td>
         <td>{{hero.user.name}}</td>
         <td>
-            <button class="btn btn-primary btn-sm" ng-click="">Modify</button>
-        </td>
-        <td>
-            <button class="btn btn-primary btn-sm" ng-click="deleteHero(hero)">Delete</button>
+            <div class="dropdown" style="display: inline;" ng-if="hero.status !== 'Deceased'">
+                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
+                    Change status to...
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href ng-click="changeStatus(hero, 'ACTIVE')">Active</a></li>
+                    <li><a href ng-click="changeStatus(hero, 'INACTIVE')">Inactive</a></li>
+                    <li><a href ng-click="killHero(hero)">Deceased</a></li>
+                </ul>
+            </div>
+            <button class="btn btn-primary btn-sm" ng-click="" ng-if="hero.status !== 'Deceased'">Modify</button>
         </td>
     </tr>
 </table>
+
+<div class="modal" id="killModal" tabindex="-1" role="dialog" aria-labelledby="killModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Make {{heroToBeKilled.heroName}} deceased</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to make hero {{heroToBeKilled.heroName}} <strong>deceased</strong>?</p>
+                <p><strong>This will also mark his jobs as unsuccessful!</strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" ng-click="changeStatus(heroToBeKilled, 'DECEASED')">Make deceased</button>
+            </div>
+        </div>
+    </div>
+</div>

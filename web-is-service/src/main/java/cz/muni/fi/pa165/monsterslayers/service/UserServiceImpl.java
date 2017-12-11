@@ -3,7 +3,7 @@ package cz.muni.fi.pa165.monsterslayers.service;
 import cz.muni.fi.pa165.monsterslayers.dao.UserRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
-import cz.muni.fi.pa165.monsterslayers.enums.UserStatus;
+import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.List;
@@ -57,11 +57,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean hasUserManagerRights(User user) {
         return findUserById(user.getId()).getRightsLevel() == RightsLevel.MANAGER;
-    }
-
-    @Override
-    public boolean isUserActive(User user) {
-        return findUserById(user.getId()).getStatus() == UserStatus.ACTIVE;
     }
 
     @Override

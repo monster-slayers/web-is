@@ -3,7 +3,6 @@ package cz.muni.fi.pa165.monsterslayers.service;
 import cz.muni.fi.pa165.monsterslayers.dao.UserRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
-import cz.muni.fi.pa165.monsterslayers.enums.UserStatus;
 import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.junit.Assert;
 import org.junit.Before;
@@ -55,15 +54,12 @@ public class UserServiceTest {
         // salt: "salt", password: "holubyvnose"
         user1.setPassword("1000:73616c74:6313553dbe97e1bfd2061832a8315e0c449126f3356881bdb57a94db5cb8a1e4");
         user1.setRightsLevel(RightsLevel.MANAGER);
-        user1.setStatus(UserStatus.ACTIVE);
 
         user2.setName("Jarda");
         user2.setRightsLevel(RightsLevel.HERO);
-        user2.setStatus(UserStatus.INACTIVE);
 
         user3.setName("Pepa");
         user3.setRightsLevel(RightsLevel.CLIENT);
-        user3.setStatus(UserStatus.DECEASED);
 
         user4.setName("Karel");
 
@@ -203,22 +199,6 @@ public class UserServiceTest {
 
         Assert.assertFalse(userService.hasUserManagerRights(user2));
         Assert.assertFalse(userService.hasUserManagerRights(user3));
-    }
-
-    @Test
-    public void testUserIsActive(){
-        when(userRepository.findOne(user1.getId())).thenReturn(user1);
-
-        Assert.assertTrue(userService.isUserActive(user1));
-    }
-
-    @Test
-    public void testUserIsActiveFalse(){
-        when(userRepository.findOne(user2.getId())).thenReturn(user2);
-        when(userRepository.findOne(user3.getId())).thenReturn(user3);
-
-        Assert.assertFalse(userService.isUserActive(user2));
-        Assert.assertFalse(userService.isUserActive(user3));
     }
 
     @Test
