@@ -171,7 +171,6 @@ monsterSlayerApp.controller('HeroCtrl', function ($scope, $http) {
 
     $scope.killHero = function(hero){
         $scope.heroToBeKilled = hero;
-        console.log('adf');
         $("#killModal").modal();
     };
 });
