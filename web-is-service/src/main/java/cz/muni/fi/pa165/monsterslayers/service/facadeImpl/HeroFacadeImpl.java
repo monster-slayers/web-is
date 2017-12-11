@@ -1,9 +1,11 @@
 package cz.muni.fi.pa165.monsterslayers.service.facadeImpl;
 
-import cz.muni.fi.pa165.monsterslayers.dto.CreateHeroDTO;
-import cz.muni.fi.pa165.monsterslayers.dto.HeroDTO;
-import cz.muni.fi.pa165.monsterslayers.dto.ModifyHeroDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.hero.CreateHeroDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.hero.ModifyHeroDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
+import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
+import cz.muni.fi.pa165.monsterslayers.enums.UserStatus;
 import cz.muni.fi.pa165.monsterslayers.facade.HeroFacade;
 import cz.muni.fi.pa165.monsterslayers.service.HeroService;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;

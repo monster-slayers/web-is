@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.monsterslayers.dto;
+package cz.muni.fi.pa165.monsterslayers.dto.user;
 
 /**
  * Data transfer object for changing image in user profile

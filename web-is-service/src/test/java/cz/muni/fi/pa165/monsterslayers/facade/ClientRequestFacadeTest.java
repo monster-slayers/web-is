@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.monsterslayers.facade;
 
-import cz.muni.fi.pa165.monsterslayers.dto.ClientRequestDTO;
-import cz.muni.fi.pa165.monsterslayers.dto.CreateClientRequestDTO;
-import cz.muni.fi.pa165.monsterslayers.dto.ModifyClientRequestDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.clientrequest.ClientRequestDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.clientrequest.CreateClientRequestDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.clientrequest.ModifyClientRequestDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.service.ClientRequestService;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;

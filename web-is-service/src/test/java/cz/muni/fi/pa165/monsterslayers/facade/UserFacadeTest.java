@@ -1,6 +1,8 @@
 package cz.muni.fi.pa165.monsterslayers.facade;
 
-import cz.muni.fi.pa165.monsterslayers.dto.*;
+import cz.muni.fi.pa165.monsterslayers.dto.user.ChangeUserImageDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.user.UserDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.user.UserLoginDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
 import cz.muni.fi.pa165.monsterslayers.enums.UserStatus;
@@ -176,7 +178,7 @@ public class UserFacadeTest {
         userFacade.changeUserStatus(1L, UserStatus.INACTIVE);
         verify(userService).saveUser(user);
     }
-
+    
     @Test
     public void testChangeImage() {
         String mimeType = "image/jpg";

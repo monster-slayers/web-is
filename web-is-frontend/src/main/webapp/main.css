@@ -23,3 +23,47 @@
 #table-data-view .dropdown-link {
     text-decoration: none;
 }
+
+.element {
+    display: inline-block;
+    color: white;
+    padding: 4px;
+    border-radius: 4px;
+    margin-right: 4px;
+}
+
+.element.NORMAL {
+    background-color: black;
+}
+
+.element.FIRE {
+    background-color: darkred;
+}
+
+.element.WATER {
+    background-color: darkblue;
+}
+
+.element.EARTH {
+    background-color: saddlebrown;
+}
+
+.element.WIND {
+    background-color: darkcyan;
+}
+
+.element.POISON {
+    background-color: darkgreen;
+}
+
+.element.HOLY {
+    background-color: darkgoldenrod;
+}
+
+.element.UNDEAD {
+    background-color: purple;
+}
+
+.element.GHOST {
+    background-color: gray;
+}

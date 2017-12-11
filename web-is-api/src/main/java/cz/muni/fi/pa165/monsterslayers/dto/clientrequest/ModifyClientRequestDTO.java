@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.monsterslayers.dto;
+package cz.muni.fi.pa165.monsterslayers.dto.clientrequest;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

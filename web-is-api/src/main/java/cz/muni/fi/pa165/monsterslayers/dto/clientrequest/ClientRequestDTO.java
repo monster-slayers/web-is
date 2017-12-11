@@ -1,5 +1,6 @@
-package cz.muni.fi.pa165.monsterslayers.dto;
+package cz.muni.fi.pa165.monsterslayers.dto.clientrequest;
 
+import cz.muni.fi.pa165.monsterslayers.dto.user.UserDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.monstertype.MonsterTypeDTO;
 
 import java.math.BigDecimal;
