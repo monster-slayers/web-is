@@ -189,7 +189,7 @@ public class UserServiceTest {
     public void testHasUserManagerRights(){
         when(userRepository.findOne(user1.getId())).thenReturn(user1);
 
-        Assert.assertTrue(userService.hasUserManagerRights(user1));
+        Assert.assertTrue(userService.hasManagerRights(user1));
     }
 
     @Test
@@ -197,8 +197,24 @@ public class UserServiceTest {
         when(userRepository.findOne(user2.getId())).thenReturn(user2);
         when(userRepository.findOne(user3.getId())).thenReturn(user3);
 
-        Assert.assertFalse(userService.hasUserManagerRights(user2));
-        Assert.assertFalse(userService.hasUserManagerRights(user3));
+        Assert.assertFalse(userService.hasManagerRights(user2));
+        Assert.assertFalse(userService.hasManagerRights(user3));
+    }
+    
+    @Test
+    public void testHasHeroRights(){
+        when(userRepository.findOne(user1.getId())).thenReturn(user1);
+        when(userRepository.findOne(user2.getId())).thenReturn(user2);
+        
+        Assert.assertTrue(userService.hasHeroRights(user1));
+        Assert.assertTrue(userService.hasHeroRights(user2));
+    }
+    
+    @Test
+    public void testHasHeroRightsJustClient(){
+        when(userRepository.findOne(user3.getId())).thenReturn(user3);
+        
+        Assert.assertFalse(userService.hasHeroRights(user3));
     }
 
     @Test

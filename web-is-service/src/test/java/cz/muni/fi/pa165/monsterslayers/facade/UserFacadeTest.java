@@ -148,11 +148,20 @@ public class UserFacadeTest {
 
     @Test
     public void testHasManagerRights() {
-        when(userService.hasUserManagerRights(user)).thenReturn(true);
+        when(userService.hasManagerRights(user)).thenReturn(true);
         when(mappingService.mapTo(userDTO, User.class)).thenReturn(user);
 
-        Assert.assertTrue(userFacade.hasUserManagerRights(userDTO));
-        verify(userService).hasUserManagerRights(user);
+        Assert.assertTrue(userFacade.hasManagerRights(userDTO));
+        verify(userService).hasManagerRights(user);
+    }
+    
+    @Test
+    public void testHasHeroRights() {
+        when(userService.hasHeroRights(user)).thenReturn(true);
+        when(mappingService.mapTo(userDTO, User.class)).thenReturn(user);
+
+        Assert.assertTrue(userFacade.hasHeroRights(userDTO));
+        verify(userService).hasHeroRights(user);
     }
 
     @Test

@@ -62,12 +62,20 @@ public interface UserFacade {
     boolean authenticateUser (UserLoginDTO userLoginDTO);
 
     /**
-     * Checks if user has manager rights
+     * Checks if user has atleast manager rights
      *
      * @param userDTO DTO of user
      * @return true if user has manager rights, false otherwise
      */
-    boolean hasUserManagerRights(UserDTO userDTO);
+    boolean hasManagerRights(UserDTO userDTO);
+    
+    /**
+     * Checks if user has atleast hero rights
+     *
+     * @param userDTO DTO of user
+     * @return true if user has manager rights, false otherwise
+     */
+    boolean hasHeroRights(UserDTO userDTO);
 
     /**
      * Changes image of user according to special DTO

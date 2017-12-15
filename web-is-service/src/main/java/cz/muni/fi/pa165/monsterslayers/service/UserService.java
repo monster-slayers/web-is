@@ -71,12 +71,20 @@ public interface UserService {
     boolean authenticateUser (User user, String password);
 
     /**
-     * Checks if given user has manager rights
+     * Checks if given user has at least manager rights
      *
      * @param user given user
      * @return true if user has manager rights, false otherwise
      */
-    boolean hasUserManagerRights(User user);
+    boolean hasManagerRights(User user);
+    
+    /**
+     * Checks if given user has at least hero rights
+     *
+     * @param user given user
+     * @return true if user has manager rights, false otherwise
+     */
+    boolean hasHeroRights(User user);
 
     /**
      * Edits image of given user
