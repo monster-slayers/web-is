@@ -41,17 +41,14 @@ public class MonsterTypeFacadeTest {
     @Mock
     private MappingService mappingService;
 
-    @Mock
-    private MonsterTypeDTO monsterTypeDto;
+    private MonsterTypeDTO monsterTypeDto = new MonsterTypeDTO();
 
-    @Mock
-    private ModifyMonsterTypeDTO modifyMonsterTypeDto;
+    private ModifyMonsterTypeDTO modifyMonsterTypeDto = new ModifyMonsterTypeDTO();
 
-    @Mock
-    private CreateMonsterTypeDTO createMonsterTypeDto;
+    private CreateMonsterTypeDTO createMonsterTypeDto = new CreateMonsterTypeDTO();
 
-    @Mock
-    private MonsterType monsterType;
+    private MonsterType monsterType = new MonsterType();
+
     private boolean initialized = false;
 
     @Before

@@ -43,17 +43,14 @@ public class HeroFacadeTest {
     @Mock
     private MappingService mappingService;
 
-    @Mock
-    private CreateHeroDTO createHeroDTO;
+    private CreateHeroDTO createHeroDTO = new CreateHeroDTO(1L, "");
 
-    @Mock
-    private HeroDTO heroDTO;
+    private HeroDTO heroDTO = new HeroDTO();
 
-    @Mock
-    private ModifyHeroDTO modifyHeroDTO;
+    private ModifyHeroDTO modifyHeroDTO = new ModifyHeroDTO();
 
-    @Mock
-    private Hero hero;
+    private Hero hero = new Hero();
+
     private boolean initialized = false;
 
     @Before

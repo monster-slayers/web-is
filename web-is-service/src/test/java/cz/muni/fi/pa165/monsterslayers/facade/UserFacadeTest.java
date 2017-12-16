@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -48,17 +49,13 @@ public class UserFacadeTest {
     @Mock
     private PasswordService passwordService;
 
-    @Mock
-    private UserLoginDTO userLoginDTO;
+    private UserLoginDTO userLoginDTO = new UserLoginDTO("a", "b");
 
-    @Mock
-    private UserDTO userDTO;
+    private UserDTO userDTO = new UserDTO();
 
-    @Mock
-    private ChangeUserImageDTO changeUserImageDTO;
+    private ChangeUserImageDTO changeUserImageDTO = new ChangeUserImageDTO(1L, new byte[0], "");
 
-    @Mock
-    private User user;
+    private User user = new User();
     private boolean initialized = false;
 
     @Before
@@ -134,11 +131,15 @@ public class UserFacadeTest {
     @Test
     public void testRegisterUser() {
         when(mappingService.mapTo(userDTO, User.class)).thenReturn(user);
-        when(user.getId()).thenReturn(1L);
+        when(passwordService.createHash("password")).thenReturn("hash");
 
         userFacade.registerUser(userDTO, "password");
 
-        verify(userService).registerUser(user);
+        ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
+        verify(userService).registerUser(captor.capture());
+
+        Assert.assertEquals(captor.getValue(), user);
+        Assert.assertEquals(user.getPassword(), "hash");
     }
 
     @Test
@@ -195,13 +196,14 @@ public class UserFacadeTest {
         String mimeType = "image/jpg";
         byte [] image = new byte[256];
 
+        changeUserImageDTO.setImageMimeType(mimeType);
+        changeUserImageDTO.setImage(image);
+
         when(userService.findUserById(changeUserImageDTO.getUserId())).thenReturn(user);
-        when(changeUserImageDTO.getImage()).thenReturn(image);
-        when(changeUserImageDTO.getImageMimeType()).thenReturn(mimeType);
 
         userFacade.changeUserImage(changeUserImageDTO);
 
-        verify(userService).editUserImage(user, image,mimeType );
+        verify(userService).editUserImage(user, image, mimeType);
     }
 
 }

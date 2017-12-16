@@ -44,17 +44,14 @@ public class ClientRequestFacadeTest {
     @Mock
     private MappingService mappingService;
 
-    @Mock
-    private ClientRequestDTO clientRequestDTO;
+    private ClientRequestDTO clientRequestDTO = new ClientRequestDTO();
 
-    @Mock
-    private ModifyClientRequestDTO modifyClientRequestDTO;
+    private ModifyClientRequestDTO modifyClientRequestDTO = new ModifyClientRequestDTO();
 
-    @Mock
-    private CreateClientRequestDTO createClientRequestDTO;
+    private CreateClientRequestDTO createClientRequestDTO = new CreateClientRequestDTO();
 
-    @Mock
-    private ClientRequest clientRequest;
+    private ClientRequest clientRequest = new ClientRequest();
+
     private boolean initialized = false;
 
     @Before
