@@ -5,6 +5,9 @@ import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
 import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 import cz.muni.fi.pa165.monsterslayers.service.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,17 +33,19 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
     @Autowired
     private HeroService heroService;
+    
+    public static final String PNG = "image/png";
 
     @Override
     public void loadData() {
         MonsterType zombie = monsterType("Zombie", "brains", PowerElement.HOLY);
         MonsterType dragon = monsterType("Dragon", "humans", PowerElement.WATER);
 
-        User george = user("george", "george@coldmail.com", "iamgeorge", RightsLevel.CLIENT);
-        User john = user("john", "john@coolmail.com", "iamnotgeorge", RightsLevel.CLIENT);
-        User andrew = user("andrew", "andrew@mail.hero", "thechosenone", RightsLevel.HERO);
-        User michael = user("michael", "pesfili@amail.org", "daddy", RightsLevel.MANAGER);
-        User trevor = user("trevor", "killer@mail.hero", "ihatemichael", RightsLevel.HERO);
+        User george = user("george", "george@coldmail.com", "iamgeorge", RightsLevel.CLIENT, "default.png" ,PNG);
+        User john = user("john", "john@coolmail.com", "iamnotgeorge", RightsLevel.CLIENT, "default.png" ,PNG);
+        User andrew = user("andrew", "andrew@mail.hero", "thechosenone", RightsLevel.HERO, "default.png" ,PNG);
+        User michael = user("michael", "pesfili@amail.org", "daddy", RightsLevel.MANAGER, "default.png" ,PNG);
+        User trevor = user("trevor", "killer@mail.hero", "ihatemichael", RightsLevel.HERO, "default.png" ,PNG);
 
         List<PowerElement> guitarCrusherEles = new ArrayList<>();
         guitarCrusherEles.add(PowerElement.FIRE);
@@ -123,14 +128,18 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return jobService.getJobById(jobService.createJob(job));
     }
 
-    private User user(String name, String email, String password, RightsLevel rightLevel) {
+    private User user(String name, String email, String password, RightsLevel rightLevel, String imageFile, String mimeType) {
         User user = new User();
 
         user.setName(name);
         user.setEmail(email);
         user.setPassword(password);
         user.setRightsLevel(rightLevel);
-
+        try {
+            user.setImage(readImage(imageFile));
+            user.setImageMimeType(mimeType);
+        } catch (IOException ex) {     
+        }
         return userService.findUserById(userService.saveUser(user));
     }
 
@@ -156,5 +165,18 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         monsterType.addWeakness(weakness);
 
         return monsterTypeService.findById(monsterTypeService.create(monsterType));
+    }
+    
+    private byte[] readImage(String file) throws IOException {
+        try (InputStream is = this.getClass().getResourceAsStream("/" + file)) {
+            int nRead;
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            byte[] data = new byte[1024];
+            while ((nRead = is.read(data, 0, data.length)) != -1) {
+                buffer.write(data, 0, nRead);
+            }
+            buffer.flush();
+            return buffer.toByteArray();
+        }
     }
 }

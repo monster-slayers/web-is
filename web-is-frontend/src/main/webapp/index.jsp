@@ -16,13 +16,19 @@
     <script src="${pageContext.request.contextPath}/libs/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/libs/lodash.min.js"></script>
     <script src="${pageContext.request.contextPath}/angular_app.js"></script>
+    <script src="${pageContext.request.contextPath}/controllers/monster-type.js"></script>
+    <script src="${pageContext.request.contextPath}/controllers/hero.js"></script>
+    <script src="${pageContext.request.contextPath}/controllers/user.js"></script>
+    <script src="${pageContext.request.contextPath}/controllers/user-detail.js"></script>
+    <script src="${pageContext.request.contextPath}/controllers/client-request.js"></script>
+    <script src="${pageContext.request.contextPath}/controllers/job.js"></script>
 </head>
 <body ng-controller="MainCtrl">
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>

@@ -73,9 +73,15 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public boolean hasUserManagerRights(UserDTO userDTO) {
+    public boolean hasManagerRights(UserDTO userDTO) {
         User user = mappingService.mapTo(userDTO, User.class);
-        return userService.hasUserManagerRights(user);
+        return userService.hasManagerRights(user);
+    }
+    
+    @Override
+    public boolean hasHeroRights(UserDTO userDTO) {
+        User user = mappingService.mapTo(userDTO, User.class);
+        return userService.hasHeroRights(user);
     }
 
     @Override

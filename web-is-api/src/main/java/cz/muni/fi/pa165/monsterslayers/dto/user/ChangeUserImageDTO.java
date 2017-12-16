@@ -9,12 +9,6 @@ public class ChangeUserImageDTO {
     private Long userId;
     private byte[] image;
     private String imageMimeType;
-
-    public ChangeUserImageDTO(Long userId, byte[] image, String imageMimeType) {
-        this.userId = userId;
-        this.image = image;
-        this.imageMimeType = imageMimeType;
-    }
     
     public Long getUserId() {
         return userId;

@@ -55,8 +55,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean hasUserManagerRights(User user) {
+    public boolean hasManagerRights(User user) {
         return findUserById(user.getId()).getRightsLevel() == RightsLevel.MANAGER;
+    }
+    
+    @Override
+    public boolean hasHeroRights(User user) {
+        return findUserById(user.getId()).getRightsLevel() == RightsLevel.HERO || hasManagerRights(user);
     }
 
     @Override

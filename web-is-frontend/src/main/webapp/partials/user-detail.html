@@ -1,0 +1,32 @@
+<h2>User profile</h2>
+
+<table class="table table-stripped" id="table-data-view">
+    <tr>
+        <th>Name</th><td>{{user.name}}</td>
+    </tr>
+    <tr>
+        <th>Email</th><td>{{user.email}}</td>
+    </tr>
+    <tr>
+        <th>
+            Image
+        </th>
+        <td>
+            <img class="img-responsive img-thumbnail" src="data:{{user.imageMimeType}};base64,{{user.image}}" alt="Profile photo" width="320" height="320">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button class="btn btn-primary btn-sm" type="file" ng-click="upload()">Upload image</button>
+            <input type="file" ng-upload-change="fileChanged($event)" accept="image/*" style="display:none;" id="file" name="file"/>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div>
+                Default icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+            </div>
+        </td>
+    </tr>
+</table>

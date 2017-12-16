@@ -1,0 +1,2 @@
+monsterSlayerApp.controller('ClientRequestCtrl', function () {
+});

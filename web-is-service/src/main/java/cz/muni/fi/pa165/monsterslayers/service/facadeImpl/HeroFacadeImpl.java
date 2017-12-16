@@ -5,7 +5,6 @@ import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.hero.ModifyHeroDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.Job;
-import cz.muni.fi.pa165.monsterslayers.entities.User;
 import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 import cz.muni.fi.pa165.monsterslayers.enums.JobStatus;
 import cz.muni.fi.pa165.monsterslayers.facade.HeroFacade;
@@ -73,6 +72,7 @@ public class HeroFacadeImpl implements HeroFacade {
     public Long createHero(CreateHeroDTO createHeroDTO) {
         Hero hero = mappingService.mapTo(createHeroDTO, Hero.class);
         hero.setUser(userService.findUserById(createHeroDTO.getUserId()));
+        hero.setStatus(HeroStatus.ACTIVE);
         return heroService.saveHero(hero);
     }
 
@@ -81,6 +81,9 @@ public class HeroFacadeImpl implements HeroFacade {
         Hero hero = heroService.findHeroById(modifyHeroDTO.getHeroId());
         if (modifyHeroDTO.getNewHeroName() != null) {
             hero.setHeroName(modifyHeroDTO.getNewHeroName());
+        }
+        if (modifyHeroDTO.getNewElements() != null) {
+            hero.setElements(modifyHeroDTO.getNewElements());
         }
         heroService.saveHero(hero);
     }
