@@ -49,16 +49,11 @@ public class JobServiceTest {
     private Job job1;
     private Job job2;
     private Collection<Job> jobs;
-    private boolean initialized = false;
 
     @Before
     public void setup(){
-        if (initialized) {
-            return;
-        }
         MockitoAnnotations.initMocks(this);
 
-        initialized = true;
         job1 = new Job();
         job1.setId(1L);
         job1.setAssignee(assignee1);
@@ -131,21 +126,12 @@ public class JobServiceTest {
     }
 
     @Test
-    public void createJobTest() {
+    public void saveJobTest() {
         when(jobRepository.save(job1)).thenReturn(job1);
 
-        Long id = jobService.createJob(job1);
+        Long id = jobService.saveJob(job1);
 
         verify(jobRepository).save(job1);
         Assert.assertEquals(id, job1.getId());
-    }
-
-    @Test
-    public void updateJobTest() {
-        when(jobRepository.save(job1)).thenReturn(job1);
-
-        jobService.updateJob(job1);
-
-        verify(jobRepository).save(job1);
     }
 }

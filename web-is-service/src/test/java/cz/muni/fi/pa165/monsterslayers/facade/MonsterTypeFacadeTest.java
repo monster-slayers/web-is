@@ -41,34 +41,24 @@ public class MonsterTypeFacadeTest {
     @Mock
     private MappingService mappingService;
 
-    @Mock
-    private MonsterTypeDTO monsterTypeDto;
+    private MonsterTypeDTO monsterTypeDto = new MonsterTypeDTO();
 
-    @Mock
-    private ModifyMonsterTypeDTO modifyMonsterTypeDto;
+    private ModifyMonsterTypeDTO modifyMonsterTypeDto = new ModifyMonsterTypeDTO();
 
-    @Mock
-    private CreateMonsterTypeDTO createMonsterTypeDto;
+    private CreateMonsterTypeDTO createMonsterTypeDto = new CreateMonsterTypeDTO();
 
-    @Mock
-    private MonsterType monsterType;
-    private boolean initialized = false;
+    private MonsterType monsterType = new MonsterType();
 
     @Before
     public void setup(){
-        if (initialized) {
-            return;
-        }
         MockitoAnnotations.initMocks(this);
-
-        initialized = true;
     }
 
     @Test
     public void createMonsterTypeServiceCallTest() {
         when(mappingService.mapTo(createMonsterTypeDto, MonsterType.class)).thenReturn(monsterType);
         facade.createMonsterType(createMonsterTypeDto);
-        verify(service).create(monsterType);
+        verify(service).save(monsterType);
     }
 
     @Test
@@ -84,7 +74,7 @@ public class MonsterTypeFacadeTest {
         Long id = 13L;
         when(service.findById(modifyMonsterTypeDto.getId())).thenReturn(monsterType);
         facade.editMonsterType(modifyMonsterTypeDto);
-        verify(service).update(monsterType);
+        verify(service).save(monsterType);
     }
 
     @Test

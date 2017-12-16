@@ -6,24 +6,22 @@ import cz.muni.fi.pa165.monsterslayers.dto.clientrequest.ModifyClientRequestDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.service.ClientRequestService;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import static org.mockito.Matchers.any;
 import org.mockito.Mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.Collection;
+import java.util.Collections;
+
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Test class for simple facade tests of ClientRequest
@@ -44,27 +42,17 @@ public class ClientRequestFacadeTest {
     @Mock
     private MappingService mappingService;
 
-    @Mock
-    private ClientRequestDTO clientRequestDTO;
+    private ClientRequestDTO clientRequestDTO = new ClientRequestDTO();
 
-    @Mock
-    private ModifyClientRequestDTO modifyClientRequestDTO;
+    private ModifyClientRequestDTO modifyClientRequestDTO = new ModifyClientRequestDTO();
 
-    @Mock
-    private CreateClientRequestDTO createClientRequestDTO;
+    private CreateClientRequestDTO createClientRequestDTO = new CreateClientRequestDTO();
 
-    @Mock
-    private ClientRequest clientRequest;
-    private boolean initialized = false;
+    private ClientRequest clientRequest = new ClientRequest();
 
     @Before
     public void setup(){
-        if (initialized) {
-            return;
-        }
         MockitoAnnotations.initMocks(this);
-
-        initialized = true;
     }
 
     @Test

@@ -21,9 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Tests for user service
@@ -39,8 +37,6 @@ public class HeroServiceTest {
     @Autowired
     @InjectMocks
     private HeroService heroService;
-
-    private boolean initialized = false;
 
     final private Hero hero1 = new Hero();
     final private Hero hero2 = new Hero();
@@ -70,15 +66,7 @@ public class HeroServiceTest {
 
     @Before
     public void setup() {
-        // this is not optimal, but junit requires from method
-        // annotated with @Before to be static
-        // possibly better solution is to use testng instead...
-        if (initialized) {
-            return;
-        }
         MockitoAnnotations.initMocks(this);
-
-        initialized = true;
     }
 
     @Test

@@ -17,7 +17,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -50,19 +53,9 @@ public class JobFacadeTest {
     @InjectMocks
     private JobFacade jobFacade;
 
-    private boolean initialized = false;
-
     @Before
     public void setup() {
-        // this is not optimal, but junit requires from method
-        // annotated with @Before to be static
-        // possibly better solution is to use testng instead...
-        if (initialized) {
-            return;
-        }
         MockitoAnnotations.initMocks(this);
-
-        initialized = true;
     }
 
     @Test
@@ -144,13 +137,13 @@ public class JobFacadeTest {
         when(mappingService.mapTo(createJobDTO, Job.class)).thenReturn(expectedJob);
 
         Long expectedId = 66L;
-        when(jobService.createJob(expectedJob)).thenReturn(expectedId);
+        when(jobService.saveJob(expectedJob)).thenReturn(expectedId);
 
         Long actualJobId = jobFacade.createJob(createJobDTO);
 
 
         ArgumentCaptor<Job> jobCapture = ArgumentCaptor.forClass(Job.class);
-        verify(jobService).createJob(jobCapture.capture());
+        verify(jobService).saveJob(jobCapture.capture());
 
         Job job = jobCapture.getValue();
 
@@ -180,7 +173,7 @@ public class JobFacadeTest {
         jobFacade.reassignJob(reassignJobDTO);
 
         ArgumentCaptor<Job> jobCapture = ArgumentCaptor.forClass(Job.class);
-        verify(jobService).updateJob(jobCapture.capture());
+        verify(jobService).saveJob(jobCapture.capture());
 
         Job actualJob = jobCapture.getValue();
 
@@ -203,7 +196,7 @@ public class JobFacadeTest {
         jobFacade.evaluateJob(evaluateJobDTO);
 
         ArgumentCaptor<Job> jobCaptor = ArgumentCaptor.forClass(Job.class);
-        verify(jobService).updateJob(jobCaptor.capture());
+        verify(jobService).saveJob(jobCaptor.capture());
 
         Job actualJob = jobCaptor.getValue();
 
@@ -226,7 +219,7 @@ public class JobFacadeTest {
         jobFacade.updateJobStatusDto(updateJobStatusDto);
 
         ArgumentCaptor<Job> jobCaptor = ArgumentCaptor.forClass(Job.class);
-        verify(jobService).updateJob(jobCaptor.capture());
+        verify(jobService).saveJob(jobCaptor.capture());
 
         Job actualJob = jobCaptor.getValue();
 

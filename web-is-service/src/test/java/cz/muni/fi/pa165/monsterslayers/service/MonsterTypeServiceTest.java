@@ -39,16 +39,11 @@ public class MonsterTypeServiceTest {
     private MonsterType monsterType1;
     private MonsterType monsterType2;
     private Collection<MonsterType> monsterTypes;
-    private boolean initialized = false;
 
     @Before
     public void setup() {
-        if (initialized) {
-            return;
-        }
         MockitoAnnotations.initMocks(this);
 
-        initialized = true;
         monsterType1 = new MonsterType("Zombie");
         monsterType1.setId(1L);
         monsterType1.setFood("food for zombie");
@@ -112,10 +107,10 @@ public class MonsterTypeServiceTest {
     }
 
     @Test
-    public void testCreate(){
+    public void testSave(){
         when(monsterTypeRepository.save(monsterType1)).thenReturn(monsterType1);
 
-        Long id = monsterTypeService.create(monsterType1);
+        Long id = monsterTypeService.save(monsterType1);
 
         verify(monsterTypeRepository).save(monsterType1);
         Assert.assertEquals(id, monsterType1.getId());
@@ -127,16 +122,4 @@ public class MonsterTypeServiceTest {
 
         verify(monsterTypeRepository).delete(monsterType1);
     }
-
-    @Test
-    public void testUpdate(){
-        monsterTypeService.update(monsterType1);
-
-        verify(monsterTypeRepository).save(monsterType1);
-    }
-
-
-
-
-
 }

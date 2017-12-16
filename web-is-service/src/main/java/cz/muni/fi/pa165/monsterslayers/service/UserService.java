@@ -1,9 +1,9 @@
 package cz.muni.fi.pa165.monsterslayers.service;
 
 import cz.muni.fi.pa165.monsterslayers.entities.User;
-import java.util.Collection;
-import java.util.List;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Interface for a service access to User entity
@@ -54,21 +54,10 @@ public interface UserService {
 
     /**
      * Registers new user with password
-     * (password will be encrypted using helper methods in implementation)
      *
      * @param user new user
-     * @param password user's password
      */
-    void registerUser (User user, String password);
-
-    /**
-     * Checks if user can be authenticated according to given password
-     *
-     * @param user user we want to authenticate
-     * @param password given password
-     * @return true if user can be authenticated, false otherwise
-     */
-    boolean authenticateUser (User user, String password);
+    void registerUser (User user);
 
     /**
      * Checks if given user has at least manager rights

@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.monsterslayers.service.utils;
 
-import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

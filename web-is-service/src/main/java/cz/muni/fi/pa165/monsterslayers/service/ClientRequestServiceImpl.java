@@ -2,7 +2,7 @@ package cz.muni.fi.pa165.monsterslayers.service;
 
 import cz.muni.fi.pa165.monsterslayers.dao.ClientRequestRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
-import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
+import cz.muni.fi.pa165.monsterslayers.exception.MonsterSlayersException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,26 +18,61 @@ public class ClientRequestServiceImpl implements ClientRequestService {
 
     @Override
     public ClientRequest findClientRequestById(Long id) {
-        return clientRequestRepository.findOne(id);
+        try {
+            return clientRequestRepository.findOne(id);
+        } catch (Exception e) {
+            throw new MonsterSlayersException(
+                    "Cannot find client request with ID" + id.toString() + ".",
+                    e
+            );
+        }
     }
 
     @Override
     public Iterable<ClientRequest> getAllClientRequests() {
-        return clientRequestRepository.findAll();
+        try {
+            return clientRequestRepository.findAll();
+        } catch (Exception e) {
+            throw new MonsterSlayersException(
+                    "Cannot retrieve client requests.",
+                    e
+            );
+        }
     }
 
     @Override
     public ClientRequest findClientRequestByTitle(String title) {
-        return clientRequestRepository.findByTitle(title);
+        try {
+            return clientRequestRepository.findByTitle(title);
+        } catch (Exception e) {
+            throw new MonsterSlayersException(
+                    "Cannot retrieve client request with title" + title + ".",
+                    e
+            );
+        }
     }
 
     @Override
     public void removeClientRequest(ClientRequest clientRequest) {
-        clientRequestRepository.delete(clientRequest);
+        try {
+            clientRequestRepository.delete(clientRequest);
+        } catch (Exception e) {
+            throw new MonsterSlayersException(
+                    "Cannot remove client request.",
+                    e
+            );
+        }
     }
 
     @Override
     public Long saveClientRequest(ClientRequest clientRequest) {
-        return clientRequestRepository.save(clientRequest).getId();
+        try {
+            return clientRequestRepository.save(clientRequest).getId();
+        } catch(Exception e) {
+            throw new MonsterSlayersException(
+                    "Cannot save client request.",
+                    e
+            );
+        }
     }
 }

@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.monsterslayers.dto.clientrequest;
 
-import cz.muni.fi.pa165.monsterslayers.dto.user.UserDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.monstertype.MonsterTypeDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.user.UserDTO;
 
 import java.math.BigDecimal;
 import java.util.HashMap;

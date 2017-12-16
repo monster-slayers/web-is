@@ -6,8 +6,6 @@ import cz.muni.fi.pa165.monsterslayers.dao.UserRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
-import java.math.BigDecimal;
-import javax.validation.ConstraintViolationException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,9 +16,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.ConstraintViolationException;
+import java.math.BigDecimal;
+
 /**
  * Test class for ClientRequest entity (case for constraints, setters, equals)
- * 
+ *
  * @author Tomáš Richter
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,16 +30,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class ClientRequestTests {
     @Autowired
     private ClientRequestRepository clientRequestRepository;
-    
+
     @Autowired
     private UserRepository userRepository;
-    
+
     @Autowired
     private MonsterTypeRepository monsterTypeRepository;
-    
+
     private ClientRequest clientRequest;
     private ClientRequest clientRequestFull;
-    
+
     private User user;
     private MonsterType monsterType = new MonsterType("Zombie");
     private String title = "request title";
@@ -46,7 +47,7 @@ public class ClientRequestTests {
     private String location = "location";
     private BigDecimal reward = new BigDecimal("1000");
     private Integer monsterCount = 10;
-    
+
     @Before
     public void setup() {
         user = new User();
@@ -54,19 +55,19 @@ public class ClientRequestTests {
         user.setEmail("monty@python.com");
         user.setPassword("bravesirrobin");
         userRepository.save(user);
-        
+
         clientRequest = new ClientRequest();
-        
-        clientRequestFull = new ClientRequest(); 
+
+        clientRequestFull = new ClientRequest();
         clientRequestFull.setTitle(title);
         clientRequestFull.setClient(user);
         clientRequestFull.setDescription(description);
         clientRequestFull.setLocation(location);
         clientRequestFull.setReward(reward);
-        clientRequestFull.addToKillList(monsterType, monsterCount);   
-        clientRequestRepository.save(clientRequestFull); 
+        clientRequestFull.addToKillList(monsterType, monsterCount);
+        clientRequestRepository.save(clientRequestFull);
     }
-    
+
     @Test
     public void allAttributesTest() {
         ClientRequest found = clientRequestRepository.findOne(clientRequestFull.getId());
@@ -77,46 +78,46 @@ public class ClientRequestTests {
         Assert.assertEquals(reward, found.getReward());
         Assert.assertEquals(monsterCount, found.getCountFromKillList(monsterType));
     }
-    
+
     @Test
     public void isInKillListTest() {
         Assert.assertTrue(clientRequestFull.isInKillList(monsterType));
         clientRequestFull.removeFromKillList(monsterType);
         Assert.assertFalse(clientRequestFull.isInKillList(monsterType));
     }
-    
+
     @Test(expected = ConstraintViolationException.class)
     public void saveNullClientTest() {
         clientRequest.setTitle("Null client");
         clientRequestRepository.save(clientRequest);
     }
-    
+
     @Test(expected = ConstraintViolationException.class)
     public void saveNullTitleTest() {
         clientRequest.setClient(user);
         clientRequestRepository.save(clientRequest);
     }
-    
+
     @Test(expected = DataAccessException.class)
     public void saveUniqueTitleTest() {
         clientRequest.setClient(user);
         clientRequest.setTitle(clientRequestFull.getTitle());
         clientRequestRepository.save(clientRequest);
     }
-    
+
     @Test
     public void equalityTest() {
         Assert.assertEquals(clientRequest, clientRequest);
         Assert.assertNotEquals(clientRequest, null);
-        
+
         clientRequest.setTitle(clientRequestFull.getTitle());
         clientRequest.setClient(user);
         Assert.assertEquals(clientRequestFull, clientRequest);
-        
+
         clientRequest.setTitle("other title");
         Assert.assertNotEquals(clientRequestFull, clientRequest);
     }
-    
+
     @Test
     public void hashCodeTest() {
         clientRequest.setTitle(clientRequestFull.getTitle());

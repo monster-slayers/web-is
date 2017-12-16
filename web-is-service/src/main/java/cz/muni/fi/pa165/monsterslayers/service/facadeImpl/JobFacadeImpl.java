@@ -1,7 +1,6 @@
 package cz.muni.fi.pa165.monsterslayers.service.facadeImpl;
 
 import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
-import cz.muni.fi.pa165.monsterslayers.dto.monstertype.MonsterTypeDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.jobs.*;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.Job;
@@ -12,14 +11,14 @@ import cz.muni.fi.pa165.monsterslayers.service.HeroService;
 import cz.muni.fi.pa165.monsterslayers.service.JobService;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
 import cz.muni.fi.pa165.monsterslayers.service.utils.PowerElementsMatch;
-import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Implementation of the facade layer for Jobs.
@@ -60,7 +59,7 @@ public class JobFacadeImpl implements JobFacade {
 
     @Override
     public Long createJob(CreateJobDTO dto) {
-        return jobService.createJob(mappingService.mapTo(dto, Job.class));
+        return jobService.saveJob(mappingService.mapTo(dto, Job.class));
     }
 
     @Override
@@ -68,7 +67,7 @@ public class JobFacadeImpl implements JobFacade {
         Job job = jobService.getJobById(dto.getJobId());
         Hero newAssignee = heroService.findHeroById(dto.getNewHeroId());
         job.setAssignee(newAssignee);
-        jobService.updateJob(job);
+        jobService.saveJob(job);
     }
 
     @Override
@@ -76,7 +75,7 @@ public class JobFacadeImpl implements JobFacade {
         Job job = jobService.getJobById(dto.getJobId());
         Integer evaluation = dto.getEvaluation();
         job.setEvaluation(evaluation);
-        jobService.updateJob(job);
+        jobService.saveJob(job);
     }
 
     @Override
@@ -84,7 +83,7 @@ public class JobFacadeImpl implements JobFacade {
         Job job = jobService.getJobById(dto.getJobId());
         JobStatus newStatus = dto.getNewStatus();
         job.setStatus(newStatus);
-        jobService.updateJob(job);
+        jobService.saveJob(job);
     }
 
     @Override

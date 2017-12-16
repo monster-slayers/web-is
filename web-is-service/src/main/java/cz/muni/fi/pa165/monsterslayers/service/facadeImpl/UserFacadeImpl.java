@@ -5,14 +5,15 @@ import cz.muni.fi.pa165.monsterslayers.dto.user.UserDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.user.UserLoginDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
-import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 import cz.muni.fi.pa165.monsterslayers.facade.UserFacade;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
+import cz.muni.fi.pa165.monsterslayers.service.PasswordService;
 import cz.muni.fi.pa165.monsterslayers.service.UserService;
-import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
 
 /**
  * Implementation of user facade interface.
@@ -30,6 +31,9 @@ public class UserFacadeImpl implements UserFacade {
 
     @Autowired
     private MappingService mappingService;
+
+    @Autowired
+    private PasswordService passwordService;
 
 
     @Override
@@ -63,13 +67,18 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public void registerUser(UserDTO userDTO, String unencryptedPassword) {
         User user = mappingService.mapTo(userDTO, User.class);
-        userService.registerUser(user, unencryptedPassword);
+        user.setPassword(passwordService.createHash(unencryptedPassword));
+        userService.registerUser(user);
         userDTO.setId(user.getId());
     }
 
     @Override
     public boolean authenticateUser(UserLoginDTO userLoginDTO) {
-        return userService.authenticateUser(userService.findUserByEmail(userLoginDTO.getEmail()), userLoginDTO.getPassword());
+        User user = userService.findUserByEmail(userLoginDTO.getEmail());
+        String password = userLoginDTO.getPassword();
+        String correctHash = user.getPassword();
+
+        return passwordService.checkHash(password, correctHash);
     }
 
     @Override

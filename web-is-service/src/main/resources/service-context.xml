@@ -13,5 +13,6 @@
     <context:component-scan base-package="cz.muni.fi.pa165.monsterslayers.service"/>
 
     <bean id="dozer" class="org.dozer.DozerBeanMapper"/>
+    <bean id="secureRandom" class="java.security.SecureRandom"/>
 
 </beans>

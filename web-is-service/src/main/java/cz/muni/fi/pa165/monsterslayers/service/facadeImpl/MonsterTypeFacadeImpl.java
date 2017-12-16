@@ -34,7 +34,7 @@ public class MonsterTypeFacadeImpl implements MonsterTypeFacade {
 
         monsterType.addWeakness(createMonsterTypeDTO.getWeakness());
 
-        return monsterTypeService.create(monsterType);
+        return monsterTypeService.save(monsterType);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class MonsterTypeFacadeImpl implements MonsterTypeFacade {
         if (modifyMonsterTypeDTO.getNewWeaknesses() != null) {
             monsterType.setWeaknesses(modifyMonsterTypeDTO.getNewWeaknesses());
         }
-        monsterTypeService.update(monsterType);
+        monsterTypeService.save(monsterType);
     }
 
     @Override

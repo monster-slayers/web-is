@@ -6,11 +6,13 @@ import cz.muni.fi.pa165.monsterslayers.dto.user.UserLoginDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
+import cz.muni.fi.pa165.monsterslayers.service.PasswordService;
 import cz.muni.fi.pa165.monsterslayers.service.UserService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -45,26 +47,19 @@ public class UserFacadeTest {
     private MappingService mappingService;
 
     @Mock
-    private UserLoginDTO userLoginDTO;
+    private PasswordService passwordService;
 
-    @Mock
-    private UserDTO userDTO;
+    private UserLoginDTO userLoginDTO = new UserLoginDTO("a", "b");
 
-    @Mock
-    private ChangeUserImageDTO changeUserImageDTO;
+    private UserDTO userDTO = new UserDTO();
 
-    @Mock
-    private User user;
-    private boolean initialized = false;
+    private ChangeUserImageDTO changeUserImageDTO = new ChangeUserImageDTO();
+
+    private User user = new User();
 
     @Before
     public void setup(){
-        if (initialized) {
-            return;
-        }
         MockitoAnnotations.initMocks(this);
-
-        initialized = true;
     }
 
     @Test
@@ -130,20 +125,39 @@ public class UserFacadeTest {
     @Test
     public void testRegisterUser() {
         when(mappingService.mapTo(userDTO, User.class)).thenReturn(user);
-        when(user.getId()).thenReturn(1L);
+        when(passwordService.createHash("password")).thenReturn("hash");
 
         userFacade.registerUser(userDTO, "password");
 
-        verify(userService).registerUser(user, "password");
+        ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
+        verify(userService).registerUser(captor.capture());
+
+        Assert.assertEquals(captor.getValue(), user);
+        Assert.assertEquals(user.getPassword(), "hash");
     }
 
     @Test
     public void testAuthenticate() {
-        when(userService.findUserByEmail(userLoginDTO.getEmail())).thenReturn(user);
-        when(userLoginDTO.getPassword()).thenReturn("password");
-        userFacade.authenticateUser(userLoginDTO);
+        UserLoginDTO login = new UserLoginDTO("info@example.com", "1234");
+        User sampleUser = new User();
+        sampleUser.setPassword("secret");
 
-        verify(userService).authenticateUser(user, "password");
+        when(userService.findUserByEmail(login.getEmail())).thenReturn(sampleUser);
+        when(passwordService.checkHash(login.getPassword(), sampleUser.getPassword())).thenReturn(true);
+
+        Assert.assertTrue(userFacade.authenticateUser(login));
+    }
+
+    @Test
+    public void testAuthenticateBad() {
+        UserLoginDTO login = new UserLoginDTO("info@example.com", "1234");
+        User sampleUser = new User();
+        sampleUser.setPassword("secret");
+
+        when(userService.findUserByEmail(login.getEmail())).thenReturn(sampleUser);
+        when(passwordService.checkHash(login.getPassword(), sampleUser.getPassword())).thenReturn(false);
+
+        Assert.assertFalse(userFacade.authenticateUser(login));
     }
 
     @Test
@@ -154,7 +168,7 @@ public class UserFacadeTest {
         Assert.assertTrue(userFacade.hasManagerRights(userDTO));
         verify(userService).hasManagerRights(user);
     }
-    
+
     @Test
     public void testHasHeroRights() {
         when(userService.hasHeroRights(user)).thenReturn(true);
@@ -176,13 +190,14 @@ public class UserFacadeTest {
         String mimeType = "image/jpg";
         byte [] image = new byte[256];
 
+        changeUserImageDTO.setImageMimeType(mimeType);
+        changeUserImageDTO.setImage(image);
+
         when(userService.findUserById(changeUserImageDTO.getUserId())).thenReturn(user);
-        when(changeUserImageDTO.getImage()).thenReturn(image);
-        when(changeUserImageDTO.getImageMimeType()).thenReturn(mimeType);
 
         userFacade.changeUserImage(changeUserImageDTO);
 
-        verify(userService).editUserImage(user, image,mimeType );
+        verify(userService).editUserImage(user, image, mimeType);
     }
 
 }

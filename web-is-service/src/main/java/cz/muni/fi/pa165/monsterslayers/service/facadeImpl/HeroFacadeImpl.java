@@ -12,10 +12,11 @@ import cz.muni.fi.pa165.monsterslayers.service.HeroService;
 import cz.muni.fi.pa165.monsterslayers.service.JobService;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
 import cz.muni.fi.pa165.monsterslayers.service.UserService;
-import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
 
 /**
  * Implementation of hero facade interface.
@@ -98,7 +99,7 @@ public class HeroFacadeImpl implements HeroFacade {
             Collection<Job> jobs = jobService.getJobsByAssignee(hero);
             for(Job job: jobs){
                 job.setStatus(JobStatus.UNSUCCESSFUL);
-                jobService.updateJob(job);
+                jobService.saveJob(job);
             }
         }
     }

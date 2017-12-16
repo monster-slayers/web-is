@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * Rest controller for Hero
- * 
+ *
  * @author Tomáš Richter
  */
 @RestController
@@ -40,7 +40,7 @@ public class HeroController {
         createHeroDTO.setElements(elements);
         heroFacade.createHero(createHeroDTO);
     }
-    
+
     @PutMapping(value = "/modify/{heroId}/{heroName}/{elements}")
     private void modifyHero(@PathVariable("heroId") Long heroId, @PathVariable("heroName") String heroName, @PathVariable("elements") List<PowerElement> elements) {
         ModifyHeroDTO modifyHeroDTO = new ModifyHeroDTO();

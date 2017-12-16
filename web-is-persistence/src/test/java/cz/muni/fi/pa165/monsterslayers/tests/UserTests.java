@@ -2,8 +2,8 @@ package cz.muni.fi.pa165.monsterslayers.tests;
 
 import cz.muni.fi.pa165.monsterslayers.dao.UserRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
-import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
 import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
+import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

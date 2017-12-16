@@ -13,39 +13,32 @@ import java.util.Collection;
 public interface JobService {
     /**
      * Finds job by given id
-     * 
+     *
      * @param id given id
      * @return found job entity
      */
     Job getJobById(Long id);
-    
+
     /**
      * Finds all jobs that are assigned to given hero
-     * 
+     *
      * @param assignee given hero
      * @return Collection of job entities
      */
     Collection<Job> getJobsByAssignee(Hero assignee);
-    
+
     /**
      * Finds all jobs
-     * 
-     * @return iterable collection of job entities 
+     *
+     * @return iterable collection of job entities
      */
     Iterable<Job> getAllJobs();
-    
+
     /**
-     * Creates new job in system
-     * 
+     * Saves the job
+     *
      * @param job job entity that will be saved
      * @return id of created entity
      */
-    Long createJob(Job job);
-    
-    /**
-     * Update existing job
-     * 
-     * @param job job entity that will be saved
-     */
-    void updateJob(Job job);
+    Long saveJob(Job job);
 }

@@ -1,11 +1,11 @@
 package cz.muni.fi.pa165.monsterslayers.service;
 
-import cz.muni.fi.pa165.monsterslayers.service.utils.PowerElementsMatch;
 import cz.muni.fi.pa165.monsterslayers.dao.HeroRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
-import java.util.Collection;
+import cz.muni.fi.pa165.monsterslayers.exception.MonsterSlayersException;
+import cz.muni.fi.pa165.monsterslayers.service.utils.PowerElementsMatch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,25 +22,62 @@ public class HeroServiceImpl implements HeroService {
 
     @Override
     public Hero findHeroById(Long id) {
-        return heroRepository.findOne(id);
+        try {
+            return heroRepository.findOne(id);
+        } catch (Exception e) {
+            throw new MonsterSlayersException(
+                    "Cannot find hero with ID" + id.toString() + ".",
+                    e
+            );
+        }
     }
 
     @Override
     public Iterable<Hero> getAllHeroes() {
-        return heroRepository.findAll();
+        try {
+            return heroRepository.findAll();
+        } catch (Exception e) {
+            throw new MonsterSlayersException(
+                    "Cannot retrieve heroes.",
+                    e
+            );
+        }
     }
 
     @Override
     public void removeHero(Hero hero) {
-        heroRepository.delete(hero);
+        try {
+            heroRepository.delete(hero);
+        } catch (Exception e) {
+            throw new MonsterSlayersException(
+                    "Cannot delete hero.",
+                    e
+            );
+        }
     }
 
     @Override
-    public Long saveHero(Hero hero) { return heroRepository.save(hero).getId(); }
+    public Long saveHero(Hero hero) {
+        try {
+            return heroRepository.save(hero).getId();
+        } catch (Exception e) {
+            throw new MonsterSlayersException(
+                    "Cannot save hero.",
+                    e
+            );
+        }
+    }
 
     @Override
     public Hero findHeroByName(String heroName) {
-        return heroRepository.findByHeroName(heroName);
+        try {
+            return heroRepository.findByHeroName(heroName);
+        } catch (Exception e) {
+            throw new MonsterSlayersException(
+                    "Cannot find hero with name " + heroName + ".",
+                    e
+            );
+        }
     }
 
     @Override

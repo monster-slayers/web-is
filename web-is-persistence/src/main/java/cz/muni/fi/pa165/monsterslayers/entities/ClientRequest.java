@@ -3,7 +3,10 @@ package cz.muni.fi.pa165.monsterslayers.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Basic entity class - ClientRequest

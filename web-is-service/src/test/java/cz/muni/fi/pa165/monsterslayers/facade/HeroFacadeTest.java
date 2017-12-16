@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.monsterslayers.facade;
 
+import cz.muni.fi.pa165.monsterslayers.dto.hero.CreateHeroDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.hero.ModifyHeroDTO;
-import cz.muni.fi.pa165.monsterslayers.dto.hero.CreateHeroDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 import cz.muni.fi.pa165.monsterslayers.service.HeroService;
@@ -43,27 +43,17 @@ public class HeroFacadeTest {
     @Mock
     private MappingService mappingService;
 
-    @Mock
-    private CreateHeroDTO createHeroDTO;
+    private CreateHeroDTO createHeroDTO = new CreateHeroDTO(1L, "");
 
-    @Mock
-    private HeroDTO heroDTO;
+    private HeroDTO heroDTO = new HeroDTO();
 
-    @Mock
-    private ModifyHeroDTO modifyHeroDTO;
+    private ModifyHeroDTO modifyHeroDTO = new ModifyHeroDTO();
 
-    @Mock
-    private Hero hero;
-    private boolean initialized = false;
+    private Hero hero = new Hero();
 
     @Before
     public void setup(){
-        if (initialized) {
-            return;
-        }
         MockitoAnnotations.initMocks(this);
-
-        initialized = true;
     }
 
     @Test

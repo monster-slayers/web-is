@@ -17,11 +17,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Tests for ClientRequestService.
@@ -44,16 +41,11 @@ public class ClientRequestServiceTest {
     private ClientRequest cr1;
     private ClientRequest cr2;
     private Collection<ClientRequest> crs = new ArrayList<>();
-    private boolean initialized = false;
 
     @Before
     public void setUp() {
-        if (initialized) {
-            return;
-        }
         MockitoAnnotations.initMocks(this);
 
-        initialized = true;
         cr1 = new ClientRequest("cr1", client);
         cr1.setId(1L);
         cr2 = new ClientRequest("cr2", client);

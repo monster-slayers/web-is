@@ -37,8 +37,6 @@ public class UserServiceTest {
     @InjectMocks
     private UserService userService;
 
-    private boolean initialized = false;
-
     private final List<User> sampleUsers = new ArrayList<>();
     private final User user1 = new User();
     private final User user2 = new User();
@@ -71,15 +69,7 @@ public class UserServiceTest {
 
     @Before
     public void setup() {
-        // this is not optimal, but junit requires from method
-        // annotated with @Before to be static
-        // possibly better solution is to use testng instead...
-        if (initialized) {
-            return;
-        }
         MockitoAnnotations.initMocks(this);
-
-        initialized = true;
     }
 
     @Test
@@ -160,29 +150,12 @@ public class UserServiceTest {
 
     @Test
     public void testRegisterUser(){
-        userService.registerUser(user1, "test");
+        userService.registerUser(user1);
         ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
         verify(userRepository).save(userCaptor.capture());
         User registeredUser = userCaptor.getValue();
 
         Assert.assertEquals(registeredUser, user1);
-    }
-
-    @Test
-    public void testAuthenticateUser(){
-        when(userRepository.findOne(user1.getId())).thenReturn(user1);
-
-        boolean result = userService.authenticateUser(user1, "holubyvnose");
-        Assert.assertTrue(result);
-    }
-
-
-    @Test
-    public void testAuthenticateUserBadPassword(){
-        when(userRepository.findOne(user1.getId())).thenReturn(user1);
-
-        boolean result = userService.authenticateUser(user1, "nosyvholubovi");
-        Assert.assertFalse(result);
     }
 
     @Test

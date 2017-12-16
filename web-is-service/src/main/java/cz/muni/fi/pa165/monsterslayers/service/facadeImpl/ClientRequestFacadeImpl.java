@@ -8,10 +8,10 @@ import cz.muni.fi.pa165.monsterslayers.facade.ClientRequestFacade;
 import cz.muni.fi.pa165.monsterslayers.service.ClientRequestService;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Collection;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
 
 /**
  * Implementation of client request facade interface
