@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Monster Slayers</title>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/libs/bootstrap-theme.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">

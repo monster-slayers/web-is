@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.monsterslayers.frontend.config;
 
+import org.springframework.web.filter.CharacterEncodingFilter;
+import javax.servlet.Filter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class Initializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -12,6 +14,13 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/rest/*"};
+    }
+    
+    @Override
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
+        encodingFilter.setEncoding("utf-8");
+        return new Filter[]{encodingFilter};
     }
 
     @Override

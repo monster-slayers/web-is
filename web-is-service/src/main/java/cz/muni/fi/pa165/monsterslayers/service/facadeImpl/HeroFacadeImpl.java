@@ -98,8 +98,11 @@ public class HeroFacadeImpl implements HeroFacade {
         if(userStatus == HeroStatus.DECEASED) {
             Collection<Job> jobs = jobService.getJobsByAssignee(hero);
             for(Job job: jobs){
-                job.setStatus(JobStatus.UNSUCCESSFUL);
-                jobService.saveJob(job);
+                JobStatus oldStatus = job.getStatus();
+                if (oldStatus == JobStatus.ASSIGNED || oldStatus == JobStatus.ON_MISSION) {
+                    job.setStatus(JobStatus.UNSUCCESSFUL);
+                    jobService.saveJob(job);
+                }
             }
         }
     }
