@@ -68,7 +68,7 @@ public class MonsterTypeFacadeTest {
     public void createMonsterTypeServiceCallTest() {
         when(mappingService.mapTo(createMonsterTypeDto, MonsterType.class)).thenReturn(monsterType);
         facade.createMonsterType(createMonsterTypeDto);
-        verify(service).create(monsterType);
+        verify(service).save(monsterType);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class MonsterTypeFacadeTest {
         Long id = 13L;
         when(service.findById(modifyMonsterTypeDto.getId())).thenReturn(monsterType);
         facade.editMonsterType(modifyMonsterTypeDto);
-        verify(service).update(monsterType);
+        verify(service).save(monsterType);
     }
 
     @Test

@@ -54,21 +54,10 @@ public interface UserService {
 
     /**
      * Registers new user with password
-     * (password will be encrypted using helper methods in implementation)
      *
      * @param user new user
-     * @param password user's password
      */
-    void registerUser (User user, String password);
-
-    /**
-     * Checks if user can be authenticated according to given password
-     *
-     * @param user user we want to authenticate
-     * @param password given password
-     * @return true if user can be authenticated, false otherwise
-     */
-    boolean authenticateUser (User user, String password);
+    void registerUser (User user);
 
     /**
      * Checks if given user has at least manager rights

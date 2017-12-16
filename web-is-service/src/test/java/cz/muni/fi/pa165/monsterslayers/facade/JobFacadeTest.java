@@ -144,13 +144,13 @@ public class JobFacadeTest {
         when(mappingService.mapTo(createJobDTO, Job.class)).thenReturn(expectedJob);
 
         Long expectedId = 66L;
-        when(jobService.createJob(expectedJob)).thenReturn(expectedId);
+        when(jobService.saveJob(expectedJob)).thenReturn(expectedId);
 
         Long actualJobId = jobFacade.createJob(createJobDTO);
 
 
         ArgumentCaptor<Job> jobCapture = ArgumentCaptor.forClass(Job.class);
-        verify(jobService).createJob(jobCapture.capture());
+        verify(jobService).saveJob(jobCapture.capture());
 
         Job job = jobCapture.getValue();
 
@@ -180,7 +180,7 @@ public class JobFacadeTest {
         jobFacade.reassignJob(reassignJobDTO);
 
         ArgumentCaptor<Job> jobCapture = ArgumentCaptor.forClass(Job.class);
-        verify(jobService).updateJob(jobCapture.capture());
+        verify(jobService).saveJob(jobCapture.capture());
 
         Job actualJob = jobCapture.getValue();
 
@@ -203,7 +203,7 @@ public class JobFacadeTest {
         jobFacade.evaluateJob(evaluateJobDTO);
 
         ArgumentCaptor<Job> jobCaptor = ArgumentCaptor.forClass(Job.class);
-        verify(jobService).updateJob(jobCaptor.capture());
+        verify(jobService).saveJob(jobCaptor.capture());
 
         Job actualJob = jobCaptor.getValue();
 
@@ -226,7 +226,7 @@ public class JobFacadeTest {
         jobFacade.updateJobStatusDto(updateJobStatusDto);
 
         ArgumentCaptor<Job> jobCaptor = ArgumentCaptor.forClass(Job.class);
-        verify(jobService).updateJob(jobCaptor.capture());
+        verify(jobService).saveJob(jobCaptor.capture());
 
         Job actualJob = jobCaptor.getValue();
 

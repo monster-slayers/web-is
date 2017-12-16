@@ -36,6 +36,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     
     public static final String PNG = "image/png";
 
+    @Autowired
+    private PasswordService passwordService;
+
     @Override
     public void loadData() {
         MonsterType zombie = monsterType("Zombie", "brains", PowerElement.HOLY);
@@ -125,7 +128,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         job.setAssignee(hero);
         job.setClientRequest(clientRequest);
 
-        return jobService.getJobById(jobService.createJob(job));
+        return jobService.getJobById(jobService.saveJob(job));
     }
 
     private User user(String name, String email, String password, RightsLevel rightLevel, String imageFile, String mimeType) {
@@ -133,7 +136,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         user.setName(name);
         user.setEmail(email);
-        user.setPassword(password);
+        user.setPassword(passwordService.createHash(password));
         user.setRightsLevel(rightLevel);
         try {
             user.setImage(readImage(imageFile));
@@ -164,7 +167,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         //TODO: create monster with multiple weaknesses is currently impossible
         monsterType.addWeakness(weakness);
 
-        return monsterTypeService.findById(monsterTypeService.create(monsterType));
+        return monsterTypeService.findById(monsterTypeService.save(monsterType));
     }
     
     private byte[] readImage(String file) throws IOException {

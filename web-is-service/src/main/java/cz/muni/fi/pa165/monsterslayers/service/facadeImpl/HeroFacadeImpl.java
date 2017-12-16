@@ -98,7 +98,7 @@ public class HeroFacadeImpl implements HeroFacade {
             Collection<Job> jobs = jobService.getJobsByAssignee(hero);
             for(Job job: jobs){
                 job.setStatus(JobStatus.UNSUCCESSFUL);
-                jobService.updateJob(job);
+                jobService.saveJob(job);
             }
         }
     }

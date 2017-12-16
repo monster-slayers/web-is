@@ -160,29 +160,12 @@ public class UserServiceTest {
 
     @Test
     public void testRegisterUser(){
-        userService.registerUser(user1, "test");
+        userService.registerUser(user1);
         ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
         verify(userRepository).save(userCaptor.capture());
         User registeredUser = userCaptor.getValue();
 
         Assert.assertEquals(registeredUser, user1);
-    }
-
-    @Test
-    public void testAuthenticateUser(){
-        when(userRepository.findOne(user1.getId())).thenReturn(user1);
-
-        boolean result = userService.authenticateUser(user1, "holubyvnose");
-        Assert.assertTrue(result);
-    }
-
-
-    @Test
-    public void testAuthenticateUserBadPassword(){
-        when(userRepository.findOne(user1.getId())).thenReturn(user1);
-
-        boolean result = userService.authenticateUser(user1, "nosyvholubovi");
-        Assert.assertFalse(result);
     }
 
     @Test

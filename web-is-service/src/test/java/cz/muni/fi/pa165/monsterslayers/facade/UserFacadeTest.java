@@ -6,6 +6,7 @@ import cz.muni.fi.pa165.monsterslayers.dto.user.UserLoginDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
+import cz.muni.fi.pa165.monsterslayers.service.PasswordService;
 import cz.muni.fi.pa165.monsterslayers.service.UserService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -43,6 +44,9 @@ public class UserFacadeTest {
 
     @Mock
     private MappingService mappingService;
+
+    @Mock
+    private PasswordService passwordService;
 
     @Mock
     private UserLoginDTO userLoginDTO;
@@ -134,16 +138,31 @@ public class UserFacadeTest {
 
         userFacade.registerUser(userDTO, "password");
 
-        verify(userService).registerUser(user, "password");
+        verify(userService).registerUser(user);
     }
 
     @Test
     public void testAuthenticate() {
-        when(userService.findUserByEmail(userLoginDTO.getEmail())).thenReturn(user);
-        when(userLoginDTO.getPassword()).thenReturn("password");
-        userFacade.authenticateUser(userLoginDTO);
+        UserLoginDTO login = new UserLoginDTO("info@example.com", "1234");
+        User sampleUser = new User();
+        sampleUser.setPassword("secret");
 
-        verify(userService).authenticateUser(user, "password");
+        when(userService.findUserByEmail(login.getEmail())).thenReturn(sampleUser);
+        when(passwordService.checkHash(login.getPassword(), sampleUser.getPassword())).thenReturn(true);
+
+        Assert.assertTrue(userFacade.authenticateUser(login));
+    }
+
+    @Test
+    public void testAuthenticateBad() {
+        UserLoginDTO login = new UserLoginDTO("info@example.com", "1234");
+        User sampleUser = new User();
+        sampleUser.setPassword("secret");
+
+        when(userService.findUserByEmail(login.getEmail())).thenReturn(sampleUser);
+        when(passwordService.checkHash(login.getPassword(), sampleUser.getPassword())).thenReturn(false);
+
+        Assert.assertFalse(userFacade.authenticateUser(login));
     }
 
     @Test

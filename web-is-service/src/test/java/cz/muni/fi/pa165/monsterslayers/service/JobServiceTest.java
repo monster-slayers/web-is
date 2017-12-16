@@ -131,21 +131,12 @@ public class JobServiceTest {
     }
 
     @Test
-    public void createJobTest() {
+    public void saveJobTest() {
         when(jobRepository.save(job1)).thenReturn(job1);
 
-        Long id = jobService.createJob(job1);
+        Long id = jobService.saveJob(job1);
 
         verify(jobRepository).save(job1);
         Assert.assertEquals(id, job1.getId());
-    }
-
-    @Test
-    public void updateJobTest() {
-        when(jobRepository.save(job1)).thenReturn(job1);
-
-        jobService.updateJob(job1);
-
-        verify(jobRepository).save(job1);
     }
 }

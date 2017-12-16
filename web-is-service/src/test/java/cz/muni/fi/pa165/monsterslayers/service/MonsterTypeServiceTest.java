@@ -112,10 +112,10 @@ public class MonsterTypeServiceTest {
     }
 
     @Test
-    public void testCreate(){
+    public void testSave(){
         when(monsterTypeRepository.save(monsterType1)).thenReturn(monsterType1);
 
-        Long id = monsterTypeService.create(monsterType1);
+        Long id = monsterTypeService.save(monsterType1);
 
         verify(monsterTypeRepository).save(monsterType1);
         Assert.assertEquals(id, monsterType1.getId());
@@ -127,16 +127,4 @@ public class MonsterTypeServiceTest {
 
         verify(monsterTypeRepository).delete(monsterType1);
     }
-
-    @Test
-    public void testUpdate(){
-        monsterTypeService.update(monsterType1);
-
-        verify(monsterTypeRepository).save(monsterType1);
-    }
-
-
-
-
-
 }

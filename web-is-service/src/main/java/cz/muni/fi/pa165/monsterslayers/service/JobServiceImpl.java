@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.monsterslayers.service;
 import cz.muni.fi.pa165.monsterslayers.dao.JobRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.Job;
+import cz.muni.fi.pa165.monsterslayers.exception.MonsterSlayersException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collection;
@@ -25,26 +26,49 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public Job getJobById(Long id) {
-        return repository.findOne(id);
+        try {
+            return repository.findOne(id);
+        } catch (Exception e) {
+            throw new MonsterSlayersException(
+                    "Cannot find job with id " + id.toString() + ".",
+                    e
+            );
+        }
     }
 
     @Override
     public Collection<Job> getJobsByAssignee(Hero assignee) {
-        return repository.findAllByAssignee(assignee);
+        try {
+            return repository.findAllByAssignee(assignee);
+        } catch (Exception e) {
+            throw new MonsterSlayersException(
+                    "Cannot find jobs with specified assignee.",
+                    e
+            );
+        }
     }
 
     @Override
     public Iterable<Job> getAllJobs() {
-        return repository.findAll();
+        try {
+            return repository.findAll();
+        } catch (Exception e) {
+            throw new MonsterSlayersException(
+                    "Cannot retrieve all jobs.",
+                    e
+            );
+        }
     }
 
     @Override
-    public Long createJob(Job job) {
-        return repository.save(job).getId();
-    }
-
-    @Override
-    public void updateJob(Job job) {
-        repository.save(job);
+    public Long saveJob(Job job) {
+        try {
+            return repository.save(job).getId();
+        } catch (Exception e) {
+            throw new MonsterSlayersException(
+                    "Cannot save a job.",
+                    e
+            );
+        }
     }
 }

@@ -60,7 +60,7 @@ public class JobFacadeImpl implements JobFacade {
 
     @Override
     public Long createJob(CreateJobDTO dto) {
-        return jobService.createJob(mappingService.mapTo(dto, Job.class));
+        return jobService.saveJob(mappingService.mapTo(dto, Job.class));
     }
 
     @Override
@@ -68,7 +68,7 @@ public class JobFacadeImpl implements JobFacade {
         Job job = jobService.getJobById(dto.getJobId());
         Hero newAssignee = heroService.findHeroById(dto.getNewHeroId());
         job.setAssignee(newAssignee);
-        jobService.updateJob(job);
+        jobService.saveJob(job);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class JobFacadeImpl implements JobFacade {
         Job job = jobService.getJobById(dto.getJobId());
         Integer evaluation = dto.getEvaluation();
         job.setEvaluation(evaluation);
-        jobService.updateJob(job);
+        jobService.saveJob(job);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class JobFacadeImpl implements JobFacade {
         Job job = jobService.getJobById(dto.getJobId());
         JobStatus newStatus = dto.getNewStatus();
         job.setStatus(newStatus);
-        jobService.updateJob(job);
+        jobService.saveJob(job);
     }
 
     @Override
