@@ -52,16 +52,9 @@ public class ClientRequestFacadeTest {
 
     private ClientRequest clientRequest = new ClientRequest();
 
-    private boolean initialized = false;
-
     @Before
     public void setup(){
-        if (initialized) {
-            return;
-        }
         MockitoAnnotations.initMocks(this);
-
-        initialized = true;
     }
 
     @Test

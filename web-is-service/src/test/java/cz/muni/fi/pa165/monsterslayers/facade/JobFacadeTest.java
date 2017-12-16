@@ -50,19 +50,9 @@ public class JobFacadeTest {
     @InjectMocks
     private JobFacade jobFacade;
 
-    private boolean initialized = false;
-
     @Before
     public void setup() {
-        // this is not optimal, but junit requires from method
-        // annotated with @Before to be static
-        // possibly better solution is to use testng instead...
-        if (initialized) {
-            return;
-        }
         MockitoAnnotations.initMocks(this);
-
-        initialized = true;
     }
 
     @Test

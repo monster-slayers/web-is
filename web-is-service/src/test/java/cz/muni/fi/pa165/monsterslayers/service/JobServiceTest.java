@@ -49,16 +49,11 @@ public class JobServiceTest {
     private Job job1;
     private Job job2;
     private Collection<Job> jobs;
-    private boolean initialized = false;
 
     @Before
     public void setup(){
-        if (initialized) {
-            return;
-        }
         MockitoAnnotations.initMocks(this);
 
-        initialized = true;
         job1 = new Job();
         job1.setId(1L);
         job1.setAssignee(assignee1);

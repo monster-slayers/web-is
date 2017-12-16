@@ -51,16 +51,9 @@ public class HeroFacadeTest {
 
     private Hero hero = new Hero();
 
-    private boolean initialized = false;
-
     @Before
     public void setup(){
-        if (initialized) {
-            return;
-        }
         MockitoAnnotations.initMocks(this);
-
-        initialized = true;
     }
 
     @Test

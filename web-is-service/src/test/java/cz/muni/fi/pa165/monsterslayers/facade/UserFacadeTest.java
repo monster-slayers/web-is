@@ -56,16 +56,10 @@ public class UserFacadeTest {
     private ChangeUserImageDTO changeUserImageDTO = new ChangeUserImageDTO(1L, new byte[0], "");
 
     private User user = new User();
-    private boolean initialized = false;
 
     @Before
     public void setup(){
-        if (initialized) {
-            return;
-        }
         MockitoAnnotations.initMocks(this);
-
-        initialized = true;
     }
 
     @Test

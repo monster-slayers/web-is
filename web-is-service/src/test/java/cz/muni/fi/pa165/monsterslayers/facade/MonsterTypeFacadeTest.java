@@ -49,16 +49,9 @@ public class MonsterTypeFacadeTest {
 
     private MonsterType monsterType = new MonsterType();
 
-    private boolean initialized = false;
-
     @Before
     public void setup(){
-        if (initialized) {
-            return;
-        }
         MockitoAnnotations.initMocks(this);
-
-        initialized = true;
     }
 
     @Test

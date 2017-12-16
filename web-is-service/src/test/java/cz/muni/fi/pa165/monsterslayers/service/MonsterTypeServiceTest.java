@@ -39,16 +39,11 @@ public class MonsterTypeServiceTest {
     private MonsterType monsterType1;
     private MonsterType monsterType2;
     private Collection<MonsterType> monsterTypes;
-    private boolean initialized = false;
 
     @Before
     public void setup() {
-        if (initialized) {
-            return;
-        }
         MockitoAnnotations.initMocks(this);
 
-        initialized = true;
         monsterType1 = new MonsterType("Zombie");
         monsterType1.setId(1L);
         monsterType1.setFood("food for zombie");
