@@ -2,10 +2,9 @@ package cz.muni.fi.pa165.monsterslayers.entities;
 
 import cz.muni.fi.pa165.monsterslayers.enums.JobStatus;
 
-import java.util.Objects;
-import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * Basic entity class - Job

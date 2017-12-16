@@ -3,11 +3,11 @@ package cz.muni.fi.pa165.monsterslayers.service;
 import cz.muni.fi.pa165.monsterslayers.dao.UserRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
-import java.util.List;
-
 import cz.muni.fi.pa165.monsterslayers.exception.MonsterSlayersException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Implementation of user service interface

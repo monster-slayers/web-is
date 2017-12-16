@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.monsterslayers.service;
 
 import cz.muni.fi.pa165.monsterslayers.dao.ClientRequestRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
-import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import cz.muni.fi.pa165.monsterslayers.exception.MonsterSlayersException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

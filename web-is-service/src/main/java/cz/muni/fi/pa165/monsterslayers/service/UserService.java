@@ -1,9 +1,9 @@
 package cz.muni.fi.pa165.monsterslayers.service;
 
 import cz.muni.fi.pa165.monsterslayers.entities.User;
-import java.util.Collection;
-import java.util.List;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Interface for a service access to User entity

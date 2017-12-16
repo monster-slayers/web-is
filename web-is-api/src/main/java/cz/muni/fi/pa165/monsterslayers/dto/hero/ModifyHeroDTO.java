@@ -1,8 +1,10 @@
 package cz.muni.fi.pa165.monsterslayers.dto.hero;
+
 import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
+
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
-import javax.validation.constraints.Size;
 /**
  * Data transfer object for modification of some hero's properties
  *
@@ -10,10 +12,10 @@ import javax.validation.constraints.Size;
  */
 public class ModifyHeroDTO {
     private Long heroId;
-    
+
     @Size(min = 4, max = 32)
     private String newHeroName;
-    
+
     @Size(min = 1)
     private Collection<PowerElement> newElements = new HashSet<>();
 
@@ -40,6 +42,6 @@ public class ModifyHeroDTO {
     public void setNewElements(Collection<PowerElement> newElements) {
         this.newElements = newElements;
     }
-    
-    
+
+
 }

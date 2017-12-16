@@ -1,9 +1,9 @@
 package cz.muni.fi.pa165.monsterslayers.sample_data;
 
 import cz.muni.fi.pa165.monsterslayers.entities.*;
+import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
-import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 import cz.muni.fi.pa165.monsterslayers.service.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

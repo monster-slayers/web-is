@@ -4,7 +4,6 @@ import cz.muni.fi.pa165.monsterslayers.dto.user.ChangeUserImageDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.user.UserDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.user.UserLoginDTO;
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
-import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 
 import java.util.Collection;
 

@@ -1,11 +1,13 @@
 package cz.muni.fi.pa165.monsterslayers.service;
 
-import java.util.*;
-
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import org.dozer.Mapper;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Implementation of bean mapping service using Dozer framework.

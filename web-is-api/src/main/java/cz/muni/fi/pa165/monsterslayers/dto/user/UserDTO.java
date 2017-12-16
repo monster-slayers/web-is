@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.monsterslayers.dto.user;
 
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
-import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
+
 import java.util.Objects;
 
 /**

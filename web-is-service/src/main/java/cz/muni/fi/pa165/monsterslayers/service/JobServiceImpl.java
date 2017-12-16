@@ -5,9 +5,9 @@ import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.Job;
 import cz.muni.fi.pa165.monsterslayers.exception.MonsterSlayersException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import org.springframework.stereotype.Service;
 
 /**
  * Job service implementation.

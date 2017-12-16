@@ -4,7 +4,6 @@ import cz.muni.fi.pa165.monsterslayers.dto.hero.CreateHeroDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.hero.ModifyHeroDTO;
 import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
-import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 import cz.muni.fi.pa165.monsterslayers.facade.HeroFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

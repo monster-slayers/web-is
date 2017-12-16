@@ -1,11 +1,8 @@
 package cz.muni.fi.pa165.monsterslayers.dto.clientrequest;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * DTO for modification of some properties of client request
@@ -14,7 +11,7 @@ import java.util.Map;
  */
 public class ModifyClientRequestDTO {
     private Long clientRequestId;
-    
+
     @Size(min = 4, max = 64)
     private String title;
 
@@ -34,7 +31,7 @@ public class ModifyClientRequestDTO {
     public void setClientRequestId(Long clientRequestId) {
         this.clientRequestId = clientRequestId;
     }
-    
+
     public String getTitle() {
         return title;
     }

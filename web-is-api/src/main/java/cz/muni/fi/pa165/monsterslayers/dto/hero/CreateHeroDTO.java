@@ -1,10 +1,11 @@
 package cz.muni.fi.pa165.monsterslayers.dto.hero;
 
 import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
-import java.util.Collection;
-import java.util.HashSet;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Collection;
+import java.util.HashSet;
 /**
  * Data transfer object for creating hero to specified user.
  *
@@ -48,7 +49,7 @@ public class CreateHeroDTO {
     public void setElements(Collection<PowerElement> elements) {
         this.elements = elements;
     }
-    
+
     public void addElement(PowerElement element) {
         this.elements.add(element);
     }

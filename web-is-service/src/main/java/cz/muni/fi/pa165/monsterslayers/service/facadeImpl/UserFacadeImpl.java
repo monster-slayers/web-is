@@ -5,15 +5,15 @@ import cz.muni.fi.pa165.monsterslayers.dto.user.UserDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.user.UserLoginDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.User;
 import cz.muni.fi.pa165.monsterslayers.enums.RightsLevel;
-import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 import cz.muni.fi.pa165.monsterslayers.facade.UserFacade;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
 import cz.muni.fi.pa165.monsterslayers.service.PasswordService;
 import cz.muni.fi.pa165.monsterslayers.service.UserService;
-import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
 
 /**
  * Implementation of user facade interface.
