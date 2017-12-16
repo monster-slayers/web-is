@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.monsterslayers.dto.hero.CreateHeroDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.hero.ModifyHeroDTO;
 import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
+import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 import cz.muni.fi.pa165.monsterslayers.facade.HeroFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import java.util.List;
 
 /**
  * Rest controller for Hero
- * 
+ *
  * @author Tomáš Richter
  */
 @RestController
@@ -39,7 +40,7 @@ public class HeroController {
         createHeroDTO.setElements(elements);
         heroFacade.createHero(createHeroDTO);
     }
-    
+
     @PutMapping(value = "/modify/{heroId}/{heroName}/{elements}")
     private void modifyHero(@PathVariable("heroId") Long heroId, @PathVariable("heroName") String heroName, @PathVariable("elements") List<PowerElement> elements) {
         ModifyHeroDTO modifyHeroDTO = new ModifyHeroDTO();

@@ -53,7 +53,7 @@ public class UserFacadeTest {
 
     private UserDTO userDTO = new UserDTO();
 
-    private ChangeUserImageDTO changeUserImageDTO = new ChangeUserImageDTO(1L, new byte[0], "");
+    private ChangeUserImageDTO changeUserImageDTO = new ChangeUserImageDTO();
 
     private User user = new User();
 
@@ -168,7 +168,7 @@ public class UserFacadeTest {
         Assert.assertTrue(userFacade.hasManagerRights(userDTO));
         verify(userService).hasManagerRights(user);
     }
-    
+
     @Test
     public void testHasHeroRights() {
         when(userService.hasHeroRights(user)).thenReturn(true);
