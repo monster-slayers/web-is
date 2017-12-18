@@ -2,7 +2,7 @@
 
 <table class="table table-stripped" id="table-data-view">
         <tr><th></th><th>ID</th><th>Client Request</th><th>Hero</th><th>Status</th><th>Evaluation</th><th></th></tr>
-    <tr ng-repeat-start="job in jobs">
+    <tr ng-repeat-start="job in jobs" ng-if="atleastManager() || (atleastHero() && job.assignee.user.email === loggedUser.email) || (job.clientRequest.client.email === loggedUser.email)">
         <td>
             <a href
                class="glyphicon dropdown-link"
@@ -23,7 +23,7 @@
             </span>
         </td>
         <td>
-            <div class="dropdown" style="display: inline;" ng-if="job.status === 'On Mission' || job.status === 'Assigned'">
+            <div class="dropdown" style="display: inline;" ng-if="(job.status === 'On Mission' || job.status === 'Assigned') && atleastManager()">
                 <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
                     Change status to...
                     <span class="caret"></span>

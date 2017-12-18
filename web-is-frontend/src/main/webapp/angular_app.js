@@ -185,10 +185,19 @@ monsterSlayerApp.run(function($rootScope, $http, $location, UserProfile){
     });
 
     $rootScope.loggedIn = false;
-    $rootScope.user = null;
+    $rootScope.loggedUser = null;
+    
+    $rootScope.atleastHero = function() {
+        return _.includes($rootScope.loggedUser.roles,"HERO") || $rootScope.atleastManager();
+    };
+    
+    $rootScope.atleastManager = function() {
+        console.log($rootScope.loggedUser);
+        return _.includes($rootScope.loggedUser.roles,"MANAGER") ;
+    };
 
     UserProfile.then(function(profile){
-       $rootScope.user = profile;
+       $rootScope.loggedUser = profile;
        $rootScope.loggedIn = profile.email !== null;
     });
 });

@@ -18,12 +18,12 @@
             </div>
         </td>
         <td>
-            <button class="btn btn-primary btn-sm" ng-click="modifyMonsterStart(monsterType)">Modify</button>
+            <button class="btn btn-primary btn-sm" ng-click="modifyMonsterStart(monsterType)" ng-if="atleastManager()">Modify</button>
         </td>
     </tr>
 </table>
 <br/>
-<button class="btn btn-primary btn-sm" ng-click="createMonsterStart()">Create</button>
+<button class="btn btn-primary btn-sm" ng-click="createMonsterStart()" ng-if="atleastManager()">Create</button>
 <br/>
 
 
