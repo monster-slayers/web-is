@@ -24,6 +24,7 @@
     <script src="${pageContext.request.contextPath}/controllers/user-detail.js"></script>
     <script src="${pageContext.request.contextPath}/controllers/client-request.js"></script>
     <script src="${pageContext.request.contextPath}/controllers/job.js"></script>
+    <script src="${pageContext.request.contextPath}/controllers/login.js"></script>
 </head>
 <body ng-controller="MainCtrl">
 <nav class="navbar navbar-default">
@@ -48,21 +49,25 @@
                 <li ng-class="userActive"><a href="#!/user">Users</a></li>
                 <li ng-class="heroActive"><a href="#!/hero">Heroes</a></li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-if="!loggedIn"><a href="#!/login">Login</a></li>
+                <li ng-if="loggedIn"><a href ng-click="logout()">Logout</a></li>
+            </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
 
 <div class="container">
     <div>
-        <div ng-show="errorAlert" class="alert alert-danger alert-dismissible" role="alert">
+        <div ng-show="errorAlert" ng-cloak class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" aria-label="Close" ng-click="hideErrorAlert()"> <span aria-hidden="true">&times;</span></button>
             <strong>Error!</strong> <span>{{errorAlert}}</span>
         </div>
-        <div ng-show="successAlert" class="alert alert-success alert-dismissible" role="alert">
+        <div ng-show="successAlert" ng-cloak class="alert alert-success alert-dismissible" role="alert">
             <button type="button" class="close" aria-label="Close" ng-click="hideSuccessAlert()"> <span aria-hidden="true">&times;</span></button>
             <strong>Success!</strong> <span>{{successAlert}}</span>
         </div>
-        
+
         <div ng-view></div>
     </div>
 </div>

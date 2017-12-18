@@ -67,7 +67,7 @@ public interface UserFacade {
      * @return true if user has manager rights, false otherwise
      */
     boolean hasManagerRights(UserDTO userDTO);
-    
+
     /**
      * Checks if user has atleast hero rights
      *

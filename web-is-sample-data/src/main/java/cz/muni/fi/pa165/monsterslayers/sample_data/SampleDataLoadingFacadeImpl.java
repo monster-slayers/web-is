@@ -33,7 +33,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
     @Autowired
     private HeroService heroService;
-    
+
     public static final String PNG = "image/png";
 
     @Autowired
@@ -49,6 +49,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         User andrew = user("andrew", "andrew@mail.hero", "thechosenone", RightsLevel.HERO, "default.png" ,PNG);
         User michael = user("michael", "pesfili@amail.org", "daddy", RightsLevel.MANAGER, "default.png" ,PNG);
         User trevor = user("trevor", "killer@mail.hero", "ihatemichael", RightsLevel.HERO, "default.png" ,PNG);
+        User test = user("test", "a@a.a", "test", RightsLevel.CLIENT, "default.png", PNG);
 
         List<PowerElement> guitarCrusherEles = new ArrayList<>();
         guitarCrusherEles.add(PowerElement.FIRE);
@@ -141,7 +142,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         try {
             user.setImage(readImage(imageFile));
             user.setImageMimeType(mimeType);
-        } catch (IOException ex) {     
+        } catch (IOException ex) {
         }
         return userService.findUserById(userService.saveUser(user));
     }
@@ -169,7 +170,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         return monsterTypeService.findById(monsterTypeService.save(monsterType));
     }
-    
+
     private byte[] readImage(String file) throws IOException {
         try (InputStream is = this.getClass().getResourceAsStream("/" + file)) {
             int nRead;
