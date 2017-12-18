@@ -10,7 +10,7 @@
         <th>Reward</th>
         <th></th>
     </tr>
-    <tr ng-repeat-start="clientRequest in clientRequests">
+    <tr ng-repeat-start="clientRequest in clientRequests" ng-if="clientRequest.client.id == loggedUser.id || atleastManager() || _.includes(clientRequest.heroes, loggedHero.id)">
         <td>
             <a href
                class="glyphicon dropdown-link"

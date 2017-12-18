@@ -8,6 +8,11 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * Custom serializer for map objects.
+ *
+ * @author Ondrej Budai
+ */
 public class CustomMapSerializer extends JsonSerializer<Map> {
 
     @Override

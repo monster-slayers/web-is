@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.monsterslayers.frontend.controllers;
 
-import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.jobs.CreateJobDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.jobs.EvaluateJobDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.jobs.JobDTO;
@@ -12,6 +11,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
+/**
+ * Job Controller
+ *
+ * @author Ondrej Budai
+ */
 @RestController
 @RequestMapping("/job")
 public class JobController {
