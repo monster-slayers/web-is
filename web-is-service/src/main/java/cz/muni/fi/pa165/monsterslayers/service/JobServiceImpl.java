@@ -72,9 +72,4 @@ public class JobServiceImpl implements JobService {
             );
         }
     }
-
-    @Override
-    public Job getJobByClientRequest(ClientRequest clientRequest) {
-        return repository.findByClientRequest(clientRequest);
-    }
 }

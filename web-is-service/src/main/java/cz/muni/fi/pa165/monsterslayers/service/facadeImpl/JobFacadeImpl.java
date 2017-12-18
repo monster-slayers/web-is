@@ -1,8 +1,6 @@
 package cz.muni.fi.pa165.monsterslayers.service.facadeImpl;
 
-import cz.muni.fi.pa165.monsterslayers.dto.clientrequest.ClientRequestDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.jobs.*;
-import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.Job;
 import cz.muni.fi.pa165.monsterslayers.enums.JobStatus;
@@ -86,12 +84,5 @@ public class JobFacadeImpl implements JobFacade {
         JobStatus newStatus = dto.getNewStatus();
         job.setStatus(newStatus);
         jobService.saveJob(job);
-    }
-
-    @Override
-    public JobDTO getByClientRequestId(Long id) {
-        ClientRequest clientRequest = clientRequestService.findClientRequestById(id);
-        Job job = jobService.getJobByClientRequest(clientRequest);
-        return job != null ? mappingService.mapTo(jobService.getJobByClientRequest(clientRequest), JobDTO.class) : null;
     }
 }

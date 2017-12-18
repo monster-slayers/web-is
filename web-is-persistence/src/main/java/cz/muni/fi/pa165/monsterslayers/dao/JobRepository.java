@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.monsterslayers.dao;
 
-import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.Job;
 import org.springframework.data.repository.CrudRepository;
@@ -21,12 +20,4 @@ public interface JobRepository extends CrudRepository<Job, Long> {
      * @return instance of type Job that is
      */
     Collection<Job> findAllByAssignee(Hero assignee);
-
-    /**
-     * Finds Job by given ClientRequest.
-     *
-     * @param clientRequest instance of type ClientRequest
-     * @return instance of type Job that has given ClientRequest
-     */
-    Job findByClientRequest(ClientRequest clientRequest);
 }

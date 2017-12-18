@@ -24,7 +24,7 @@
         <td>{{clientRequest.reward}}</td>
         <td>
             <button class="btn btn-default btn-sm" ng-click="modifyClientRequestStart(clientRequest)">Modify</button>
-            <button class="btn btn-primary btn-sm" ng-click="createJobStart(clientRequest)">Create Job</button>
+            <button class="btn btn-primary btn-sm" ng-disabled="clientRequest.jobExists" ng-click="createJobStart(clientRequest)">Create Job</button>
         </td>
     </tr>
     <tr ng-repeat-end
