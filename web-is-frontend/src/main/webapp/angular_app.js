@@ -4,6 +4,13 @@
 
 window.monsterSlayerApp = angular.module('monsterSlayerApp', ['ngRoute']);
 
+
+monsterSlayerApp.filter('capitalize', function() {
+    return function(input) {
+      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+    }
+});
+
 monsterSlayerApp.config(function($routeProvider, $httpProvider){
     $routeProvider
         .when("/monster-type",
@@ -11,7 +18,7 @@ monsterSlayerApp.config(function($routeProvider, $httpProvider){
                 templateUrl: 'partials/monster-type.html',
                 controller: 'MonsterTypeCtrl',
                 resolve: {
-                    access: function(Access){return Access.hasRole("CLIENT");}
+                    access: function(Access){return Access.hasOneOfRole(["HERO", "MANAGER"]);}
                 }
             })
         .when("/client-request",
@@ -19,7 +26,7 @@ monsterSlayerApp.config(function($routeProvider, $httpProvider){
                 templateUrl: 'partials/client-request.html',
                 controller: 'ClientRequestCtrl',
                 resolve: {
-                    access: function(Access){return Access.hasRole("CLIENT");}
+                    access: function(Access){return Access.isLoggedIn();}
                 }
             })
         .when("/job",
@@ -27,7 +34,7 @@ monsterSlayerApp.config(function($routeProvider, $httpProvider){
                 templateUrl: 'partials/job.html',
                 controller: 'JobCtrl',
                 resolve: {
-                    access: function(Access){return Access.hasRole("CLIENT");}
+                    access: function(Access){return Access.isLoggedIn();}
                 }
             })
         .when("/user",
@@ -35,7 +42,7 @@ monsterSlayerApp.config(function($routeProvider, $httpProvider){
                 templateUrl: 'partials/user.html',
                 controller: 'UserCtrl',
                 resolve: {
-                    access: function(Access){return Access.hasRole("CLIENT");}
+                    access: function(Access){return Access.hasOneOfRole(["MANAGER"]);}
                 }
             })
         .when("/user/detail/:id*",
@@ -43,7 +50,7 @@ monsterSlayerApp.config(function($routeProvider, $httpProvider){
                 templateUrl: 'partials/user-detail.html',
                 controller: 'UserDetailCtrl',
                 resolve: {
-                    access: function(Access){return Access.hasRole("CLIENT");}
+                    access: function(Access){return Access.hasOneOfRole(["HERO", "MANAGER"]);}
                 }
             })
         .when("/hero",
@@ -51,7 +58,7 @@ monsterSlayerApp.config(function($routeProvider, $httpProvider){
                 templateUrl: 'partials/hero.html',
                 controller: 'HeroCtrl',
                 resolve: {
-                    access: function(Access){return Access.hasRole("CLIENT");}
+                    access: function(Access){return Access.hasOneOfRole(["HERO"]);}
                 }
             })
         .when("/login",
@@ -66,7 +73,7 @@ monsterSlayerApp.config(function($routeProvider, $httpProvider){
             {
                 template: "Welcome to Monster slayers' web IS!",
                 resolve: {
-                    access: function(Access){return Access.hasRole("CLIENT");}
+                    access: function(Access){return Access.isLoggedIn();}
                 }
             });
 
@@ -92,10 +99,21 @@ monsterSlayerApp.factory('Access', function(UserProfile, $q){
     var Access = {
         hasRole: function(role){
             return UserProfile.then(function(profile){
-                if(profile.email === null){
+                if(profile === ""){
                     return $q.reject("authentication");
                 }
-                if(!_.includes(profile.roles, role)) {
+                if(profile.rightsLevel !== role) {
+                    return $q.reject("authorization");
+                }
+                return true;
+            });
+        },
+        hasOneOfRole: function(roles){
+            return UserProfile.then(function(profile){
+                if(profile === ""){
+                    return $q.reject("authentication");
+                }
+                if(!_.includes(roles, profile.rightsLevel)) {
                     return $q.reject("authorization");
                 }
                 return true;
@@ -103,7 +121,16 @@ monsterSlayerApp.factory('Access', function(UserProfile, $q){
         },
         isNotLoggedIn: function(){
             return UserProfile.then(function(profile){
-                if(profile.email !== null){
+                if(profile !== ""){
+                    return $q.reject("not-authentication");
+                }
+
+                return true;
+            });
+        },
+        isLoggedIn: function(){
+            return UserProfile.then(function(profile){
+                if(profile === ""){
                     return $q.reject("not-authentication");
                 }
 
@@ -186,19 +213,28 @@ monsterSlayerApp.run(function($rootScope, $http, $location, UserProfile){
 
     $rootScope.loggedIn = false;
     $rootScope.loggedUser = null;
-    
+
     $rootScope.atleastHero = function() {
-        return _.includes($rootScope.loggedUser.roles,"HERO") || $rootScope.atleastManager();
+        return $rootScope.loggedIn && ($rootScope.loggedUser.rightsLevel === "HERO" || $rootScope.atleastManager());
     };
-    
+
     $rootScope.atleastManager = function() {
-        console.log($rootScope.loggedUser);
-        return _.includes($rootScope.loggedUser.roles,"MANAGER") ;
+        return $rootScope.loggedIn && $rootScope.loggedUser.rightsLevel === "MANAGER";
+    };
+
+    $rootScope.userLoggedIn = function(){
+        return !!$rootScope.loggedIn;
     };
 
     UserProfile.then(function(profile){
        $rootScope.loggedUser = profile;
-       $rootScope.loggedIn = profile.email !== null;
+       $rootScope.loggedIn = profile !== "";
+       if($rootScope.loggedIn){
+           $http.get("/pa165/rest/hero/get-by-user-id/" + $rootScope.loggedUser.id)
+               .then(function(data){
+               $rootScope.loggedHero = data.data;
+           });
+       }
     });
 });
 

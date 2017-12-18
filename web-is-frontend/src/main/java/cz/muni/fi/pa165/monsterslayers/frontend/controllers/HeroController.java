@@ -6,6 +6,7 @@ import cz.muni.fi.pa165.monsterslayers.dto.hero.ModifyHeroDTO;
 import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 import cz.muni.fi.pa165.monsterslayers.facade.HeroFacade;
+import cz.muni.fi.pa165.monsterslayers.facade.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,5 +49,10 @@ public class HeroController {
     @PutMapping(value = "/change-status/{id}/{status}")
     private void changeStatus(@PathVariable("id") Long id, @PathVariable("status") HeroStatus userStatus){
         heroFacade.changeStatus(id, userStatus);
+    }
+
+    @GetMapping(value = "/get-by-user-id/{id}")
+    private HeroDTO getHeroByUserId(@PathVariable("id") Long userId){
+        return heroFacade.getHeroByUserId(userId);
     }
 }
