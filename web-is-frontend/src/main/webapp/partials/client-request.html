@@ -102,7 +102,7 @@
                     </table>
                     <br/>
                     <label>Reward</label>
-                    <input type="number" class="form-control" ng-model="reward" name="reward" required>
+                    <input type="number" class="form-control" ng-model="reward" name="reward" min="100" required>
                     <span class="help-block" ng-if="!createClientRequestForm.name.$valid && createClientRequest.name.$dirty">You must insert valid reward.</span>
                     <br/>
                 </div>
@@ -157,7 +157,7 @@
                     </table>
                     <br/>
                     <label>Reward</label>
-                    <input type="number" class="form-control" ng-model="reward" name="reward" required>
+                    <input type="number" class="form-control" ng-model="reward" name="reward" min="100" required>
                     <span class="help-block" ng-if="!modifyClientRequestForm.name.$valid && modifyClientRequestForm.name.$dirty">You must insert valid reward.</span>
                     <br/>
                 </div>
