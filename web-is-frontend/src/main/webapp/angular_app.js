@@ -50,7 +50,7 @@ monsterSlayerApp.config(function($routeProvider, $httpProvider){
                 templateUrl: 'partials/user-detail.html',
                 controller: 'UserDetailCtrl',
                 resolve: {
-                    access: function(Access){return Access.hasOneOfRole(["HERO", "MANAGER"]);}
+                    access: function(Access){return Access.isLoggedIn();}
                 }
             })
         .when("/hero",
