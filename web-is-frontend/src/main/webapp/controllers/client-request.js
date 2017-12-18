@@ -1,10 +1,24 @@
 monsterSlayerApp.controller('ClientRequestCtrl', function ($scope, $http) {
     var update = function(){
         $http.get('/pa165/rest/client-request').then(function(response){
-            $scope.clientRequests = response.data;
+            var clientRequests = response.data;
+            $http.get('/pa165/rest/job').then(function(response){
+                var jobs = response.data;
+                _.forEach(clientRequests, function(c){
+                    c.jobExists = false;
+                });
+                _.forEach(jobs, function(job){
+                    var cId = job.clientRequest.id;
+                    var c = _.find(clientRequests, function(cc){
+                        return cc.id === cId;
+                    });
+
+                    c.jobExists = true;
+                });
+                $scope.clientRequests = clientRequests;
+            });
         }, function(){
-            //TODO
-            console.log('error');
+            $rootScope.errorAlert = "Cannot load client requests";
         });
     };
 

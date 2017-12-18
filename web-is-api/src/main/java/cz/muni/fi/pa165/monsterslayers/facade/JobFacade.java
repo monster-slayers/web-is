@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.monsterslayers.facade;
 
-import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.jobs.*;
 
 import java.util.Collection;
@@ -62,6 +61,4 @@ public interface JobFacade {
      * @param dto {@link UpdateJobStatusDTO} with respective data
      */
     void updateJobStatusDto(UpdateJobStatusDTO dto);
-
-    JobDTO getByClientRequestId(Long id);
 }

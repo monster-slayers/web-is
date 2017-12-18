@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.monsterslayers.service;
 
-import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.Job;
 
@@ -42,6 +41,4 @@ public interface JobService {
      * @return id of created entity
      */
     Long saveJob(Job job);
-
-    Job getJobByClientRequest(ClientRequest clientRequest);
 }

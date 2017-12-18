@@ -24,11 +24,6 @@ public class ClientRequestController {
         return facade.getAllClientRequests();
     }
 
-    @GetMapping(value = "/{id}/job")
-    JobDTO getJobByClientRequest(@PathVariable Long id) {
-        return jobFacade.getByClientRequestId(id);
-    }
-
     @GetMapping(value = "/suggested-hero/{id}")
     HeroDTO getSuggestedHero(@PathVariable Long id) {
         return facade.getBestHeroForClientRequest(id);

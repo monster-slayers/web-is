@@ -4,7 +4,6 @@ import cz.muni.fi.pa165.monsterslayers.dto.clientrequest.ClientRequestDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.clientrequest.CreateClientRequestDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.clientrequest.ModifyClientRequestDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
-import cz.muni.fi.pa165.monsterslayers.dto.jobs.JobDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
