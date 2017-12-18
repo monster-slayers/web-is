@@ -16,13 +16,12 @@ angular.module("monsterSlayerApp").directive("ngUploadChange",function(){
     };
 });
 
-monsterSlayerApp.controller('UserDetailCtrl', function ($location, $scope, $http) {
+monsterSlayerApp.controller('UserDetailCtrl', function ($location, $rootScope, $scope, $http) {
     var update = function(){
         $http.get("/pa165/rest" + $location.path()).then(function(response){
             $scope.user = response.data;
         }, function(){
-            //TODO
-            console.log('error');
+            $rootScope.errorAlert = "Cannot load user detail page";
         });
     };
     
@@ -55,12 +54,17 @@ monsterSlayerApp.controller('UserDetailCtrl', function ($location, $scope, $http
             image: image,
             imageMimeType: mimeType
         };
+        if (!mimeType.startsWith("image/")) {
+            $rootScope.errorAlert = "You can upload only image files";
+            update();
+            return;
+        }
         $http.put('/pa165/rest/user/modify-image', data)
             .then(function(){
                 update();
+                $rootScope.successAlert = "Modified profile image of " + user.name;
             },function(){
-                //TODO
-                console.log("error");
+                $rootScope.errorAlert = "Cannot modify profile image of " + user.name;
             });
     };
 });
