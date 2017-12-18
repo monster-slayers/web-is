@@ -1,24 +1,21 @@
 package cz.muni.fi.pa165.monsterslayers.service.facadeImpl;
 
-import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.clientrequest.ClientRequestDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.jobs.*;
+import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.Job;
-import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import cz.muni.fi.pa165.monsterslayers.enums.JobStatus;
 import cz.muni.fi.pa165.monsterslayers.facade.JobFacade;
+import cz.muni.fi.pa165.monsterslayers.service.ClientRequestService;
 import cz.muni.fi.pa165.monsterslayers.service.HeroService;
 import cz.muni.fi.pa165.monsterslayers.service.JobService;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
-import cz.muni.fi.pa165.monsterslayers.service.utils.PowerElementsMatch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Implementation of the facade layer for Jobs.
@@ -34,6 +31,8 @@ public class JobFacadeImpl implements JobFacade {
     private JobService jobService;
     @Autowired
     private HeroService heroService;
+    @Autowired
+    private ClientRequestService clientRequestService;
     @Autowired
     private MappingService mappingService;
 
@@ -59,7 +58,10 @@ public class JobFacadeImpl implements JobFacade {
 
     @Override
     public Long createJob(CreateJobDTO dto) {
-        return jobService.saveJob(mappingService.mapTo(dto, Job.class));
+        Job job = new Job();
+        job.setClientRequest(clientRequestService.findClientRequestById(dto.getClientRequestId()));
+        job.setAssignee(heroService.findHeroById(dto.getHeroId()));
+        return jobService.saveJob(job);
     }
 
     @Override
@@ -87,31 +89,9 @@ public class JobFacadeImpl implements JobFacade {
     }
 
     @Override
-    public HeroDTO getBestHeroForJob(Long jobId) {
-        Job job = jobService.getJobById(jobId);
-
-        Map<MonsterType, Integer> killList = job.getClientRequest().getKillList();
-
-        PowerElementsMatch bestMatch = new PowerElementsMatch(0, Integer.MAX_VALUE);
-        Hero bestHero = new Hero();
-
-        for (Hero hero : heroService.getAllHeroes()) {
-            List<PowerElementsMatch> matches = new ArrayList<>();
-            for (Map.Entry<MonsterType, Integer> entry : killList.entrySet()) {
-                MonsterType monsterType = entry.getKey();
-                matches.add(
-                        heroService.countHeroSuitabilityAgainstMonsterType(hero, monsterType)
-                                .multiplyByMonsterCount(entry.getValue())
-                );
-            }
-
-            PowerElementsMatch match = PowerElementsMatch.sumMatches(matches);
-            if (match.isMoreSuitable(bestMatch)) {
-                bestMatch = match;
-                bestHero = hero;
-            }
-        }
-
-        return mappingService.mapTo(bestHero, HeroDTO.class);
+    public JobDTO getByClientRequestId(Long id) {
+        ClientRequest clientRequest = clientRequestService.findClientRequestById(id);
+        Job job = jobService.getJobByClientRequest(clientRequest);
+        return job != null ? mappingService.mapTo(jobService.getJobByClientRequest(clientRequest), JobDTO.class) : null;
     }
 }

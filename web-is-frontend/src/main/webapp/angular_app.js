@@ -185,9 +185,6 @@ monsterSlayerApp.controller('MainCtrl', function($scope, $location, $http, $wind
     };
 });
 
-monsterSlayerApp.controller('ClientRequestCtrl', function () {
-});
-
 // add lodash to root scope
 monsterSlayerApp.run(function($rootScope, $http, $location, UserProfile){
     $rootScope._ = _;

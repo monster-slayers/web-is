@@ -1,1 +1,197 @@
-Client Requests
+<h2>Client Requests</h2>
+
+<table class="table table-stripped" id="table-data-view">
+    <tr>
+        <th></th>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Client</th>
+        <th>Location</th>
+        <th>Reward</th>
+        <th></th>
+    </tr>
+    <tr ng-repeat-start="clientRequest in clientRequests">
+        <td>
+            <a href
+               class="glyphicon dropdown-link"
+               ng-class="{'glyphicon-chevron-down':clientRequest.editable,'glyphicon-chevron-right':!clientRequest.editable}"
+               ng-click="clientRequest.editable = !clientRequest.editable"></a>
+        </td>
+        <td>{{clientRequest.id}}</td>
+        <td>{{clientRequest.title}}</td>
+        <td>{{clientRequest.client.name}}</td>
+        <td>{{clientRequest.location}}</td>
+        <td>{{clientRequest.reward}}</td>
+        <td>
+            <button class="btn btn-default btn-sm" ng-click="modifyClientRequestStart(clientRequest)">Modify</button>
+            <button class="btn btn-primary btn-sm" ng-click="createJobStart(clientRequest)">Create Job</button>
+        </td>
+    </tr>
+    <tr ng-repeat-end
+        ng-class="{'show-animate':clientRequest.editable,'hidden-animate':!clientRequest.editable}"
+        class="animate-if">
+        <td></td>
+        <td colspan="5">
+            <div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Details about {{clientRequest.title}}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr><th>Location</th><td>{{clientRequest.location}}</td></tr>
+                            <tr><th>Description</th><td>{{clientRequest.description}}</td></tr>
+                            <tr><th>Reward</th><td>{{clientRequest.reward}}</td></tr>
+                        </table>
+                        <h4>Kill List</h4>
+                        <table class="table">
+                            <tr ng-repeat="kill in clientRequest.killList">
+                                <td>{{kill.key.name}}</td><td>{{kill.value}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </td>
+        <td></td>
+    </tr>
+</table>
+<br/>
+<button class="btn btn-primary btn-sm" ng-click="createClientRequestStart()">Create</button>
+
+<div class="modal" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Create new Client Request</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" ng-class="{'has-error': !createClientRequestForm.$valid && createClientRequest.$dirty}" ng-form name="createClientRequestForm">
+                    <label>Title</label>
+                    <input type="text" class="form-control" ng-model="title" name="title" required ng-minlength="4" ng-maxlength="64">
+                    <span class="help-block" ng-if="!createClientRequestForm.title.$valid && createClientRequestForm.title.$dirty">Insert some title (between 4 and 64 characters long).</span>
+                    <br/>
+                    <label>Description</label>
+                    <input type="text" class="form-control" ng-model="description" name="description" required ng-minlength="4" ng-maxlength="256">
+                    <span class="help-block" ng-if="!createClientRequestForm.description.$valid && createClientRequestForm.description.$dirty">Insert some description (between 4 and 256 characters long).</span>
+                    <br/>
+                    <label>Location</label>
+                    <input type="text" class="form-control" ng-model="location" name="location" required ng-minlength="4" ng-maxlength="64">
+                    <span class="help-block" ng-if="!createClientRequestForm.location.$valid && createClientRequestForm.location.$dirty">Insert some location (between 4 and 64 characters long).</span>
+                    <br/>
+                    <label>Requested by</label>
+                    <select class="form-control" ng-model="clientUserId" ng-options="user.id as user.name for user in users" name="clientSelect" required></select>
+                    <span class="help-block" ng-if="!createClientRequestForm.clientUserId.$valid && createClientRequestForm.clientUserId.$dirty">Select one user.</span>
+                    <br/>
+                    <label>Kill List</label>
+                    <table class="table table-stripped">
+                        <tr ng-repeat="entry in killList track by $index">
+                            <td>
+                                <select class="form-control" ng-model="entry.key" ng-options="monster.id as monster.name for monster in monsterTypes" name="monsterSelect" required></select>
+                            </td>
+                            <td width="20%"><input type="number" min="1" class="form-control"  placeholder="#" ng-model="entry.value" required/></td>
+                            <td width="10%"><button class="btn btn-danger" ng-disabled="!$index" ng-click="removeKillListEntry($index)">&times;</button></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <span class="help-block" ng-if="!createClientRequestForm.$valid && createClientRequestForm.$dirty">At least 1 entry in kill list is needed. Remove redundant rows.</span>
+                                <button class="btn btn-primary" ng-click="addKillListEntry()">Add Monster Type</button>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <label>Reward</label>
+                    <input type="number" class="form-control" ng-model="reward" name="reward" required>
+                    <span class="help-block" ng-if="!createClientRequestForm.name.$valid && createClientRequest.name.$dirty">You must insert valid reward.</span>
+                    <br/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" ng-click="createClientRequestSubmit()" ng-disabled="!createClientRequestForm.$valid">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabelModify">Modify request {{currentRequest.title}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" ng-class="{'has-error': !modifyClientRequestForm.$valid && modifyClientRequestForm.$dirty}" ng-form name="modifyClientRequestForm">
+                    <label>Title</label>
+                    <input type="text" class="form-control" ng-model="title" name="title" required ng-minlength="4" ng-maxlength="64">
+                    <span class="help-block" ng-if="!modifyClientRequestForm.title.$valid && modifyClientRequestForm.title.$dirty">Insert some title (between 4 and 64 characters long).</span>
+                    <br/>
+                    <label>Description</label>
+                    <input type="text" class="form-control" ng-model="description" name="description" required ng-minlength="4" ng-maxlength="256">
+                    <span class="help-block" ng-if="!modifyClientRequestForm.description.$valid && modifyClientRequestForm.description.$dirty">Insert some description (between 4 and 256 characters long).</span>
+                    <br/>
+                    <label>Location</label>
+                    <input type="text" class="form-control" ng-model="location" name="location" required ng-minlength="4" ng-maxlength="64">
+                    <span class="help-block" ng-if="!modifyClientRequestForm.location.$valid && modifyClientRequestForm.location.$dirty">Insert some location (between 4 and 64 characters long).</span>
+                    <br/>
+                    <label>Requested by</label>
+                    <select class="form-control" ng-model="clientUserId" ng-options="user.id as user.name for user in users" name="clientSelect" disabled></select>
+                    <br/>
+                    <label>Kill List</label>
+                    <table class="table table-stripped">
+                        <tr ng-repeat="entry in killList track by $index">
+                            <td>
+                                <select class="form-control" ng-model="entry.key" ng-options="monster.id as monster.name for monster in monsterTypes" name="monsterSelect" required></select>
+                            </td>
+                            <td width="20%"><input type="number" min="1" class="form-control"  placeholder="#" ng-model="entry.value" required/></td>
+                            <td width="10%"><button class="btn btn-danger" ng-disabled="!$index" ng-click="removeKillListEntry($index)">&times;</button></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <span class="help-block" ng-if="!modifyClientRequestForm.$valid && modifyClientRequestForm.$dirty">At least 1 entry in kill list is needed. Remove redundant rows.</span>
+                                <button class="btn btn-primary" ng-click="addKillListEntry()">Add Monster Type</button>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <label>Reward</label>
+                    <input type="number" class="form-control" ng-model="reward" name="reward" required>
+                    <span class="help-block" ng-if="!modifyClientRequestForm.name.$valid && modifyClientRequestForm.name.$dirty">You must insert valid reward.</span>
+                    <br/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" ng-click="modifyClientRequestSubmit()" ng-disabled="!modifyClientRequestForm.$valid">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="createJobModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabelCreateJob">Create job from client request titled "{{currentRequest.title}}"</h4>
+            </div>
+            <div class="modal-body">
+                <span class="help-block">You can create job from a client request simply by assigning it to a hero.</span>
+                <div class="form-group" ng-class="{'has-error': !createJobForm.$valid && createJobForm.$dirty}" ng-form name="createJobForm">
+                    <label style="width: 100%">Suggested Hero</label>
+                    <button class="btn btn-primary" ng-click="selectSuggested(suggested)">Select {{suggested.heroName}}</button>
+                    <br/>
+                    <label>Choose different hero</label>
+                    <select class="form-control" ng-model="assignee" ng-options="hero.id as hero.heroName for hero in heroes" name="heroSelect" required></select>
+                    <br/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" ng-click="createJobSubmit()" ng-disabled="!createJobForm.$valid">Create Job</button>
+            </div>
+        </div>
+    </div>
+</div>

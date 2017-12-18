@@ -3,6 +3,8 @@ package cz.muni.fi.pa165.monsterslayers.dto.clientrequest;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * DTO for modification of some properties of client request
@@ -20,6 +22,9 @@ public class ModifyClientRequestDTO {
 
     @Size(min = 4, max = 256)
     private String description;
+
+    @Size(min = 1)
+    private Map<Long, Integer> killList = new HashMap<>();
 
     @Min(100)
     private BigDecimal reward;
@@ -54,6 +59,14 @@ public class ModifyClientRequestDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Map<Long, Integer> getKillList() {
+        return killList;
+    }
+
+    public void setKillList(Map<Long, Integer> killList) {
+        this.killList = killList;
     }
 
     public BigDecimal getReward() {

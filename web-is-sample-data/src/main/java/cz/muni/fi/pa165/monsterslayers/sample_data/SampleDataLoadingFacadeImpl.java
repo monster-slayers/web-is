@@ -107,7 +107,18 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
                 42,
                 easyPeasyKL
         );
-
+      
+        Map<MonsterType, Integer> pyramidKL = new HashMap<>();
+        hellKL.put(zombie, 1000000);
+        ClientRequest pyramid = clientRequest(
+                "Pyramid Leveling Session",
+                john,
+                "Get the Aura!",
+                "Morroc field 4",
+                100,
+                pyramidKL
+        );
+      
         job(exceptionHunter, hell);
         job(exceptionHunter, justZombies);
         job(nullCrusher, easyPeasy);

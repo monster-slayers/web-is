@@ -63,11 +63,5 @@ public interface JobFacade {
      */
     void updateJobStatusDto(UpdateJobStatusDTO dto);
 
-    /**
-     * Gets Hero who's suited the best for the job based on monsters requested to be killed.
-     *
-     * @param jobId Job id
-     * @return The best suited hero
-     */
-    HeroDTO getBestHeroForJob(Long jobId);
+    JobDTO getByClientRequestId(Long id);
 }

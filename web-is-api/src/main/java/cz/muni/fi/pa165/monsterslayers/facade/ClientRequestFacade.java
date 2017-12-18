@@ -3,6 +3,8 @@ package cz.muni.fi.pa165.monsterslayers.facade;
 import cz.muni.fi.pa165.monsterslayers.dto.clientrequest.ClientRequestDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.clientrequest.CreateClientRequestDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.clientrequest.ModifyClientRequestDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.jobs.JobDTO;
 
 import java.util.Collection;
 
@@ -57,4 +59,12 @@ public interface ClientRequestFacade {
      * @return ID of newly created client request
      */
     Long createClientRequest(CreateClientRequestDTO createClientRequestDTO);
+
+    /**
+     * Gets Hero who's suited the best for the client request based on monsters requested to be killed.
+     *
+     * @param clientRequestId client request id id
+     * @return The best suited hero
+     */
+    HeroDTO getBestHeroForClientRequest(Long clientRequestId);
 }

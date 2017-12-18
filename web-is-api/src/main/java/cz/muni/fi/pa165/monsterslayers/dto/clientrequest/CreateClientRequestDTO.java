@@ -30,7 +30,7 @@ public class CreateClientRequestDTO {
     private String description;
 
     @Size(min = 1)
-    private Map<MonsterTypeDTO, Integer> killList = new HashMap<>();
+    private Map<Long, Integer> killList = new HashMap<>();
 
     @NotNull
     @Min(100)
@@ -68,11 +68,11 @@ public class CreateClientRequestDTO {
         this.description = description;
     }
 
-    public Map<MonsterTypeDTO, Integer> getKillList() {
+    public Map<Long, Integer> getKillList() {
         return killList;
     }
 
-    public void setKillList(Map<MonsterTypeDTO, Integer> killList) {
+    public void setKillList(Map<Long, Integer> killList) {
         this.killList = killList;
     }
 

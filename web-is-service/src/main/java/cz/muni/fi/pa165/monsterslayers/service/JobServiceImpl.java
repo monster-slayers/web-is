@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.monsterslayers.service;
 
 import cz.muni.fi.pa165.monsterslayers.dao.JobRepository;
+import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.Job;
 import cz.muni.fi.pa165.monsterslayers.exception.MonsterSlayersException;
@@ -70,5 +71,10 @@ public class JobServiceImpl implements JobService {
                     e
             );
         }
+    }
+
+    @Override
+    public Job getJobByClientRequest(ClientRequest clientRequest) {
+        return repository.findByClientRequest(clientRequest);
     }
 }
