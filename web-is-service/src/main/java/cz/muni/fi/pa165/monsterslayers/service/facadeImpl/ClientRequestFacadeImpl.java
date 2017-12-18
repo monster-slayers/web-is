@@ -3,15 +3,19 @@ package cz.muni.fi.pa165.monsterslayers.service.facadeImpl;
 import cz.muni.fi.pa165.monsterslayers.dto.clientrequest.ClientRequestDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.clientrequest.CreateClientRequestDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.clientrequest.ModifyClientRequestDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
+import cz.muni.fi.pa165.monsterslayers.dto.jobs.JobDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
+import cz.muni.fi.pa165.monsterslayers.entities.Hero;
+import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import cz.muni.fi.pa165.monsterslayers.facade.ClientRequestFacade;
-import cz.muni.fi.pa165.monsterslayers.service.ClientRequestService;
-import cz.muni.fi.pa165.monsterslayers.service.MappingService;
+import cz.muni.fi.pa165.monsterslayers.service.*;
+import cz.muni.fi.pa165.monsterslayers.service.utils.PowerElementsMatch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
+import java.util.*;
 
 /**
  * Implementation of client request facade interface
@@ -25,7 +29,16 @@ public class ClientRequestFacadeImpl implements ClientRequestFacade {
     private ClientRequestService clientRequestService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
+    private MonsterTypeService monsterTypeService;
+
+    @Autowired
     private MappingService mappingService;
+
+    @Autowired
+    private HeroService heroService;
 
     @Override
     public ClientRequestDTO getClientRequestById(Long clientRequestId) {
@@ -58,6 +71,13 @@ public class ClientRequestFacadeImpl implements ClientRequestFacade {
     @Override
     public Long createClientRequest(CreateClientRequestDTO createClientRequestDTO) {
         ClientRequest clientRequest = mappingService.mapTo(createClientRequestDTO, ClientRequest.class);
+        clientRequest.setClient(userService.findUserById(createClientRequestDTO.getClientId()));
+        clientRequest.setKillList(new HashMap<>());
+        for (Map.Entry<Long, Integer> killListEntry : createClientRequestDTO.getKillList().entrySet()) {
+            clientRequest.addToKillList(
+                monsterTypeService.findById(killListEntry.getKey()), killListEntry.getValue()
+            );
+        }
         return clientRequestService.saveClientRequest(clientRequest);
     }
 
@@ -65,6 +85,12 @@ public class ClientRequestFacadeImpl implements ClientRequestFacade {
     public void editClientRequest(ModifyClientRequestDTO modifyClientRequestDTO) {
         ClientRequest clientRequest = clientRequestService.findClientRequestById(
                 modifyClientRequestDTO.getClientRequestId());
+        clientRequest.setKillList(new HashMap<>());
+        for (Map.Entry<Long, Integer> killListEntry : modifyClientRequestDTO.getKillList().entrySet()) {
+            clientRequest.addToKillList(
+                    monsterTypeService.findById(killListEntry.getKey()), killListEntry.getValue()
+            );
+        }
         if (modifyClientRequestDTO.getTitle() != null) {
             clientRequest.setTitle(modifyClientRequestDTO.getTitle());
         }
@@ -78,5 +104,34 @@ public class ClientRequestFacadeImpl implements ClientRequestFacade {
             clientRequest.setReward(modifyClientRequestDTO.getReward());
         }
         clientRequestService.saveClientRequest(clientRequest);
+    }
+
+    @Override
+    public HeroDTO getBestHeroForClientRequest(Long clientRequestId) {
+        ClientRequest clientRequest = clientRequestService.findClientRequestById(clientRequestId);
+
+        Map<MonsterType, Integer> killList = clientRequest.getKillList();
+
+        PowerElementsMatch bestMatch = new PowerElementsMatch(0, Integer.MAX_VALUE);
+        Hero bestHero = new Hero();
+
+        for (Hero hero : heroService.getAllHeroes()) {
+            List<PowerElementsMatch> matches = new ArrayList<>();
+            for (Map.Entry<MonsterType, Integer> entry : killList.entrySet()) {
+                MonsterType monsterType = entry.getKey();
+                matches.add(
+                        heroService.countHeroSuitabilityAgainstMonsterType(hero, monsterType)
+                                .multiplyByMonsterCount(entry.getValue())
+                );
+            }
+
+            PowerElementsMatch match = PowerElementsMatch.sumMatches(matches);
+            if (match.isMoreSuitable(bestMatch)) {
+                bestMatch = match;
+                bestHero = hero;
+            }
+        }
+
+        return mappingService.mapTo(bestHero, HeroDTO.class);
     }
 }

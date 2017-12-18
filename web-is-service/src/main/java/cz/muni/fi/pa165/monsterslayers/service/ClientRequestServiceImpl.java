@@ -1,10 +1,15 @@
 package cz.muni.fi.pa165.monsterslayers.service;
 
 import cz.muni.fi.pa165.monsterslayers.dao.ClientRequestRepository;
+import cz.muni.fi.pa165.monsterslayers.dao.JobRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.ClientRequest;
+import cz.muni.fi.pa165.monsterslayers.entities.Job;
 import cz.muni.fi.pa165.monsterslayers.exception.MonsterSlayersException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implementation of client request service
@@ -15,6 +20,9 @@ import org.springframework.stereotype.Service;
 public class ClientRequestServiceImpl implements ClientRequestService {
     @Autowired
     private ClientRequestRepository clientRequestRepository;
+
+    @Autowired
+    private JobRepository jobRepository;
 
     @Override
     public ClientRequest findClientRequestById(Long id) {

@@ -43,7 +43,7 @@ public class ClientRequest {
     }
 
     public Map<MonsterType, Integer> getKillList() {
-        return Collections.unmodifiableMap(killList);
+        return killList;
     }
 
     public void setKillList(Map<MonsterType, Integer> killList) {

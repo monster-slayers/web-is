@@ -8,6 +8,7 @@ import cz.muni.fi.pa165.monsterslayers.entities.Job;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
 import cz.muni.fi.pa165.monsterslayers.enums.JobStatus;
 import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
+import cz.muni.fi.pa165.monsterslayers.service.ClientRequestService;
 import cz.muni.fi.pa165.monsterslayers.service.HeroService;
 import cz.muni.fi.pa165.monsterslayers.service.JobService;
 import cz.muni.fi.pa165.monsterslayers.service.MappingService;
@@ -45,6 +46,9 @@ public class JobFacadeTest {
 
     @Mock
     private HeroService heroService;
+
+    @Mock
+    private ClientRequestService clientRequestService;
 
     @Mock
     private MappingService mappingService;
@@ -134,10 +138,10 @@ public class JobFacadeTest {
         expectedAssignee.setId(heroId);
         expectedJob.setAssignee(expectedAssignee);
 
-        when(mappingService.mapTo(createJobDTO, Job.class)).thenReturn(expectedJob);
-
         Long expectedId = 66L;
         when(jobService.saveJob(expectedJob)).thenReturn(expectedId);
+        when(clientRequestService.findClientRequestById(clientRequestId)).thenReturn(expectedClientRequest);
+        when(heroService.findHeroById(heroId)).thenReturn(expectedAssignee);
 
         Long actualJobId = jobFacade.createJob(createJobDTO);
 
@@ -225,52 +229,5 @@ public class JobFacadeTest {
 
         Assert.assertEquals(jobId, actualJob.getId());
         Assert.assertEquals(jobStatus, actualJob.getStatus());
-    }
-
-    @Test
-    public void testGetBestHeroForJob(){
-        Long jobId = 77L;
-
-        Job job = new Job();
-
-        ClientRequest clientRequest = new ClientRequest();
-
-        MonsterType monsterType1 = new MonsterType();
-        monsterType1.addWeakness(PowerElement.GHOST);
-        monsterType1.setName("Java");
-        clientRequest.addToKillList(monsterType1, 2);
-
-        MonsterType monsterType2 = new MonsterType();
-        monsterType2.addWeakness(PowerElement.EARTH);
-        monsterType2.setName("Oracle");
-        clientRequest.addToKillList(monsterType2, 3);
-
-        job.setClientRequest(clientRequest);
-
-        when(jobService.getJobById(jobId)).thenReturn(job);
-
-
-        List<Hero> heroes = new ArrayList<>();
-        Hero hero1 = new Hero();
-        hero1.addElement(PowerElement.EARTH);
-        heroes.add(hero1);
-
-        Hero hero2 = new Hero();
-        hero2.addElement(PowerElement.POISON);
-
-        when(heroService.getAllHeroes()).thenReturn(heroes);
-
-        HeroDTO heroDTO = new HeroDTO();
-
-        when(mappingService.mapTo(hero1, HeroDTO.class)).thenReturn(heroDTO);
-
-        when(heroService.countHeroSuitabilityAgainstMonsterType(hero1, monsterType1)).thenReturn(new PowerElementsMatch(0, 1));
-        when(heroService.countHeroSuitabilityAgainstMonsterType(hero1, monsterType2)).thenReturn(new PowerElementsMatch(1, 0));
-        when(heroService.countHeroSuitabilityAgainstMonsterType(hero2, monsterType1)).thenReturn(new PowerElementsMatch(0, 1));
-        when(heroService.countHeroSuitabilityAgainstMonsterType(hero2, monsterType2)).thenReturn(new PowerElementsMatch(0, 1));
-
-        HeroDTO bestHeroForJob = jobFacade.getBestHeroForJob(jobId);
-
-        Assert.assertEquals(heroDTO, bestHeroForJob);
     }
 }

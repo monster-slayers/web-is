@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import cz.muni.fi.pa165.monsterslayers.frontend.controllers.TestController;
 import cz.muni.fi.pa165.monsterslayers.frontend.serializers.CustomMapSerializer;
+import cz.muni.fi.pa165.monsterslayers.frontend.serializers.KillListDeserializer;
 import cz.muni.fi.pa165.monsterslayers.sample_data.SampleDataConfig;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +20,7 @@ import java.util.Map;
 @EnableWebMvc
 @Configuration
 @Import(SampleDataConfig.class)
-@ComponentScan(basePackageClasses = {TestController.class})
+@ComponentScan(basePackages = "cz.muni.fi.pa165.monsterslayers.frontend.controllers")
 
 public class RestSpringMvcConfig extends WebMvcConfigurerAdapter {
     @Override
@@ -31,6 +32,7 @@ public class RestSpringMvcConfig extends WebMvcConfigurerAdapter {
         SimpleModule simpleModule = new SimpleModule();
 
         simpleModule.addSerializer(Map.class, new CustomMapSerializer());
+        simpleModule.addDeserializer(Map.class, new KillListDeserializer());
 
         objectMapper.registerModule(simpleModule);
 
