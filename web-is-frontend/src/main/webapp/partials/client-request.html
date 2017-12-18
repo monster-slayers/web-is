@@ -10,7 +10,7 @@
         <th>Reward</th>
         <th></th>
     </tr>
-    <tr ng-repeat-start="clientRequest in clientRequests">
+    <tr ng-repeat-start="clientRequest in clientRequests" ng-if="clientRequest.client.id == loggedUser.id || atleastManager() || _.includes(clientRequest.heroes, loggedHero.id)">
         <td>
             <a href
                class="glyphicon dropdown-link"
@@ -23,8 +23,8 @@
         <td>{{clientRequest.location}}</td>
         <td>{{clientRequest.reward}}</td>
         <td>
-            <button class="btn btn-default btn-sm" ng-click="modifyClientRequestStart(clientRequest)">Modify</button>
-            <button class="btn btn-primary btn-sm" ng-disabled="clientRequest.jobExists" ng-click="createJobStart(clientRequest)">Create Job</button>
+            <button class="btn btn-default btn-sm" ng-if="atleastManager()" ng-click="modifyClientRequestStart(clientRequest)">Modify</button>
+            <button class="btn btn-primary btn-sm" ng-if="atleastManager()" ng-disabled="clientRequest.jobExists" ng-click="createJobStart(clientRequest)">Create Job</button>
         </td>
     </tr>
     <tr ng-repeat-end

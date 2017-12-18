@@ -6,6 +6,7 @@ monsterSlayerApp.controller('ClientRequestCtrl', function ($scope, $http) {
                 var jobs = response.data;
                 _.forEach(clientRequests, function(c){
                     c.jobExists = false;
+                    c.heroes = [];
                 });
                 _.forEach(jobs, function(job){
                     var cId = job.clientRequest.id;
@@ -14,6 +15,7 @@ monsterSlayerApp.controller('ClientRequestCtrl', function ($scope, $http) {
                     });
 
                     c.jobExists = true;
+                    c.heroes.push(job.assignee.id);
                 });
                 $scope.clientRequests = clientRequests;
             });
