@@ -25,6 +25,7 @@
     <script src="${pageContext.request.contextPath}/controllers/client-request.js"></script>
     <script src="${pageContext.request.contextPath}/controllers/job.js"></script>
     <script src="${pageContext.request.contextPath}/controllers/login.js"></script>
+    <script src="${pageContext.request.contextPath}/controllers/home.js"></script>
 </head>
 <body ng-controller="MainCtrl">
 <nav class="navbar navbar-default">
