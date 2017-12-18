@@ -17,7 +17,7 @@ monsterSlayerApp.controller('JobCtrl', function ($rootScope, $scope, $http) {
     $scope.updateStatus = function(job, newStatus){
         $http.put('/pa165/rest/job/update-status/' + job.id + "/" + newStatus)
             .then(function(){
-                $rootScope.successAlert = "Updated status of job " + job.clientRequest.title;;
+                $rootScope.successAlert = "Updated status of job " + job.clientRequest.title;
             },function(){
                 $rootScope.errorAlert = "Cannot update status of job " + job.clientRequest.title;
             });
