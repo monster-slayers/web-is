@@ -16,6 +16,8 @@ monsterSlayerApp.config(function($routeProvider){
 monsterSlayerApp.controller('MainCtrl', function($scope, $location){
 
     var updateNavbar = function(){
+        $scope.hideSuccessAlert();
+        $scope.hideErrorAlert();
         $scope.monsterTypeActive = $location.path() === '/monster-type' ? "active" : "";
         $scope.clientRequestActive = $location.path() === '/client-request' ? "active" : "";
         $scope.jobActive = $location.path() === '/job' ? "active" : "";
@@ -41,7 +43,15 @@ monsterSlayerApp.controller('ClientRequestCtrl', function () {
 });
 
 // add lodash to root scope
-monsterSlayerApp.run(function($rootScope){$rootScope._ = _;});
+monsterSlayerApp.run(function($rootScope){
+    $rootScope._ = _;
+    $rootScope.hideSuccessAlert = function () {
+        $rootScope.successAlert = undefined;
+    };
+    $rootScope.hideErrorAlert = function () {
+        $rootScope.errorAlert = undefined;
+    };
+});
 
 function prettifyEnum(enumString){
     return _.startCase(_.lowerCase(_.replace(enumString, '_', ' ')));

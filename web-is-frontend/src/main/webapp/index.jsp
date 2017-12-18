@@ -54,6 +54,15 @@
 
 <div class="container">
     <div>
+        <div ng-show="errorAlert" class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" aria-label="Close" ng-click="hideErrorAlert()"> <span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> <span>{{errorAlert}}</span>
+        </div>
+        <div ng-show="successAlert" class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" aria-label="Close" ng-click="hideSuccessAlert()"> <span aria-hidden="true">&times;</span></button>
+            <strong>Success!</strong> <span>{{successAlert}}</span>
+        </div>
+        
         <div ng-view></div>
     </div>
 </div>

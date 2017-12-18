@@ -29,11 +29,6 @@ public class HeroController {
         return heroFacade.getAllHeroes();
     }
 
-    @DeleteMapping(value = "/delete/{id}")
-    private void deleteHero(@PathVariable("id") Long id){
-        heroFacade.removeHero(heroFacade.getHeroById(id));
-    }
-
     @PostMapping(value = "/create/{userId}/{heroName}/{elements}")
     private void createHero(@PathVariable("userId") Long userId, @PathVariable("heroName") String heroName, @PathVariable("elements") List<PowerElement> elements) {
         CreateHeroDTO createHeroDTO = new CreateHeroDTO(userId, heroName);
