@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.monsterslayers.frontend.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import cz.muni.fi.pa165.monsterslayers.frontend.controllers.TestController;
 import cz.muni.fi.pa165.monsterslayers.frontend.security.SecurityConfiguration;
 import cz.muni.fi.pa165.monsterslayers.frontend.serializers.CustomMapSerializer;
 import cz.muni.fi.pa165.monsterslayers.frontend.serializers.KillListDeserializer;
