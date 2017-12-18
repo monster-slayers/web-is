@@ -8,7 +8,7 @@ window.monsterSlayerApp = angular.module('monsterSlayerApp', ['ngRoute']);
 monsterSlayerApp.filter('capitalize', function() {
     return function(input) {
       return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
-    }
+    };
 });
 
 monsterSlayerApp.config(function($routeProvider, $httpProvider){
@@ -50,7 +50,7 @@ monsterSlayerApp.config(function($routeProvider, $httpProvider){
                 templateUrl: 'partials/user-detail.html',
                 controller: 'UserDetailCtrl',
                 resolve: {
-                    access: function(Access){return Access.hasOneOfRole(["HERO", "MANAGER"]);}
+                    access: function(Access){return Access.isLoggedIn();}
                 }
             })
         .when("/hero",
@@ -58,7 +58,7 @@ monsterSlayerApp.config(function($routeProvider, $httpProvider){
                 templateUrl: 'partials/hero.html',
                 controller: 'HeroCtrl',
                 resolve: {
-                    access: function(Access){return Access.hasOneOfRole(["HERO"]);}
+                    access: function(Access){return Access.hasOneOfRole(["MANAGER"]);}
                 }
             })
         .when("/login",
@@ -71,7 +71,8 @@ monsterSlayerApp.config(function($routeProvider, $httpProvider){
             })
         .when("/",
             {
-                template: "Welcome to Monster slayers' web IS!",
+                template : 'Welcome',
+                controller: "HomeCtrl",
                 resolve: {
                     access: function(Access){return Access.isLoggedIn();}
                 }
@@ -131,7 +132,7 @@ monsterSlayerApp.factory('Access', function(UserProfile, $q){
         isLoggedIn: function(){
             return UserProfile.then(function(profile){
                 if(profile === ""){
-                    return $q.reject("not-authentication");
+                    return $q.reject("authentication");
                 }
 
                 return true;
