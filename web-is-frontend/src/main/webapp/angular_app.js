@@ -132,7 +132,7 @@ monsterSlayerApp.factory('Access', function(UserProfile, $q){
         isLoggedIn: function(){
             return UserProfile.then(function(profile){
                 if(profile === ""){
-                    return $q.reject("not-authentication");
+                    return $q.reject("authentication");
                 }
 
                 return true;
