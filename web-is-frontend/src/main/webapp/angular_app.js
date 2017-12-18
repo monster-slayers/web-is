@@ -74,7 +74,8 @@ monsterSlayerApp.config(function($routeProvider, $httpProvider){
     $httpProvider.interceptors.push(function ($q) {
         return {
             responseError: function (rejection) {
-                if (rejection.status === 401) {
+                console.log(rejection);
+                if (rejection.status === 401 && rejection.config.url !== "/pa165/login") {
                     // Something is bad with our credentials,
                     // reload the page to check out the changes in login state.
                     // If this is triggering constant reloading

@@ -18,4 +18,16 @@ monsterSlayerApp.controller('LoginCtrl', function($scope, $http, $window, $rootS
             }
         );
     };
+
+    $scope.sampleLogins = [
+        {email: "david@client.com", password: "client", role: "Client"},
+        {email: "ondra@hero.com", password: "hero", role: "Hero"},
+        {email: "tomas@hero.com", password: "hero", role: "Hero"},
+        {email: "maksym@manager.com", password: "manager", role: "Manager"},
+    ];
+
+    $scope.fillIn = function(user){
+        $scope.email = user.email;
+        $scope.password  = user.password;
+    }
 });
