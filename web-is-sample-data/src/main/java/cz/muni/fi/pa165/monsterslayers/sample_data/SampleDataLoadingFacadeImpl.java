@@ -44,31 +44,30 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         MonsterType zombie = monsterType("Zombie", "brains", PowerElement.HOLY);
         MonsterType dragon = monsterType("Dragon", "humans", PowerElement.WATER);
 
-        User george = user("george", "george@coldmail.com", "iamgeorge", RightsLevel.CLIENT, "default.png" ,PNG);
-        User john = user("john", "john@coolmail.com", "iamnotgeorge", RightsLevel.CLIENT, "default.png" ,PNG);
-        User andrew = user("andrew", "andrew@mail.hero", "thechosenone", RightsLevel.HERO, "default.png" ,PNG);
-        User michael = user("michael", "pesfili@amail.org", "daddy", RightsLevel.MANAGER, "default.png" ,PNG);
-        User trevor = user("trevor", "killer@mail.hero", "ihatemichael", RightsLevel.HERO, "default.png" ,PNG);
-        User test = user("test", "a@a.a", "test", RightsLevel.CLIENT, "default.png", PNG);
+        User david = user("Dávid the Client", "david@client.com", "client", RightsLevel.CLIENT, "default.png", PNG);
+        User john = user("john", "john@coolmail.com", "iamnotgeorge", RightsLevel.CLIENT, "default.png" , PNG);
+        User ondra = user("Ondra the Hero", "ondra@hero.com", "hero", RightsLevel.HERO, "default.png", PNG);
+        User maksym = user("Maksym the Manager", "maksym@manager.com", "manager", RightsLevel.MANAGER, "default.png", PNG);
+        User tomas = user("Tomas the Hero", "tomas@hero.com", "hero", RightsLevel.HERO, "default.png", PNG);
 
-        List<PowerElement> guitarCrusherEles = new ArrayList<>();
-        guitarCrusherEles.add(PowerElement.FIRE);
-        guitarCrusherEles.add(PowerElement.WATER);
-        guitarCrusherEles.add(PowerElement.WIND);
+        List<PowerElement> exHuntEles = new ArrayList<>();
+        exHuntEles.add(PowerElement.FIRE);
+        exHuntEles.add(PowerElement.WATER);
+        exHuntEles.add(PowerElement.WIND);
 
-        Hero guitarCrusher = hero(andrew, "Guitar Crusher", guitarCrusherEles, HeroStatus.ACTIVE);
+        Hero exceptionHunter = hero(ondra, "Exception Hunter", exHuntEles, HeroStatus.ACTIVE);
 
-        List<PowerElement> trevorEles = new ArrayList<>();
-        trevorEles.add(PowerElement.EARTH);
-        trevorEles.add(PowerElement.GHOST);
-        trevorEles.add(PowerElement.POISON);
-        Hero trevorHero = hero(trevor, "Trevor the Unstoppable", trevorEles, HeroStatus.ACTIVE  );
+        List<PowerElement> nullCrushEles = new ArrayList<>();
+        nullCrushEles.add(PowerElement.EARTH);
+        nullCrushEles.add(PowerElement.GHOST);
+        nullCrushEles.add(PowerElement.POISON);
+        Hero nullCrusher = hero(tomas, "Null Crusher", nullCrushEles, HeroStatus.ACTIVE);
 
         Map<MonsterType, Integer> justZombiesKL = new HashMap<>();
         justZombiesKL.put(zombie, 4);
         ClientRequest justZombies = clientRequest(
                 "Zombies in garden",
-                george,
+                david,
                 "It's awful.",
                 "garden",
                 10,
@@ -109,9 +108,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
                 easyPeasyKL
         );
 
-        job(guitarCrusher, hell);
-        job(guitarCrusher, justZombies);
-        job(trevorHero, easyPeasy);
+        job(exceptionHunter, hell);
+        job(exceptionHunter, justZombies);
+        job(nullCrusher, easyPeasy);
     }
 
     private Hero hero(User user, String heroName, Collection<PowerElement> elements, HeroStatus heroStatus) {
