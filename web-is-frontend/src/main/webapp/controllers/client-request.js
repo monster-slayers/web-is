@@ -1,4 +1,4 @@
-monsterSlayerApp.controller('ClientRequestCtrl', function ($scope, $http) {
+monsterSlayerApp.controller('ClientRequestCtrl', function ($rootScope, $scope, $http) {
     var update = function(){
         $http.get('/pa165/rest/client-request').then(function(response){
             var clientRequests = response.data;
@@ -48,29 +48,31 @@ monsterSlayerApp.controller('ClientRequestCtrl', function ($scope, $http) {
         $http.post('/pa165/rest/client-request/create/', dataObj)
             .then(function(){
                 update();
+                $rootScope.successAlert = "Client Request \"" + title + "\" successfully created."
             },function(){
-                //TODO
-                console.log("error");
+                $rootScope.errorAlert = "Cannot save client request";
             });
     };
 
     $scope.createClientRequestStart = function(){
-        $http.get('/pa165/rest/user').then(function(response){
-            $scope.users = response.data},
+        $http.get('/pa165/rest/user').then(function(response)
+            {
+                $scope.users = response.data
+            },
             function(){
-                //TODO
-                console.log("error");
+                $rootScope.errorAlert = "Cannot load users";
             });
-        $http.get('/pa165/rest/monster-type').then(function(response){
-            $scope.monsterTypes = response.data},
+        $http.get('/pa165/rest/monster-type').then(function(response)
+            {
+                $scope.monsterTypes = response.data
+            },
             function(){
-                //TODO
-                console.log("error");
+                $rootScope.errorAlert = "Cannot load monsters";
             });
         $scope.title = "";
         $scope.description = "";
         $scope.location = "";
-        $scope.clientUserId = -1;
+        $scope.clientUserId = $scope.loggedUser.id;
         $scope.killList = [{key:-1,value:""}];
         $scope.reward = "";
         $scope.createClientRequestForm.$setPristine();
@@ -112,24 +114,26 @@ monsterSlayerApp.controller('ClientRequestCtrl', function ($scope, $http) {
         $http.put('/pa165/rest/client-request/modify/'+ current.id, dataObj)
             .then(function(){
                 update();
+                $rootScope.successAlert = "Client Request \"" + title + "\" successfully saved."
             },function(){
-                //TODO
-                console.log("error");
+                $rootScope.errorAlert = "Cannot save client request";
             });
     };
 
     $scope.modifyClientRequestStart = function(request){
-        $http.get('/pa165/rest/user').then(function(response){
-            $scope.users = response.data},
+        $http.get('/pa165/rest/user').then(function(response)
+            {
+                $scope.users = response.data
+            },
             function(){
-                //TODO
-                console.log("error");
+                $rootScope.errorAlert = "Cannot load users";
             });
-        $http.get('/pa165/rest/monster-type').then(function(response){
-            $scope.monsterTypes = response.data},
+        $http.get('/pa165/rest/monster-type').then(function(response)
+            {
+                $scope.monsterTypes = response.data
+            },
             function(){
-                //TODO
-                console.log("error");
+                $rootScope.errorAlert = "Cannot load monsters";
             });
         $scope.currentRequest = request;
         $scope.title = request.title;
@@ -163,10 +167,10 @@ monsterSlayerApp.controller('ClientRequestCtrl', function ($scope, $http) {
             .then(
                 function () {
                     update();
+                    $rootScope.successAlert = "Job for Client Request \"" + currentRequest.title + "\" successfully created."
                 },
                 function() {
-                    //TODO
-                    console.log("error");
+                    $rootScope.errorAlert = "Cannot save job";
                 });
     };
 

@@ -23,8 +23,8 @@
         <td>{{clientRequest.location}}</td>
         <td>{{clientRequest.reward}}</td>
         <td>
-            <button class="btn btn-default btn-sm" ng-click="modifyClientRequestStart(clientRequest)">Modify</button>
-            <button class="btn btn-primary btn-sm" ng-disabled="clientRequest.jobExists" ng-click="createJobStart(clientRequest)">Create Job</button>
+            <button class="btn btn-default btn-sm" ng-if="atleastManager() || clientRequest.client.email === loggedUser.email" ng-click="modifyClientRequestStart(clientRequest)">Modify</button>
+            <button class="btn btn-primary btn-sm" ng-if="atleastManager()" ng-disabled="clientRequest.jobExists" ng-click="createJobStart(clientRequest)">Create Job</button>
         </td>
     </tr>
     <tr ng-repeat-end
@@ -81,7 +81,7 @@
                     <span class="help-block" ng-if="!createClientRequestForm.location.$valid && createClientRequestForm.location.$dirty">Insert some location (between 4 and 64 characters long).</span>
                     <br/>
                     <label>Requested by</label>
-                    <select class="form-control" ng-model="clientUserId" ng-options="user.id as user.name for user in users" name="clientSelect" required></select>
+                    <select class="form-control" ng-model="clientUserId" ng-options="user.id as user.name for user in users" name="clientSelect" ng-disabled="!atleastManager()" required></select>
                     <span class="help-block" ng-if="!createClientRequestForm.clientUserId.$valid && createClientRequestForm.clientUserId.$dirty">Select one user.</span>
                     <br/>
                     <label>Kill List</label>
@@ -137,7 +137,7 @@
                     <span class="help-block" ng-if="!modifyClientRequestForm.location.$valid && modifyClientRequestForm.location.$dirty">Insert some location (between 4 and 64 characters long).</span>
                     <br/>
                     <label>Requested by</label>
-                    <select class="form-control" ng-model="clientUserId" ng-options="user.id as user.name for user in users" name="clientSelect" disabled></select>
+                    <select class="form-control" ng-model="clientUserId" ng-options="user.id as user.name for user in users" name="clientSelect" ng-disabled="!atleastManager()"></select>
                     <br/>
                     <label>Kill List</label>
                     <table class="table table-stripped">
