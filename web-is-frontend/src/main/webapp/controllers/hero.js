@@ -1,4 +1,4 @@
-monsterSlayerApp.controller('HeroCtrl', function ($scope, $http) {
+monsterSlayerApp.controller('HeroCtrl', function ($rootScope, $scope, $http) {
     var update = function(){
         $http.get('/pa165/rest/hero').then(function(response){
             $scope.heroes = response.data;
@@ -6,30 +6,19 @@ monsterSlayerApp.controller('HeroCtrl', function ($scope, $http) {
                 hero.status = prettifyEnum(hero.status);
             });
         }, function(){
-            //TODO
-            console.log('error');
+            $rootScope.errorAlert = "Cannot load heroes";
         });
     };
 
     update();
 
-    $scope.deleteHero = function(hero){
-        $http.delete('/pa165/rest/hero/delete/' + hero.id)
-             .then(function(){
-                 update();
-             },function(){
-                 //TODO
-                 console.log("error");
-             });
-    };
-
     $scope.changeStatus = function(hero, newStatus){
         $http.put('/pa165/rest/hero/change-status/' + hero.id + "/" + newStatus)
             .then(function(){
                 hero.status = prettifyEnum(newStatus);
+                $rootScope.successAlert = "Changed status of hero " + hero.heroName;
             },function(){
-                //TODO
-                console.log("error");
+                $rootScope.errorAlert = "Cannot change status of hero " + hero.heroName;
             });
         $("#killModal").modal('hide');
     };
@@ -43,9 +32,9 @@ monsterSlayerApp.controller('HeroCtrl', function ($scope, $http) {
         $http.put('/pa165/rest/hero/modify/' + hero.id + "/" + name + "/" + elements)
              .then(function(){
                  update();
+                 $rootScope.successAlert = "Modified hero " + hero.heroName;
              },function(){
-                 //TODO
-                 console.log("error");
+                 $rootScope.errorAlert = "Cannot modify hero " + hero.heroName;
              });
     };
 

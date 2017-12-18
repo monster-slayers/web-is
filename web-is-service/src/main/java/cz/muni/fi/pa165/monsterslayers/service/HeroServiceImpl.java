@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.monsterslayers.service;
 import cz.muni.fi.pa165.monsterslayers.dao.HeroRepository;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
+import cz.muni.fi.pa165.monsterslayers.entities.User;
 import cz.muni.fi.pa165.monsterslayers.enums.PowerElement;
 import cz.muni.fi.pa165.monsterslayers.exception.MonsterSlayersException;
 import cz.muni.fi.pa165.monsterslayers.service.utils.PowerElementsMatch;
@@ -90,5 +91,17 @@ public class HeroServiceImpl implements HeroService {
         }
         int uselessElements = hero.getElements().size() - usefulElements;
         return new PowerElementsMatch(usefulElements, uselessElements);
+    }
+
+    @Override
+    public Hero findHeroByUser(User user) {
+        try {
+            return heroRepository.findByUser(user);
+        } catch (Exception e) {
+            throw new MonsterSlayersException(
+                    "Cannot find hero with user " + user.getName() + ".",
+                    e
+            );
+        }
     }
 }

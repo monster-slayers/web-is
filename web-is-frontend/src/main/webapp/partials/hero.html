@@ -13,7 +13,7 @@
         </td>
         <td>{{hero.user.name}}</td>
         <td>
-            <div class="dropdown" style="display: inline;" ng-if="hero.status !== 'Deceased'">
+            <div class="dropdown" style="display: inline;" ng-if="hero.status !== 'Deceased' && atleastManager()">
                 <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
                     Change status to...
                     <span class="caret"></span>
@@ -24,7 +24,7 @@
                     <li><a href ng-click="killHero(hero)">Deceased</a></li>
                 </ul>
             </div>
-            <button class="btn btn-primary btn-sm" ng-click="modifyHeroStart(hero)" ng-if="hero.status !== 'Deceased'">Modify</button>
+            <button class="btn btn-primary btn-sm" ng-click="modifyHeroStart(hero)" ng-if="hero.status !== 'Deceased' && (atleastManager() || (atleastHero() && hero.user.email === loggedUser.email))">Modify</button>
         </td>
     </tr>
 </table>

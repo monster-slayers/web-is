@@ -1,4 +1,4 @@
-monsterSlayerApp.controller('UserCtrl', function ($scope, $http) {
+monsterSlayerApp.controller('UserCtrl', function ($rootScope, $scope, $http) {
     var update = function(){
         $http.get('/pa165/rest/user').then(function(response){
             $scope.users = response.data;
@@ -8,21 +8,20 @@ monsterSlayerApp.controller('UserCtrl', function ($scope, $http) {
                 }
             );
         }, function(){
-            //TODO
-            console.log('error');
+            $rootScope.errorAlert = "Cannot load users";
         });
     };
 
     update();
 
     $scope.createHero = function(user, name, elements){
-        $scope.promoteRights(user, 'HERO');
         $http.post('/pa165/rest/hero/create/' + user.id + "/" + name + "/" + elements)
-             .then(function(){
-             },function(){
-                 //TODO
-                 console.log("error");
-             });
+            .then(function(){
+                $scope.promoteRights(user, 'HERO');
+                $rootScope.successAlert = "Created new hero " + name;
+            },function(){
+                $rootScope.errorAlert = "Cannot create new hero " + name;
+            });
     };
 
     $scope.createHeroStart = function(user){    
@@ -40,12 +39,12 @@ monsterSlayerApp.controller('UserCtrl', function ($scope, $http) {
 
     $scope.promoteRights = function(user, newRightsLevel){
         $http.put('/pa165/rest/user/promote-rights/' + user.id + "/" + newRightsLevel)
-             .then(function(){
-             },function(){
-                 //TODO
-                 console.log("error");
-             });
-        user.rightsLevel = prettifyEnum(newRightsLevel);
+            .then(function(){
+                user.rightsLevel = prettifyEnum(newRightsLevel);
+                $rootScope.successAlert = "Promoted rights of " + user.name + " to " + user.rightsLevel;
+            },function(){
+                $rootScope.errorAlert = "Cannot promoted rights of " + user.name;
+            });
     };
     
     $scope.toggle = function (element) {
