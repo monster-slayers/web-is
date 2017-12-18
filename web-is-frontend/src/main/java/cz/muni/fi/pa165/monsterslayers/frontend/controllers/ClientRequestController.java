@@ -10,6 +10,11 @@ import cz.muni.fi.pa165.monsterslayers.facade.JobFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Client Request Controller
+ *
+ * @author David Kizivat
+ */
 @RestController
 @RequestMapping("/client-request")
 public class ClientRequestController {

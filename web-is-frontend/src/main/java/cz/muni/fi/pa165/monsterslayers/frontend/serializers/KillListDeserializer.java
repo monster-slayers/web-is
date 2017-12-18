@@ -13,6 +13,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Deserializer for kill list
+ *
+ * @author David Kizivat
+ */
 public class KillListDeserializer extends JsonDeserializer<Map> {
     @Override
     public Map<Long, Integer> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {

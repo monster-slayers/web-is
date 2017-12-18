@@ -13,6 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Handler for auth success.
+ *
+ * @author Ondrej Budai
+ */
 public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private RequestCache requestCache = new HttpSessionRequestCache();
     @Override

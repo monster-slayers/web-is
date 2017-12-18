@@ -7,6 +7,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Principal for user.
+ *
+ * @author Ondrej Budai
+ */
 public class MyUserPrincipal implements UserDetails {
 
     private final UserDTO user;
