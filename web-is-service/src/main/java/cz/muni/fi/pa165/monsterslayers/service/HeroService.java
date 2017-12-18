@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.monsterslayers.service;
 
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.MonsterType;
+import cz.muni.fi.pa165.monsterslayers.entities.User;
 import cz.muni.fi.pa165.monsterslayers.service.utils.PowerElementsMatch;
 import org.springframework.stereotype.Service;
 
@@ -60,4 +61,11 @@ public interface HeroService {
      * @return sauitability as PowerElementsMatch
      */
     PowerElementsMatch countHeroSuitabilityAgainstMonsterType (Hero hero, MonsterType monsterType);
+
+    /**
+     * Finds hero created from given user
+     * @param user given user
+     * @return found hero
+     */
+    Hero findHeroByUser(User user);
 }

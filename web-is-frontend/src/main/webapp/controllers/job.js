@@ -1,4 +1,4 @@
-monsterSlayerApp.controller('JobCtrl', function ($scope, $http) {
+monsterSlayerApp.controller('JobCtrl', function ($rootScope, $scope, $http) {
     var update = function(){
         $http.get('/pa165/rest/job').then(function(response){
             $scope.jobs = response.data;
@@ -8,8 +8,7 @@ monsterSlayerApp.controller('JobCtrl', function ($scope, $http) {
                 }
             );
         }, function(){
-            //TODO
-            console.log('error');
+            $rootScope.errorAlert = "Cannot load jobs";
         });
     };
 
@@ -17,20 +16,20 @@ monsterSlayerApp.controller('JobCtrl', function ($scope, $http) {
 
     $scope.updateStatus = function(job, newStatus){
         $http.put('/pa165/rest/job/update-status/' + job.id + "/" + newStatus)
-             .then(function(response){
-             },function(){
-                 //TODO
-                 console.log("error");
-             });
+            .then(function(){
+                $rootScope.successAlert = "Updated status of job " + job.clientRequest.title;;
+            },function(){
+                $rootScope.errorAlert = "Cannot update status of job " + job.clientRequest.title;
+            });
         job.status = prettifyEnum(newStatus);
     };
 
     $scope.updateEvaluation = function(job, newEvaluation){
         $http.put('/pa165/rest/job/update-evaluation/' + job.id + "/" + newEvaluation)
             .then(function(){
+                $rootScope.successAlert = "Evaluated job " + job.clientRequest.title;
             },function(){
-                //TODO
-                console.log("error");
+                $rootScope.errorAlert = "Cannot evaluate job " + job.clientRequest.title;
             });
         job.evaluation = newEvaluation;
     };

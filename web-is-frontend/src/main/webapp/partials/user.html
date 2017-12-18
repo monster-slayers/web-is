@@ -7,7 +7,7 @@
         <td>{{user.name}}</td>
         <td>{{user.rightsLevel}}</td>
         <td>
-            <div class="dropdown" style="display: inline;" ng-if="user.rightsLevel === 'Client'">
+            <div class="dropdown" style="display: inline;" ng-if="user.rightsLevel === 'Client' && atleastManager()">
                 <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuRights" data-toggle="dropdown" aria-haspopup="true">
                     Promote to...
                     <span class="caret"></span>

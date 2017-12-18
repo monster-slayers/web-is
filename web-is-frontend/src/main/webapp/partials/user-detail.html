@@ -17,7 +17,7 @@
     </tr>
     <tr>
         <td>
-            <button class="btn btn-primary btn-sm" type="file" ng-click="upload()">Upload image</button>
+            <button class="btn btn-primary btn-sm" type="file" ng-click="upload()" ng-if="atleastManager() || user.email === loggedUser.email">Upload image</button>
             <input type="file" ng-upload-change="fileChanged($event)" accept="image/*" style="display:none;" id="file" name="file"/>
         </td>
         <td></td>
