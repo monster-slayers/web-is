@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.monsterslayers.dto.hero.HeroDTO;
 import cz.muni.fi.pa165.monsterslayers.dto.hero.ModifyHeroDTO;
 import cz.muni.fi.pa165.monsterslayers.entities.Hero;
 import cz.muni.fi.pa165.monsterslayers.entities.Job;
+import cz.muni.fi.pa165.monsterslayers.entities.User;
 import cz.muni.fi.pa165.monsterslayers.enums.HeroStatus;
 import cz.muni.fi.pa165.monsterslayers.enums.JobStatus;
 import cz.muni.fi.pa165.monsterslayers.facade.HeroFacade;
@@ -105,5 +106,21 @@ public class HeroFacadeImpl implements HeroFacade {
                 }
             }
         }
+    }
+
+    @Override
+    public HeroDTO getHeroByUserId(Long userId) {
+        User user = userService.findUserById(userId);
+        if(user == null) {
+            return null;
+        }
+
+        Hero hero = heroService.findHeroByUser(user);
+
+        if(hero == null) {
+            return null;
+        }
+
+        return mappingService.mapTo(hero, HeroDTO.class);
     }
 }

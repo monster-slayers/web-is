@@ -43,20 +43,21 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li ng-class="monsterTypeActive"><a href="#!/monster-type">Monster Types</a></li>
-                <li ng-class="clientRequestActive"><a href="#!/client-request">Client Requests</a></li>
-                <li ng-class="jobActive"><a href="#!/job">Jobs</a></li>
-                <li ng-class="userActive"><a href="#!/user">Users</a></li>
-                <li ng-class="heroActive"><a href="#!/hero">Heroes</a></li>
+                <li ng-if="atleastHero()" ng-cloak ng-class="monsterTypeActive"><a href="#!/monster-type">Monster Types</a></li>
+                <li ng-if="userLoggedIn()" ng-cloak ng-class="clientRequestActive"><a href="#!/client-request">Client Requests</a></li>
+                <li ng-if="userLoggedIn()" ng-cloak ng-class="jobActive"><a href="#!/job">Jobs</a></li>
+                <li ng-if="atleastManager()" ng-cloak ng-class="userActive"><a href="#!/user">Users</a></li>
+                <li ng-if="atleastManager()" ng-cloak ng-class="heroActive"><a href="#!/hero">Heroes</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li ng-if="!loggedIn"><a href="#!/login">Login</a></li>
-                <li ng-if="loggedIn"><a href ng-click="logout()">Logout</a></li>
+                <li ng-if="userLoggedIn()" ng-cloak><a>{{loggedUser.name}}<span ng-if="loggedHero"> ({{loggedHero.heroName}})</span></a></li>
+                <li ng-if="userLoggedIn()" ng-cloak><a>{{loggedUser.rightsLevel | capitalize}}</a></li>
+                <li ng-if="!userLoggedIn()" ng-cloak><a href="#!/login">Login</a></li>
+                <li ng-if="userLoggedIn()" ng-cloak><a href ng-click="logout()">Logout</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-
 <div class="container">
     <div>
         <div ng-show="errorAlert" ng-cloak class="alert alert-danger alert-dismissible" role="alert">

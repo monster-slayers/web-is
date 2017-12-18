@@ -1,7 +1,6 @@
 monsterSlayerApp.controller('LoginCtrl', function($scope, $http, $window, $rootScope){
     $scope.login = function(){
         var loginData = {username: $scope.email, password: $scope.password};
-        console.log(loginData);
 
         $http.post('/pa165/login', loginData, { headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     transformRequest: function(obj) {

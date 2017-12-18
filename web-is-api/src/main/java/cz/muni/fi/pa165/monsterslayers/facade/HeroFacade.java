@@ -66,4 +66,11 @@ public interface HeroFacade {
      * @param userStatus new user status
      */
     void changeStatus(Long userId, HeroStatus userStatus);
+
+    /**
+     * Finds hero by user ID
+     * @param userId if of user
+     * @return hero assigned to given user
+     */
+    HeroDTO getHeroByUserId(Long userId);
 }
