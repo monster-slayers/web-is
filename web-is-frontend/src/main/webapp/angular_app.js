@@ -4,8 +4,7 @@
 
 window.monsterSlayerApp = angular.module('monsterSlayerApp', ['ngRoute']);
 
-monsterSlayerApp.config(function($routeProvider, $httpProvider, $qProvider){
-    // $qProvider.errorOnUnhandledRejections(false);
+monsterSlayerApp.config(function($routeProvider, $httpProvider){
     $routeProvider
         .when("/monster-type",
             {
@@ -75,9 +74,13 @@ monsterSlayerApp.config(function($routeProvider, $httpProvider, $qProvider){
     $httpProvider.interceptors.push(function ($q) {
         return {
             responseError: function (rejection) {
-                // if (rejection.status === 401) {
-                //     location.reload();
-                // }
+                if (rejection.status === 401) {
+                    // Something is bad with our credentials,
+                    // reload the page to check out the changes in login state.
+                    // If this is triggering constant reloading
+                    // there might be a backend problem with roles.
+                    location.reload();
+                }
                 return $q.reject(rejection);
             }
         };
